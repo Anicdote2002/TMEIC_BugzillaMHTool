@@ -129,7 +129,7 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("Problem with ProjectEmail.xml/Configuration/FieldEngineerManager");
                     return false;
                 }
-                FE_Manager = curNode.InnerText;
+                FE_Manager = curNode.InnerText; // FE_Manager string now stores the Field Manager email
 
                 curNode = Doc.SelectSingleNode("Configuration/HardwareManager");
                 if (curNode == null)
@@ -303,6 +303,7 @@ namespace WindowsFormsApplication1
                             
                             //retrieve a login webpage as a string
                             string token_page = wb.DownloadString(url);
+                            Console.WriteLine(token_page);
                             string _buggzilla_login = "Bugzilla_login_token";
                             int position = 0;
                             for(int i = 0; i< token_page.Length; i++)//iterate through the string until finding the login token

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Add Product</title>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link href="data/assets/3fc7a4425370272905fcf75ee7f57035.css" rel="stylesheet" type="text/css">
+
+
+
+    
+<script type="text/javascript" src="data/assets/7aea391f77d255cdd754e18ddbf1133b.js"></script>
+
+    <script type="text/javascript">
+    <!--
+        YAHOO.namespace('bugzilla');
+        YAHOO.util.Event.addListener = function (el, sType, fn, obj, overrideContext) {
+               if ( ("onpagehide" in window || YAHOO.env.ua.gecko) && sType === "unload") { sType = "pagehide"; };
+               var capture = ((sType == "focusin" || sType == "focusout") && !YAHOO.env.ua.ie) ? true : false;
+               return this._addListener(el, this._getType(sType), fn, obj, overrideContext, capture);
+         };
+        if ( "onpagehide" in window || YAHOO.env.ua.gecko) {
+            YAHOO.util.Event._simpleRemove(window, "unload", 
+                                           YAHOO.util.Event._unload);
+        }
+        
+        function unhide_language_selector() { 
+            YAHOO.util.Dom.removeClass(
+                'lang_links_container', 'bz_default_hidden'
+            ); 
+        } 
+        YAHOO.util.Event.onDOMReady(unhide_language_selector);
+
+        
+        var BUGZILLA = {
+            param: {
+                cookiepath: '\/',
+                maxusermatches: 10
+            },
+            constant: {
+                COMMENT_COLS: 80
+            },
+            string: {
+                
+
+                attach_desc_required:
+                    "You must enter a Description for this attachment.",
+                component_required:
+                    "You must select a Component for this bug.",
+                description_required:
+                    "You must enter a Description for this bug.",
+                short_desc_required:
+                    "You must enter a Summary for this bug.",
+                version_required:
+                    "You must select a Version for this bug."
+            }
+              , api_token: 'Oo3a0zLnF4'
+        };
+
+    // -->
+    </script>
+<script type="text/javascript" src="data/assets/daf5e0fb6826e6a35280e622913f0c4a.js"></script>
+
+    
+
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+                       title="Bugzilla" href="./search_plugin.cgi">
+    <link rel="shortcut icon" href="images/favicon.ico"><link href="extensions/Testopia/css/testopia.css" rel="stylesheet" type="text/css">
+    <link href="extensions/Testopia/extjs/examples/ux/css/RowEditor.css" rel="stylesheet" type="text/css"  />
+    <script type="text/javascript">
+        Testopia_user = {login: "Aniruddh.Chauhan@tmeic.com", id: 312};
+        DEFAULT_CASE_STATUS = 'PROPOSED';
+    </script>
+  </head>
+
+  <body 
+        class="tools-tmeic-com-mh yui-skin-sam">
+
+  <div id="header"><div id="banner">
+  </div>
+
+    <div id="titles">
+      <span id="title">Bugzilla &ndash; Add Product</span>
+
+
+    </div>
+
+
+    <div id="common_links"><ul class="links">
+  <li><a href="./">Home</a></li>
+  <li><span class="separator">| </span><a href="enter_bug.cgi">New</a></li>
+  <li><span class="separator">| </span><a href="describecomponents.cgi">Browse</a></li>
+  <li><span class="separator">| </span><a href="query.cgi">Search</a></li>
+
+  <li class="form">
+    <span class="separator">| </span>
+    <form action="buglist.cgi" method="get"
+        onsubmit="if (this.quicksearch.value == '')
+                  { alert('Please enter one or more search terms first.');
+                    return false; } return true;">
+    <input type="hidden" id="no_redirect_top" name="no_redirect" value="0">
+    <script type="text/javascript">
+      if (history && history.replaceState) {
+        var no_redirect = document.getElementById("no_redirect_top");
+        no_redirect.value = 1;
+      }
+    </script>
+    <input class="txt" type="text" id="quicksearch_top" name="quicksearch" 
+           title="Quick Search" value="">
+    <input class="btn" type="submit" value="Search" 
+           id="find_top"></form>
+  <a href="page.cgi?id=quicksearch.html" title="Quicksearch Help">[?]</a></li>
+
+  <li><span class="separator">| </span><a href="report.cgi">Reports</a></li>
+
+  <li></li>
+
+
+    <li><span class="separator">| </span><a href="userprefs.cgi">Preferences</a></li>
+      <li><span class="separator">| </span><a href="admin.cgi">Administration</a></li>
+<li>
+        <span class="separator">| </span>
+        <a href="docs/en/html/administering/categorization.html#products" target="_blank">Help</a>
+      </li>
+
+    <li>
+      <span class="separator">| </span>
+        <a href="index.cgi?logout=1">Log&nbsp;out</a>
+        Aniruddh.Chauhan&#64;tmeic.com</li>
+</ul>
+    </div>
+  </div>
+
+  <div id="bugzilla-body">
+
+
+<form method="post" action="editproducts.cgi">
+  <table id="admin_table_edit">
+<tr>
+    <th>Classification:</th>
+    <td><b>MH Projects</b></td>
+  </tr>
+    
+<tr>
+  <th>Product:</th>
+  <td><input size="64" maxlength="64" name="product" 
+             value="" required>
+  </td>
+</tr>
+<tr>
+  <th>Description:</th>
+  <td><textarea rows="4" cols="64" wrap="virtual" name="description" required></textarea>
+  </td>
+</tr>
+
+<tr>
+  <th>Open for bug entry:</th>
+  <td><input type="checkbox" name="is_active" value="1" checked="checked">
+  </td>
+</tr>
+<tr>
+  <th>
+    <label for="allows_unconfirmed">Enable the
+      UNCONFIRMED status
+      in this product:</label>
+  </th>
+  <td><input type="checkbox" id="allows_unconfirmed" name="allows_unconfirmed" checked="checked">
+  </td>
+</tr>
+
+    <tr>
+      <th>Version:</th>
+      <td><input size="20" maxlength="64" name="version" 
+                value="unspecified" required>
+      </td>
+    </tr>
+    <tr>
+      <th>Create chart datasets for this product:</th>
+      <td>
+        <input type="checkbox" name="createseries" value="1" checked="checked">
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        This product must have at least one component.
+        You will be able to create additional components later:
+      </td>
+    </tr>
+<tr>
+  <th><label for="component">Component:</label></th>
+  <td><input size="64" maxlength="64" name="component" id="component"
+             value="" required></td>
+</tr>
+<tr>
+  <th><label for="comp_desc">Component Description:</label></th>
+  <td><textarea name="comp_desc" id="comp_desc" wrap="virtual"
+            rows="4"
+          cols="64"
+            data-required="true" aria-required="true" required></textarea>
+  </td>
+</tr>
+<tr>
+  <th><label for="initialowner">Default Assignee:</label></th>
+  <td><div id="initialowner_autocomplete" >  
+  <input
+    name="initialowner"
+    value="" size="64"  id="initialowner"  required 
+  >
+    <div id="initialowner_autocomplete_container"></div>
+    </div>  
+    <script type="text/javascript">
+      if( typeof(YAHOO.bugzilla.userAutocomplete) !== 'undefined' 
+          && YAHOO.bugzilla.userAutocomplete != null){
+        YAHOO.bugzilla.userAutocomplete.init( "initialowner", 
+                    "initialowner_autocomplete_container");        
+      }
+    </script>
+  </td>
+</tr>
+<tr>
+  <th><label for="initialcc">Default CC List:</label></th>
+  <td><div id="initialcc_autocomplete" >  
+  <input
+    name="initialcc"
+    value="" size="64"  id="initialcc" 
+  >
+    <div id="initialcc_autocomplete_container"></div>
+    </div>  
+    <script type="text/javascript">
+      if( typeof(YAHOO.bugzilla.userAutocomplete) !== 'undefined' 
+          && YAHOO.bugzilla.userAutocomplete != null){
+        YAHOO.bugzilla.userAutocomplete.init( "initialcc", 
+                    "initialcc_autocomplete_container", true);        
+      }
+    </script>
+    <br>
+      <span class="bz_info">Enter user names for the CC list as a comma-separated list.</span>
+  </td>
+</tr>
+  </table>
+
+  <input type="submit" id="add-product" value="Add">
+  <input type="hidden" name="action" value="new">
+  <input type="hidden" name="token" value="F4hhWU9IaP">
+  <input type="hidden" name="classification"
+        value="MH Projects">
+</form>
+<hr>
+
+<p>
+
+
+
+
+  Edit <a 
+  href="editproducts.cgi?classification=MH%20Projects">other products 
+    of classification 'MH Projects'</a>.
+
+
+  Edit classification <a href="editclassifications.cgi?action=edit&amp;classification=MH%20Projects">'MH Projects'</a>.
+
+
+</p>
+</div>
+
+    <div id="footer">
+      <div class="intro"></div>
+<ul id="useful-links">
+  <li id="links-actions"><ul class="links">
+  <li><a href="./">Home</a></li>
+  <li><span class="separator">| </span><a href="enter_bug.cgi">New</a></li>
+  <li><span class="separator">| </span><a href="describecomponents.cgi">Browse</a></li>
+  <li><span class="separator">| </span><a href="query.cgi">Search</a></li>
+
+  <li class="form">
+    <span class="separator">| </span>
+    <form action="buglist.cgi" method="get"
+        onsubmit="if (this.quicksearch.value == '')
+                  { alert('Please enter one or more search terms first.');
+                    return false; } return true;">
+    <input type="hidden" id="no_redirect_bottom" name="no_redirect" value="0">
+    <script type="text/javascript">
+      if (history && history.replaceState) {
+        var no_redirect = document.getElementById("no_redirect_bottom");
+        no_redirect.value = 1;
+      }
+    </script>
+    <input class="txt" type="text" id="quicksearch_bottom" name="quicksearch" 
+           title="Quick Search" value="">
+    <input class="btn" type="submit" value="Search" 
+           id="find_bottom"></form>
+  <a href="page.cgi?id=quicksearch.html" title="Quicksearch Help">[?]</a></li>
+
+  <li><span class="separator">| </span><a href="report.cgi">Reports</a></li>
+
+  <li></li>
+
+
+    <li><span class="separator">| </span><a href="userprefs.cgi">Preferences</a></li>
+      <li><span class="separator">| </span><a href="admin.cgi">Administration</a></li>
+<li>
+        <span class="separator">| </span>
+        <a href="docs/en/html/administering/categorization.html#products" target="_blank">Help</a>
+      </li>
+
+    <li>
+      <span class="separator">| </span>
+        <a href="index.cgi?logout=1">Log&nbsp;out</a>
+        Aniruddh.Chauhan&#64;tmeic.com</li>
+</ul>
+  </li>
+
+  
+
+    <li id="links-saved">
+      <ul class="links">
+          <li>
+            <a href=" buglist.cgi?f1=bug_status&emailtype2=substring&list_id=272&o1=notequals&query_format=advanced&email2=Aniruddh.Chauhan%40tmeic.com&emailassigned_to2=1&v1=VERIFIED">My Bugs</a>
+          </li>
+
+      </ul>
+    </li>
+
+
+
+  <form id="testopia_helper_frm"></form>
+</ul>
+
+      <div class="outro"></div>
+    </div>
+
+  </body>
+</html>

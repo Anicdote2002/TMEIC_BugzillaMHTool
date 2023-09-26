@@ -31,21 +31,16 @@ using System.Diagnostics;
 
 namespace WindowsFormsApplication1
 {
-    
-
     public partial class MH_tool : Form
     {
         public MH_tool()
         {
             InitializeComponent();
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             
-            this.progressBar1.Value = 0;
-          
-
+            this.progressBar1.Value = 0;      
             if (CreateProject())
             {
                 if (MessageBox.Show("A new project has been created.\r\n\r\n Select yes to open a the new project in your browser and no to close this message", "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
@@ -54,24 +49,21 @@ namespace WindowsFormsApplication1
                 }
             }
             else this.progressBar1.Value = 0;
-        }
-
-       
-
+        }    
         private bool CreateProject()
         {
             string username = textBox1.Text;
             string password = textBox2.Text;
             string projectname = textBox3.Text;
-            string projectManager = textBox4.Text;
-            string HWengineer = textBox5.Text;
-            string SWengineer = textBox6.Text;
+            string projectManager = comboBox_ProjMan.Text;
+            string HWengineer = comboBox_HrdwEng.Text;
+            string SWengineer = comboBox_SysEng.Text;
             string projectDescription = textBox7.Text;
-            string HMI_Engineer = textBox8.Text;
-            string AppEngineer = textBox9.Text;
-            string SysEngineer = textBox10.Text;
-            string CompTech = textBox11.Text;
-            string DrvEngineer = textBox12.Text;
+            string HMI_Engineer = comboBox_HMIEng.Text;
+            string AppEngineer = comboBox_AppEng.Text;
+            string SysEngineer = comboBox_ControlEng.Text;
+            string CompTech = comboBox_CompTech.Text;
+            string DrvEngineer = comboBox_DriveEng.Text;
 
             string FE_Manager;
             string HW_Manager;
@@ -94,7 +86,7 @@ namespace WindowsFormsApplication1
             //Mergiing of button2_click
             string response;
             string url = "https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
-
+            string users_url = "https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
 
             if (password == "")
             {
@@ -117,11 +109,6 @@ namespace WindowsFormsApplication1
                 }
                 System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
                 Doc.Load(@"ProjectEmail.xml");
-
-
- 
-
-
 
                 XmlNode curNode = Doc.SelectSingleNode("Configuration/FieldEngineerManager");
                 if (curNode == null)
@@ -263,9 +250,7 @@ namespace WindowsFormsApplication1
                 SPLC_Owner = SPLC_Owner.Replace("@", "%40").ToLower();
                 Maxview_QC_Owner = Maxview_QC_Owner.Replace("@", "%40").ToLower();
 
-            
-
-                if (HMI_Engineer == "" || AppEngineer == "" || username == "" || password == "" || projectname == "" || projectManager == "" || DrvEngineer == "" || HWengineer == "" || SWengineer == "" || SysEngineer == "" || CompTech == "" || projectDescription == "" || (typeASC.Checked == typeRequisit.Checked && typeQC.Checked == typeASC.Checked))
+                if (HMI_Engineer == "" || AppEngineer == "" || username == "" || password == "" || projectname == "" || projectManager == "" || DrvEngineer == "" || HWengineer == "" || SWengineer == "" || SysEngineer == "" || CompTech == "" || projectDescription == "")
                 {
                     // do something
                     MessageBox.Show("Please fill out all the fields", "Friendly reminder!");
@@ -303,7 +288,7 @@ namespace WindowsFormsApplication1
                             
                             //retrieve a login webpage as a string
                             string token_page = wb.DownloadString(url);
-                            Console.WriteLine(token_page);
+                           // Console.WriteLine(token_page);
                             string _buggzilla_login = "Bugzilla_login_token";
                             int position = 0;
                             for(int i = 0; i< token_page.Length; i++)//iterate through the string until finding the login token
@@ -328,7 +313,7 @@ namespace WindowsFormsApplication1
                             string _value = "value";
                             for (int i = position; i < token_page.Length; i++)//iterate through the string until finding the login token
                             {
-                                bool done_flag = false; //flag to track if the vlaue is found and terminate the for loop
+                                bool done_flag = false; //flag to track if the value is found and terminate the for loop
                                 for (int j = 0; j < _value.Length; j++)
                                 {//for every character, begin a substring search
                                     if (_value[j] != token_page[i+j])
@@ -337,7 +322,7 @@ namespace WindowsFormsApplication1
                                     }
                                     else if (j == _value.Length - 1)
                                     {//if all cards match, position becomes i;
-                                        position = i+j+3; //set the position to four cahracters pasts the "e" in value, the first character of the login token
+                                        position = i+j+3; //set the position to four characters pasts the "e" in value, the first character of the login token
                                         done_flag = true;
                                         break;
                                     }
@@ -346,7 +331,6 @@ namespace WindowsFormsApplication1
                             }
 
                             StringBuilder loginToken_temp = new StringBuilder();
-
                             while (token_page[position] != 34)
                             {  //the page is returned with the token ending with " (quotation marks).  34 is ASCII code.  while that character is not hit, keep appending the login token to loginToken_temp
                                 //a temp String_builder is used since strings are "immutable" in C#, that is, once set their value cannot be changed.
@@ -363,7 +347,8 @@ namespace WindowsFormsApplication1
                             //    MessageBox.Show("Successfully sent command. Cookies and Tokens are still valid.", "Success! ");
                             else if (response.Contains("<title>Confirm Match</title>"))
                             {
-                                MessageBox.Show("Failed to match entered engineer email. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error");
+                                MessageBox.Show("Failed to match entered eng" +
+                                    "ineer email. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error");
                                 return false;
                             }
                             else if (response.Contains("<title>Untrusted Authentication Request</title>"))
@@ -424,9 +409,14 @@ namespace WindowsFormsApplication1
 
                         // Including all emails in the CC list to validate them before the project is created in Bugzilla
                         token = FindToken(getToken);
+                        Console.WriteLine(token);
                         component = "General%2FSystems";
                         componentComment = "Other+System+or+multicomponent+issues";
-                        response = wb.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken  +"&product=" + projectname + "&description=" + projectDescription + "&is_active=1&allows_unconfirmed=on&version=unspecified&createseries=1&component=" + component + "&comp_desc=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + CompTech + "%2C+" + DrvEngineer + "%2C+" + SWengineer + "%2C+" + HWengineer + "%2C+" + projectManager + "%2C+" + AppEngineer + "%2C+" + HMI_Engineer + "%2C+" + FE_Manager + "%2C+" + HW_Manager + "%2C+" + SW_Manager + "%2C+" + Crane_Dir_Owner + "%2C+" + Warranty_User + "%2C+" + MPR_Owner + "%2C+" + MaxviewRT_Owner + "%2C+" + SPLC_Owner + "%2C+" + Maxview_QC_Owner + "%2C+" + "&action=new&token=" + token + "&classification=MH+Projects");
+                        response = wb.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken  +"&product=" + projectname + "&description=" + projectDescription 
+                                                   + "&is_active=1&allows_unconfirmed=on&version=unspecified&createseries=1&component=" + component + "&comp_desc=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + CompTech 
+                                                   + "%2C+" + DrvEngineer + "%2C+" + SWengineer + "%2C+" + HWengineer + "%2C+" + projectManager + "%2C+" + AppEngineer + "%2C+" + HMI_Engineer + "%2C+" + FE_Manager + "%2C+" + HW_Manager + "%2C+"
+                                                   + SW_Manager + "%2C+" + Crane_Dir_Owner + "%2C+" + Warranty_User + "%2C+" + MPR_Owner + "%2C+" + MaxviewRT_Owner + "%2C+" + SPLC_Owner + "%2C+" + Maxview_QC_Owner + "%2C+" + "&action=new&token=" 
+                                                   + token + "&classification=MH+Projects");
 
                         if (response.Contains("<title>Match Failed</title>"))
                         {
@@ -475,7 +465,7 @@ namespace WindowsFormsApplication1
                         getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                         if (getToken.Contains("<title>Product Access Denied</title>"))
                         {
-                            MessageBox.Show("Something When wrong");
+                            MessageBox.Show("Something Went wrong");
                             return false;
                         }
                         token = FindToken(getToken);
@@ -708,8 +698,14 @@ namespace WindowsFormsApplication1
                     // Components created if the Project is a STS/QC job
                     if (typeQC.Checked == true)
                     {
-                        this.progressBar1.Increment(15);
+                        //for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
+                        //{
+                        //    checkedListBox_QC.SetItemChecked(i, true);
+                        //}
 
+                        checkedListBox_QC.Refresh();
+                        this.progressBar1.Increment(15);
+                       
                         // Add component: Safety PLC 
                         component = "Safety+PLC";
                         componentComment = "Safety+PLC+software";
@@ -849,17 +845,120 @@ namespace WindowsFormsApplication1
                         token = FindToken(getToken);
                         response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
 
+                    }
+                    ////
+                    //// QC Individual Components
+                    ////
+                    if(checkedListBox_QC.GetItemChecked(0))
+                    {
+                      
+                        this.progressBar1.Increment(10);
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        component = "Safety+PLC";
+                        componentComment = "Safety+PLC+software";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SPLC_Owner + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
 
                     }
+                    if (checkedListBox_QC.GetItemChecked(1))
+                    {
+                        this.progressBar1.Increment(10);
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        component = "Op+Cab/+Gantry+HMI+Screens";
+                        componentComment = "General+HMI+screen+related+issues";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
 
-                    getToken = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+                    }
+                    
+                    if (checkedListBox_QC.GetItemChecked(2))
+                    {
+                       
+                        this.progressBar1.Increment(10);
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        // Add component: Op.Cab/Gantry Machine Configuration
+                        component = "Op+Cab/+Gantry+Machine+Configuration";
+                        componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+                    }
+                    if (checkedListBox_QC.GetItemChecked(3))
+                    {
+                        
+                        this.progressBar1.Increment(10);
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        component = "Maxview+Smart+Landing";
+                        componentComment = "STS+Crane+Maxview+Smart+Landing+issues";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + Maxview_QC_Owner + "%2C+" + SW_Manager + "%2C+" + MaxviewRT_Owner + "%2C+" + projectManager + "&action=new&token=" + token);
+
+                    }
+                    if (checkedListBox_QC.GetItemChecked(4))
+                    {
+                       
+                        this.progressBar1.Increment(10);
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        component = "Maxview+Smart+Move";
+                        componentComment = "Maxview+software+for+smart+move";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+                    }
+                    if (checkedListBox_QC.GetItemChecked(5))
+                    {
+                        
+                        this.progressBar1.Increment(10);
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        // Add component: RCMS HMI Project
+                        component = "RCMS+HMI+Project";
+                        componentComment = "General+HMI+project+related+issues+including+points,+alarms,+events,+scripts,+devices,+ports,+users,+roles,+resources,+database+logger,+documentation,+drawings+index,+and+HMI+config+files";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+                    }
+                    if (checkedListBox_QC.GetItemChecked(6))
+                    {
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        this.progressBar1.Increment(10);
+                        // Add component: RCMS HMI Screens
+                        component = "RCMS+HMI+Screens";
+                        componentComment = "General+HMI+screens+related+issues";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+                    }
+                    if (checkedListBox_QC.GetItemChecked(7))
+                    {
+                        typeQC.Checked = false;
+                        checkedListBox_QC.Refresh();
+                        this.progressBar1.Increment(10);
+                        // Add component: RCMS Machine Configuration 
+                        component = "RCMS+Machine+Configuration";
+                        componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+                        getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        token = FindToken(getToken);
+                        response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+                    }
+
+
+
+                getToken = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
                 token = FindToken(getToken);
-                response = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&action=updategroupcontrols&product="+projectname+"&token="+token+"&membercontrol_21=0&othercontrol_21=0&membercontrol_17=0&othercontrol_17=0&membercontrol_15=0&othercontrol_15=0&entry_16=1&membercontrol_16=3&othercontrol_16=3&membercontrol_22=0&othercontrol_22=0&submit=submit");
-                
+                response = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&action=updategroupcontrols&product="+projectname+"&token="+token+"&membercontrol_21=0&othercontrol_21=0&membercontrol_17=0&othercontrol_17=0&membercontrol_15=0&othercontrol_15=0&entry_16=1&membercontrol_16=3&othercontrol_16=3&membercontrol_22=0&othercontrol_22=0&submit=submit");         
 
-                }
-
-                
+                }     
                 this.progressBar1.Increment(10);
                 return true;
                 
@@ -888,7 +987,6 @@ namespace WindowsFormsApplication1
 
             // Must be the first one.
             projectDescription = projectDescription.Replace("%", "%25");// %25 == %
-
             projectDescription = projectDescription.Replace(">", "%3E"); // %3E == >
             projectDescription = projectDescription.Replace("<", "%3C"); // %3C == <
             projectDescription = projectDescription.Replace("(", "%28");// %28 == (
@@ -920,7 +1018,6 @@ namespace WindowsFormsApplication1
 
             return projectDescription;
         }
-
         [DllImport("wininet.dll", SetLastError = true)]
         public static extern bool InternetGetCookieEx(
             string url,
@@ -964,113 +1061,229 @@ namespace WindowsFormsApplication1
             }
             return cookies;
         }
-
-        /*
-         * private void button1_Click(object sender, EventArgs e)
+        private void typeASC_CheckedChanged(object sender, EventArgs e)
         {
-            try
+            //Toggle all items if ASC is checked
+            if (typeASC.Checked== true)
             {
-                Process.Start("notepad.exe", "ProjectEmail.xml");
+                typeQC.Checked = false;
+                typeRequisit.Checked = false;
+                for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
+                {
+                    checkedListBox_ASC.SetItemChecked(i, true);                  
+                }
+                for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
+                {
+                    checkedListBox_QC.SetItemChecked(i, false);
+                }
+                for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
+                {
+                    checkedListBox_Req.SetItemChecked(i, false);
+                }                        
             }
-            catch
-            {
-                MessageBox.Show("Unable to open the ProjectEmail.xml from here.  Please make sure it exists in the same directory as the tool.", "Error");
-            }
-
-        }*/
-
-        /*
-        private void button2_Click(object sender, EventArgs e)
+            // if an individual item has been checked, Check = false for typeASC        
+            checkedListBox_ASC.Refresh();
+            checkedListBox_QC.Refresh();
+            checkedListBox_Req.Refresh();
+        }
+        private void typeQC_CheckedChanged(object sender, EventArgs e)
         {
-            string cookies;
-            string loginToken;
-            string username = textBox1.Text;
-            string password = textBox2.Text;
-            string response;
-            string url = "https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
-            username = username.Replace("@", "%40");
-
-            if (password == "")
+           if(typeQC.Checked == true)
             {
-                MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
-                return;
+                typeASC.Checked = false;
+                typeRequisit.Checked = false;
+                for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
+                {
+                    checkedListBox_QC.SetItemChecked(i, true);                  
+                }
+                for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
+                {
+                    checkedListBox_ASC.SetItemChecked(i, false);
+                }
+                for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
+                {
+                    checkedListBox_Req.SetItemChecked(i, false);
+                }
             }
-
-
-            try
+                
+            checkedListBox_ASC.Refresh();
+            checkedListBox_QC.Refresh();
+            checkedListBox_Req.Refresh();
+        }
+        private void typeRequisit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (typeRequisit.Checked == true)
             {
-                //Load XML Document
-                try
+                typeASC.Checked = false;
+                typeQC.Checked = false;
+                for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
                 {
-                    System.Xml.XmlDocument DocTest = new System.Xml.XmlDocument();
-                    DocTest.Load(@"ProjectEmail.xml");
+                    checkedListBox_Req.SetItemChecked(i, true);                  
                 }
-                catch
+                for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
                 {
-                    MessageBox.Show("Please make sure that the ProjectEmail.xml file is located in the same file as this tool when it is run.", "Error");
-                    return;
+                    checkedListBox_QC.SetItemChecked(i, false);
                 }
-                System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
-                Doc.Load(@"ProjectEmail.xml");
-
-                XmlNode curNode = Doc.SelectSingleNode("Configuration/Cookies");
-                if (curNode == null)
+                for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
                 {
-                    MessageBox.Show("Problem with ProjectEmail.xml/Configuration/Cookies");
-                    return;
+                    checkedListBox_ASC.SetItemChecked(i, false);
                 }
-                cookies = curNode.InnerText;
-
-                curNode = Doc.SelectSingleNode("Configuration/LoginToken");
-                if (curNode == null)
-                {
-                    MessageBox.Show("Problem with ProjectEmail.xml/Configuration/LoginToken");
-                    return;
-                }
-                loginToken = curNode.InnerText;
-            }
-            catch (Exception ex)
+            }       
+            checkedListBox_ASC.Refresh();
+            checkedListBox_QC.Refresh();
+            checkedListBox_Req.Refresh();
+        }
+        private void checkedListBox_ASC_ItemClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
             {
-                MessageBox.Show("An exception was thrown while reading the ProjectEmail.xml. Please insure that it is in the same folder as the project creation utility. ", "Error!");
-                return;
-            }
-
-            using (WebClient wb = new WebClient())
-            {
-                try
+                if (checkedListBox_ASC.GetItemChecked(i) == false)
                 {
-                    wb.Headers.Add(HttpRequestHeader.Cookie, cookies);
-
-                    CredentialCache credentialCache = new CredentialCache();
-                    credentialCache.Add(new System.Uri(url), "Basic", new NetworkCredential(username, password, "tools.tmeic.com"));
-
-                    
-                    wb.Credentials = credentialCache;
-                    wb.BaseAddress = url;
-                    
-                    response = wb.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
-
-                    if (response.Contains("<title>Match Failed</title>"))
-                        MessageBox.Show("Failed to match one or more of the input engineer emails. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error!");
-                    else if (response.Contains("<title>Confirm Match</title>"))
-                        MessageBox.Show("Failed to match entered engineer email. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error");
-                    else if (response.Contains("<title>Untrusted Authentication Request</title>"))
-                        MessageBox.Show("Bugzilla returned the Untrusted Authentication Request page. The Cookies or Login Tokens are invalid","Failed!");
-                    else if (response.Contains("<title>Invalid Username Or Password</title>"))
-                        MessageBox.Show("Invalid Username Or Password.");
-                    else if (response.Contains("<title>Add Product</title>"))
-                        MessageBox.Show("Successfully sent command. Cookies and Tokens are still valid.", "Success! ");                    
-                    else if (response.Contains("<title>Authorization Required</title>"))
-                        MessageBox.Show("Authorization Required. You are not an Admin!");
-                    else
-                        MessageBox.Show("Unexpected response. Unsure of success.");
-                }
-                catch
-                {
-                    MessageBox.Show("Exception thrown. Operation failed");
-                }
+                    typeASC.Checked = false;
+                    typeASC.Refresh();
+                    break;
+                }               
             }
         }
-        */
+        private void checkedListBox_QC_ItemClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
+            {
+                if (checkedListBox_QC.GetItemChecked(i) == false)
+                {
+                    typeQC.Checked = false;
+                    typeQC.Refresh();
+                    break;
+                }             
+            }
+        }
+        private void checkedListBox_Req_ItemClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
+            {
+                if (checkedListBox_Req.GetItemChecked(i) == false)
+                {
+                    typeRequisit.Checked = false;
+                    typeRequisit.Refresh();
+                    break;
+                }
+            }
+        }       
     }
 }
+
+
+
+
+
+
+
+
+//if (HMI_Engineer == "" || AppEngineer == "" || username == "" || password == "" || projectname == "" || projectManager == "" || DrvEngineer == "" || HWengineer == "" || SWengineer == "" || SysEngineer == "" || CompTech == "" || projectDescription == "" || (typeASC.Checked == typeRequisit.Checked && typeQC.Checked == typeASC.Checked))
+/*
+        * private void button1_Click(object sender, EventArgs e)
+       {
+           try
+           {
+               Process.Start("notepad.exe", "ProjectEmail.xml");
+           }
+           catch
+           {
+               MessageBox.Show("Unable to open the ProjectEmail.xml from here.  Please make sure it exists in the same directory as the tool.", "Error");
+           }
+
+       }*/
+
+/*
+private void button2_Click(object sender, EventArgs e)
+{
+    string cookies;
+    string loginToken;
+    string username = textBox1.Text;
+    string password = textBox2.Text;
+    string response;
+    string url = "https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
+    username = username.Replace("@", "%40");
+
+    if (password == "")
+    {
+        MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
+        return;
+    }
+
+
+    try
+    {
+        //Load XML Document
+        try
+        {
+            System.Xml.XmlDocument DocTest = new System.Xml.XmlDocument();
+            DocTest.Load(@"ProjectEmail.xml");
+        }
+        catch
+        {
+            MessageBox.Show("Please make sure that the ProjectEmail.xml file is located in the same file as this tool when it is run.", "Error");
+            return;
+        }
+        System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
+        Doc.Load(@"ProjectEmail.xml");
+
+        XmlNode curNode = Doc.SelectSingleNode("Configuration/Cookies");
+        if (curNode == null)
+        {
+            MessageBox.Show("Problem with ProjectEmail.xml/Configuration/Cookies");
+            return;
+        }
+        cookies = curNode.InnerText;
+
+        curNode = Doc.SelectSingleNode("Configuration/LoginToken");
+        if (curNode == null)
+        {
+            MessageBox.Show("Problem with ProjectEmail.xml/Configuration/LoginToken");
+            return;
+        }
+        loginToken = curNode.InnerText;
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show("An exception was thrown while reading the ProjectEmail.xml. Please insure that it is in the same folder as the project creation utility. ", "Error!");
+        return;
+    }
+
+    using (WebClient wb = new WebClient())
+    {
+        try
+        {
+            wb.Headers.Add(HttpRequestHeader.Cookie, cookies);
+
+            CredentialCache credentialCache = new CredentialCache();
+            credentialCache.Add(new System.Uri(url), "Basic", new NetworkCredential(username, password, "tools.tmeic.com"));
+
+
+            wb.Credentials = credentialCache;
+            wb.BaseAddress = url;
+
+            response = wb.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+
+            if (response.Contains("<title>Match Failed</title>"))
+                MessageBox.Show("Failed to match one or more of the input engineer emails. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error!");
+            else if (response.Contains("<title>Confirm Match</title>"))
+                MessageBox.Show("Failed to match entered engineer email. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error");
+            else if (response.Contains("<title>Untrusted Authentication Request</title>"))
+                MessageBox.Show("Bugzilla returned the Untrusted Authentication Request page. The Cookies or Login Tokens are invalid","Failed!");
+            else if (response.Contains("<title>Invalid Username Or Password</title>"))
+                MessageBox.Show("Invalid Username Or Password.");
+            else if (response.Contains("<title>Add Product</title>"))
+                MessageBox.Show("Successfully sent command. Cookies and Tokens are still valid.", "Success! ");                    
+            else if (response.Contains("<title>Authorization Required</title>"))
+                MessageBox.Show("Authorization Required. You are not an Admin!");
+            else
+                MessageBox.Show("Unexpected response. Unsure of success.");
+        }
+        catch
+        {
+            MessageBox.Show("Exception thrown. Operation failed");
+        }
+    }
+}
+*/

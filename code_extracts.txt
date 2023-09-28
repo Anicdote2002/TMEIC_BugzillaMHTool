@@ -1,0 +1,309 @@
+if (typeASC.Checked == true)
+{
+    this.progressBar1.Increment(10);
+    // Add component: CraneDirector 
+    component = "CraneDirector";
+    componentComment = "ASC+instruction+manager+and+TOS+interface";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + Crane_Dir_Owner + "%2C+" + projectManager + "%2C+" + SW_Manager + "&action=new&token=" + token);
+    
+    this.progressBar1.Increment(10);
+    // Add component: Maxspeed Performance Report -- MRC: This needs to be removed
+    //component = "Maxspeed+Performance+Report?";
+    //componentComment = "UMI%2C+Retry%2C+and+system+performance+reporting+tool";
+    //getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    //token = FindToken(getToken);
+    //response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + MPR_Owner + "&initialcc=" + MPR_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+   
+    // Add component: Maxview ASC 
+    component = "Maxview+ASC";
+    componentComment = "Maxview+software+for+ASC";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+    
+    this.progressBar1.Increment(10);
+    // Add component: Maxview Clear Zone 
+    component = "Maxview+Clear+Zone";
+    componentComment = "Maxview+software+for+transfer+zone";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Maxview Clear Path 
+    component = "Maxview+Clear+Path";
+    componentComment = "Maxview+software+for+anticollision";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Maxview Chassis Guidance 
+    component = "Maxview+Chassis+Guidance";
+    componentComment = "Maxview+software+for+Chassis+Guidance";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Maxview 4D
+    component = "Maxview+4D";
+    componentComment = "Maxview+4D+software";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Maxview Smart Move 
+    component = "Maxview+Smart+Move";
+    componentComment = "Maxview+software+for+smart+move";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: MAXVIEW Machine Configuration 
+    component = "MAXVIEW+Machine+Configuration";
+    componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: RCMS HMI Project
+    component = "RCMS+HMI+Project";
+    componentComment = "General+HMI+project+related+issues+including+points,+alarms,+events,+scripts,+devices,+ports,+users,+roles,+resources,+database+logger,+documentation,+drawings+index,+and+HMI+config+files";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: RCMS HMI Screens
+    component = "RCMS+HMI+Screens";
+    componentComment = "General+HMI+screens+related+issues";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: RCMS Machine Configuration 
+    component = "RCMS+Machine+Configuration";
+    componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: VOIP Software  --- MRC: This needs to be removed
+    //component = "VOIP+Software";
+    //componentComment = "Voice+over+IP";
+    //getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    //token = FindToken(getToken);
+    //response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + VOIP_Owner + "&initialcc=" + VOIP_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+    
+    // Add component: Yard HMI Project
+    component = "Yard+HMI+Project";
+    componentComment = "General+HMI+project+related+issues+including+points,+alarms,+events,+scripts,+devices,+ports,+users,+roles,+resources,+database+logger,+documentation,+drawings+index,+and+HMI+config+files";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Yard HMI/File Server Machine Configuration
+    component = "Yard+HMI+File+Server+Machine+Configuration";
+    componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Yard PLC  
+    component = "Yard+PLC";
+    componentComment = "Primary+yard+PLC+software";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SWengineer + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Yard IO Project
+    component = "Yard+IO+Project";
+    componentComment = "Yard+IO+project+software";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SWengineer + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Safety PLC 
+    component = "Safety+PLC";
+    componentComment = "Safety+PLC+software";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SPLC_Owner + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: ROS HMI Screens
+    component = "ROS+HMI+Screens";
+    componentComment = "General+HMI+screens+related+issues";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: ROS Machine Configuration 
+    component = "ROS+Machine+Configuration";
+    componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: ROS IO Project
+    component = "ROS+IO+Project";
+    componentComment = "ROS+IO+project+software";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SWengineer + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: ROS PLC
+    component = "ROS+PLC";
+    componentComment = "ROS+PLC+Software";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SWengineer + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+}
+
+// Components created if the Project is a STS/QC job
+if (typeQC.Checked == true)
+{
+    this.progressBar1.Increment(15);
+
+    // Add component: Safety PLC 
+    component = "Safety+PLC";
+    componentComment = "Safety+PLC+software";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SPLC_Owner + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Op.Cab/Gantry HMI 
+    component = "Op+Cab/+Gantry+HMI+Screens";
+    componentComment = "General+HMI+screen+related+issues";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(15);
+    // Add component: Op.Cab/Gantry Machine Configuration
+    component = "Op+Cab/+Gantry+Machine+Configuration";
+    componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+  
+    this.progressBar1.Increment(15);
+    // Add component: Maxview Smart Landing 
+    component = "Maxview+Smart+Landing";
+    componentComment = "STS+Crane+Maxview+Smart+Landing+issues";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + Maxview_QC_Owner + "%2C+" + SW_Manager + "%2C+" + MaxviewRT_Owner + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    // Add component: Maxview Smart Move 
+    component = "Maxview+Smart+Move";
+    componentComment = "Maxview+software+for+smart+move";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + MaxviewRT_Owner + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(15);
+    // Add component: RCMS HMI Project
+    component = "RCMS+HMI+Project";
+    componentComment = "General+HMI+project+related+issues+including+points,+alarms,+events,+scripts,+devices,+ports,+users,+roles,+resources,+database+logger,+documentation,+drawings+index,+and+HMI+config+files";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(15);
+    // Add component: RCMS HMI Screens
+    component = "RCMS+HMI+Screens";
+    componentComment = "General+HMI+screens+related+issues";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(15);
+    // Add component: RCMS Machine Configuration 
+    component = "RCMS+Machine+Configuration";
+    componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
+   
+    this.progressBar1.Increment(10);
+
+}
+
+// Components created if the Project is created as "Requisition Only" first.
+if (typeRequisit.Checked == true)
+{
+    // Add component: Requisition Crane Director 
+    component = "Requisition+Crane+Director";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+    
+    this.progressBar1.Increment(10);
+    // Add component: Requisition Drive Software 
+    component = "Requisition+Drive+Software";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + DrvEngineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Requisition HMI 
+    component = "Requisition+HMI";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Requisition Machine Configuration 
+    component = "Requisition+Machine+Configuration";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Requisition PLC Software 
+    component = "Requisition+PLC+Software";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Requisition General Software 
+    component = "Requisition+General+Software";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Requisition Hardware 
+    component = "Requisition+Hardware";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Requisition Maxview 
+    component = "Requisition+Maxview";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+    this.progressBar1.Increment(10);
+    // Add component: Requisition Maxview 4D 
+    component = "Requisition+Maxview+4D";
+    componentComment = " Use+this+prior+to+initial+Software+Release";
+    getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+    token = FindToken(getToken);
+    response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
+
+}

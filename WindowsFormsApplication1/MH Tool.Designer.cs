@@ -59,7 +59,6 @@ namespace WindowsFormsApplication1
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label15 = new System.Windows.Forms.Label();
@@ -78,15 +77,19 @@ namespace WindowsFormsApplication1
             this.comboBox_AppEng = new System.Windows.Forms.ComboBox();
             this.comboBox_DriveEng = new System.Windows.Forms.ComboBox();
             this.comboBox_CompTech = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.checkedListBox_General = new System.Windows.Forms.CheckedListBox();
+            this.type_SelectAll = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(686, 611);
+            this.button4.Location = new System.Drawing.Point(145, 882);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 42);
+            this.button4.Size = new System.Drawing.Size(179, 42);
             this.button4.TabIndex = 12;
             this.button4.Text = "Create New Project";
             this.button4.UseVisualStyleBackColor = true;
@@ -147,7 +150,7 @@ namespace WindowsFormsApplication1
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(194, 79);
+            this.label4.Location = new System.Drawing.Point(240, 79);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(471, 31);
@@ -210,13 +213,13 @@ namespace WindowsFormsApplication1
             this.textBox3.Location = new System.Drawing.Point(174, 284);
             this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(561, 22);
+            this.textBox3.Size = new System.Drawing.Size(570, 22);
             this.textBox3.TabIndex = 2;
             // 
             // typeRequisit
             // 
             this.typeRequisit.AutoSize = true;
-            this.typeRequisit.Location = new System.Drawing.Point(564, 449);
+            this.typeRequisit.Location = new System.Drawing.Point(652, 591);
             this.typeRequisit.Margin = new System.Windows.Forms.Padding(4);
             this.typeRequisit.Name = "typeRequisit";
             this.typeRequisit.Size = new System.Drawing.Size(125, 20);
@@ -229,7 +232,7 @@ namespace WindowsFormsApplication1
             // typeASC
             // 
             this.typeASC.AutoSize = true;
-            this.typeASC.Location = new System.Drawing.Point(21, 449);
+            this.typeASC.Location = new System.Drawing.Point(32, 591);
             this.typeASC.Margin = new System.Windows.Forms.Padding(4);
             this.typeASC.Name = "typeASC";
             this.typeASC.Size = new System.Drawing.Size(55, 20);
@@ -242,7 +245,7 @@ namespace WindowsFormsApplication1
             // typeQC
             // 
             this.typeQC.AutoSize = true;
-            this.typeQC.Location = new System.Drawing.Point(291, 449);
+            this.typeQC.Location = new System.Drawing.Point(341, 591);
             this.typeQC.Margin = new System.Windows.Forms.Padding(4);
             this.typeQC.Name = "typeQC";
             this.typeQC.Size = new System.Drawing.Size(80, 20);
@@ -255,7 +258,7 @@ namespace WindowsFormsApplication1
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 429);
+            this.label10.Location = new System.Drawing.Point(15, 571);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 16);
@@ -266,7 +269,7 @@ namespace WindowsFormsApplication1
             // 
             this.pictureBox1.ErrorImage = null;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(246, 13);
+            this.pictureBox1.Location = new System.Drawing.Point(298, 13);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(404, 62);
@@ -276,7 +279,7 @@ namespace WindowsFormsApplication1
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(96, 599);
+            this.label11.Location = new System.Drawing.Point(32, 741);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(106, 16);
@@ -286,7 +289,7 @@ namespace WindowsFormsApplication1
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(79, 683);
+            this.label12.Location = new System.Drawing.Point(15, 801);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(123, 16);
@@ -296,22 +299,12 @@ namespace WindowsFormsApplication1
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(96, 727);
+            this.label13.Location = new System.Drawing.Point(32, 831);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(106, 16);
             this.label13.TabIndex = 5;
             this.label13.Text = "Control Engineer";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 319);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(123, 16);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "Project Description:";
             // 
             // textBox7
             // 
@@ -321,21 +314,21 @@ namespace WindowsFormsApplication1
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
             this.textBox7.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox7.Size = new System.Drawing.Size(562, 85);
+            this.textBox7.Size = new System.Drawing.Size(571, 110);
             this.textBox7.TabIndex = 3;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(686, 661);
+            this.progressBar1.Location = new System.Drawing.Point(341, 892);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(133, 28);
+            this.progressBar1.Size = new System.Drawing.Size(394, 22);
             this.progressBar1.TabIndex = 11;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(108, 771);
+            this.label15.Location = new System.Drawing.Point(536, 741);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(88, 16);
@@ -345,7 +338,7 @@ namespace WindowsFormsApplication1
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(73, 812);
+            this.label16.Location = new System.Drawing.Point(493, 771);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(131, 16);
@@ -355,7 +348,7 @@ namespace WindowsFormsApplication1
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(93, 640);
+            this.label17.Location = new System.Drawing.Point(29, 771);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(109, 16);
@@ -365,7 +358,7 @@ namespace WindowsFormsApplication1
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(68, 852);
+            this.label18.Location = new System.Drawing.Point(490, 801);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(134, 16);
@@ -375,7 +368,7 @@ namespace WindowsFormsApplication1
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(108, 891);
+            this.label19.Location = new System.Drawing.Point(528, 831);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(96, 16);
@@ -394,11 +387,11 @@ namespace WindowsFormsApplication1
             "RCMS HMI Project",
             "RCMS HMI Screens",
             "RCMS Machine Configuration"});
-            this.checkedListBox_QC.Location = new System.Drawing.Point(291, 476);
+            this.checkedListBox_QC.Location = new System.Drawing.Point(341, 618);
             this.checkedListBox_QC.Name = "checkedListBox_QC";
             this.checkedListBox_QC.Size = new System.Drawing.Size(255, 89);
             this.checkedListBox_QC.TabIndex = 33;
-            this.checkedListBox_QC.DoubleClick += new System.EventHandler(this.checkedListBox_Req_ItemClick);
+            this.checkedListBox_QC.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox_QC_ItemClick);
             // 
             // checkedListBox_Req
             // 
@@ -407,27 +400,29 @@ namespace WindowsFormsApplication1
             "Requistion Crane Director",
             "Requistion Drive Software",
             "Requistion HMI",
-            "Requistion HMI",
             "Requistion Machine Configuration",
             "Requistion PLC Software",
             "Requistion General Software",
             "Requistion Hardware",
             "Requistion Maxview",
             "Requistion Maxview 4D"});
-            this.checkedListBox_Req.Location = new System.Drawing.Point(564, 476);
+            this.checkedListBox_Req.Location = new System.Drawing.Point(652, 618);
             this.checkedListBox_Req.Name = "checkedListBox_Req";
             this.checkedListBox_Req.Size = new System.Drawing.Size(255, 89);
             this.checkedListBox_Req.TabIndex = 23;
+            this.checkedListBox_Req.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox_Req_ItemClick);
             // 
             // checkedListBox_ASC
             // 
             this.checkedListBox_ASC.FormattingEnabled = true;
             this.checkedListBox_ASC.Items.AddRange(new object[] {
+            "Crane Director",
             "Maxview ASC",
             "Maxview Clear Zone",
             "Maxview Clear path",
             "Maxview Chassis Guidance",
             "Maxview 4D",
+            "Maxview+Smart+Move",
             "Maxview Machine Configuration",
             "RCMS HMI Project",
             "RCMS HMI Screens",
@@ -441,11 +436,11 @@ namespace WindowsFormsApplication1
             "ROS Machine Configuration",
             "ROS IO Project",
             "ROS PLC"});
-            this.checkedListBox_ASC.Location = new System.Drawing.Point(21, 476);
+            this.checkedListBox_ASC.Location = new System.Drawing.Point(32, 618);
             this.checkedListBox_ASC.Name = "checkedListBox_ASC";
             this.checkedListBox_ASC.Size = new System.Drawing.Size(255, 89);
             this.checkedListBox_ASC.TabIndex = 24;
-            this.checkedListBox_ASC.DoubleClick += new System.EventHandler(this.checkedListBox_ASC_ItemClick);
+            this.checkedListBox_ASC.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox_ASC_ItemClick);
             // 
             // comboBox_ProjMan
             // 
@@ -622,9 +617,9 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_ProjMan.Location = new System.Drawing.Point(209, 599);
+            this.comboBox_ProjMan.Location = new System.Drawing.Point(145, 738);
             this.comboBox_ProjMan.Name = "comboBox_ProjMan";
-            this.comboBox_ProjMan.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_ProjMan.Size = new System.Drawing.Size(276, 24);
             this.comboBox_ProjMan.TabIndex = 25;
             // 
             // comboBox_SysEng
@@ -632,7 +627,7 @@ namespace WindowsFormsApplication1
             this.comboBox_SysEng.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox_SysEng.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_SysEng.FormattingEnabled = true;
-            this.comboBox_SysEng.Items.AddRange(new object[] {         
+            this.comboBox_SysEng.Items.AddRange(new object[] {
             "Aniruddh.Chauhan@tmeic.com",
             "abhijeet.pisal@tmeic.in",
             "Abhijit.Gorhe@tmeic.com.au",
@@ -802,9 +797,9 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_SysEng.Location = new System.Drawing.Point(209, 640);
+            this.comboBox_SysEng.Location = new System.Drawing.Point(145, 768);
             this.comboBox_SysEng.Name = "comboBox_SysEng";
-            this.comboBox_SysEng.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_SysEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_SysEng.TabIndex = 26;
             // 
             // comboBox_HrdwEng
@@ -812,7 +807,7 @@ namespace WindowsFormsApplication1
             this.comboBox_HrdwEng.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox_HrdwEng.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_HrdwEng.FormattingEnabled = true;
-            this.comboBox_HrdwEng.Items.AddRange(new object[] {          
+            this.comboBox_HrdwEng.Items.AddRange(new object[] {
             "Aniruddh.Chauhan@tmeic.com",
             "abhijeet.pisal@tmeic.in",
             "Abhijit.Gorhe@tmeic.com.au",
@@ -982,9 +977,9 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_HrdwEng.Location = new System.Drawing.Point(209, 683);
+            this.comboBox_HrdwEng.Location = new System.Drawing.Point(145, 798);
             this.comboBox_HrdwEng.Name = "comboBox_HrdwEng";
-            this.comboBox_HrdwEng.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_HrdwEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_HrdwEng.TabIndex = 27;
             // 
             // comboBox_ControlEng
@@ -993,7 +988,6 @@ namespace WindowsFormsApplication1
             this.comboBox_ControlEng.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_ControlEng.FormattingEnabled = true;
             this.comboBox_ControlEng.Items.AddRange(new object[] {
-           
             "Aniruddh.Chauhan@tmeic.com",
             "abhijeet.pisal@tmeic.in",
             "Abhijit.Gorhe@tmeic.com.au",
@@ -1163,9 +1157,9 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_ControlEng.Location = new System.Drawing.Point(209, 727);
+            this.comboBox_ControlEng.Location = new System.Drawing.Point(145, 828);
             this.comboBox_ControlEng.Name = "comboBox_ControlEng";
-            this.comboBox_ControlEng.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_ControlEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_ControlEng.TabIndex = 28;
             // 
             // comboBox_HMIEng
@@ -1344,9 +1338,9 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_HMIEng.Location = new System.Drawing.Point(209, 771);
+            this.comboBox_HMIEng.Location = new System.Drawing.Point(631, 738);
             this.comboBox_HMIEng.Name = "comboBox_HMIEng";
-            this.comboBox_HMIEng.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_HMIEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_HMIEng.TabIndex = 29;
             // 
             // comboBox_AppEng
@@ -1357,7 +1351,7 @@ namespace WindowsFormsApplication1
             this.comboBox_AppEng.Items.AddRange(new object[] {
             "Mario.Rodriguez@tmeic.com",
             "Aniruddh.Chauhan@tmeic.com",
-           "abhijeet.pisal@tmeic.in",
+            "abhijeet.pisal@tmeic.in",
             "Abhijit.Gorhe@tmeic.com.au",
             "Abhishek.Kumar@tmeic.in",
             "Adarsh.K@tmeic.in",
@@ -1525,9 +1519,9 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_AppEng.Location = new System.Drawing.Point(209, 812);
+            this.comboBox_AppEng.Location = new System.Drawing.Point(631, 768);
             this.comboBox_AppEng.Name = "comboBox_AppEng";
-            this.comboBox_AppEng.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_AppEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_AppEng.TabIndex = 30;
             // 
             // comboBox_DriveEng
@@ -1706,9 +1700,9 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_DriveEng.Location = new System.Drawing.Point(209, 891);
+            this.comboBox_DriveEng.Location = new System.Drawing.Point(631, 828);
             this.comboBox_DriveEng.Name = "comboBox_DriveEng";
-            this.comboBox_DriveEng.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_DriveEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_DriveEng.TabIndex = 31;
             // 
             // comboBox_CompTech
@@ -1887,10 +1881,60 @@ namespace WindowsFormsApplication1
             "zhenyan@tmeic-cn.com",
             "ZhisongMei@TMEIC-CN.Com",
             "zhuoqiu@tmeic-cn.com"});
-            this.comboBox_CompTech.Location = new System.Drawing.Point(209, 852);
+            this.comboBox_CompTech.Location = new System.Drawing.Point(631, 798);
             this.comboBox_CompTech.Name = "comboBox_CompTech";
-            this.comboBox_CompTech.Size = new System.Drawing.Size(409, 24);
+            this.comboBox_CompTech.Size = new System.Drawing.Size(276, 24);
             this.comboBox_CompTech.TabIndex = 32;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(15, 447);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(133, 16);
+            this.label20.TabIndex = 34;
+            this.label20.Text = "General Component: ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 319);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(123, 16);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Project Description:";
+            // 
+            // checkedListBox_General
+            // 
+            this.checkedListBox_General.FormattingEnabled = true;
+            this.checkedListBox_General.Items.AddRange(new object[] {
+            "General Hardware",
+            "Crane PLC",
+            "General Software",
+            "Drive Hardware",
+            "Drive Software",
+            "LCMS HMI Project",
+            "LCMS HMI Screens",
+            "LCMS Machine Configuration",
+            "Elementaries"});
+            this.checkedListBox_General.Location = new System.Drawing.Point(172, 469);
+            this.checkedListBox_General.Name = "checkedListBox_General";
+            this.checkedListBox_General.Size = new System.Drawing.Size(294, 89);
+            this.checkedListBox_General.TabIndex = 35;
+            this.checkedListBox_General.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox_General_ItemClick);
+            // 
+            // type_SelectAll
+            // 
+            this.type_SelectAll.AutoSize = true;
+            this.type_SelectAll.Location = new System.Drawing.Point(172, 443);
+            this.type_SelectAll.Name = "type_SelectAll";
+            this.type_SelectAll.Size = new System.Drawing.Size(84, 20);
+            this.type_SelectAll.TabIndex = 36;
+            this.type_SelectAll.TabStop = true;
+            this.type_SelectAll.Text = "Select All";
+            this.type_SelectAll.UseVisualStyleBackColor = true;
+            this.type_SelectAll.CheckedChanged += new System.EventHandler(this.typeSelectAll_CheckedChanged);
             // 
             // MH_tool
             // 
@@ -1898,7 +1942,10 @@ namespace WindowsFormsApplication1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(857, 961);
+            this.ClientSize = new System.Drawing.Size(931, 941);
+            this.Controls.Add(this.type_SelectAll);
+            this.Controls.Add(this.checkedListBox_General);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.comboBox_CompTech);
             this.Controls.Add(this.comboBox_DriveEng);
             this.Controls.Add(this.comboBox_AppEng);
@@ -1973,7 +2020,6 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label15;
@@ -1992,6 +2038,10 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.ComboBox comboBox_AppEng;
         private System.Windows.Forms.ComboBox comboBox_DriveEng;
         private System.Windows.Forms.ComboBox comboBox_CompTech;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckedListBox checkedListBox_General;
+        private System.Windows.Forms.RadioButton type_SelectAll;
         //private System.Windows.Forms.Button button1;
         //private System.Windows.Forms.Button button2;
 

@@ -80,7 +80,10 @@ namespace WindowsFormsApplication1
             this.label20 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.checkedListBox_General = new System.Windows.Forms.CheckedListBox();
-            this.type_SelectAll = new System.Windows.Forms.RadioButton();
+            this.checkBox_General = new System.Windows.Forms.CheckBox();
+            this.radioButton_Yes = new System.Windows.Forms.RadioButton();
+            this.radioButton_No = new System.Windows.Forms.RadioButton();
+            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -322,7 +325,7 @@ namespace WindowsFormsApplication1
             this.progressBar1.Location = new System.Drawing.Point(341, 892);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(394, 22);
+            this.progressBar1.Size = new System.Drawing.Size(195, 22);
             this.progressBar1.TabIndex = 11;
             // 
             // label15
@@ -1889,7 +1892,7 @@ namespace WindowsFormsApplication1
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(15, 447);
+            this.label20.Location = new System.Drawing.Point(338, 461);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(133, 16);
             this.label20.TabIndex = 34;
@@ -1918,23 +1921,55 @@ namespace WindowsFormsApplication1
             "LCMS HMI Screens",
             "LCMS Machine Configuration",
             "Elementaries"});
-            this.checkedListBox_General.Location = new System.Drawing.Point(172, 469);
+            this.checkedListBox_General.Location = new System.Drawing.Point(489, 461);
             this.checkedListBox_General.Name = "checkedListBox_General";
-            this.checkedListBox_General.Size = new System.Drawing.Size(294, 89);
+            this.checkedListBox_General.Size = new System.Drawing.Size(255, 89);
             this.checkedListBox_General.TabIndex = 35;
             this.checkedListBox_General.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox_General_ItemClick);
             // 
-            // type_SelectAll
+            // checkBox_General
             // 
-            this.type_SelectAll.AutoSize = true;
-            this.type_SelectAll.Location = new System.Drawing.Point(172, 443);
-            this.type_SelectAll.Name = "type_SelectAll";
-            this.type_SelectAll.Size = new System.Drawing.Size(84, 20);
-            this.type_SelectAll.TabIndex = 36;
-            this.type_SelectAll.TabStop = true;
-            this.type_SelectAll.Text = "Select All";
-            this.type_SelectAll.UseVisualStyleBackColor = true;
-            this.type_SelectAll.CheckedChanged += new System.EventHandler(this.typeSelectAll_CheckedChanged);
+            this.checkBox_General.AutoSize = true;
+            this.checkBox_General.Location = new System.Drawing.Point(386, 480);
+            this.checkBox_General.Name = "checkBox_General";
+            this.checkBox_General.Size = new System.Drawing.Size(85, 20);
+            this.checkBox_General.TabIndex = 36;
+            this.checkBox_General.Text = "Select All";
+            this.checkBox_General.UseVisualStyleBackColor = true;
+            this.checkBox_General.Click += new System.EventHandler(this.checkBox_General_Checked);
+            // 
+            // radioButton_Yes
+            // 
+            this.radioButton_Yes.AutoSize = true;
+            this.radioButton_Yes.Location = new System.Drawing.Point(173, 483);
+            this.radioButton_Yes.Name = "radioButton_Yes";
+            this.radioButton_Yes.Size = new System.Drawing.Size(52, 20);
+            this.radioButton_Yes.TabIndex = 37;
+            this.radioButton_Yes.TabStop = true;
+            this.radioButton_Yes.Text = "Yes";
+            this.radioButton_Yes.UseVisualStyleBackColor = true;
+            this.radioButton_Yes.CheckedChanged += new System.EventHandler(this.radioButton_Yes_CheckedChanged);
+            // 
+            // radioButton_No
+            // 
+            this.radioButton_No.AutoSize = true;
+            this.radioButton_No.Location = new System.Drawing.Point(174, 509);
+            this.radioButton_No.Name = "radioButton_No";
+            this.radioButton_No.Size = new System.Drawing.Size(46, 20);
+            this.radioButton_No.TabIndex = 38;
+            this.radioButton_No.TabStop = true;
+            this.radioButton_No.Text = "No";
+            this.radioButton_No.UseVisualStyleBackColor = true;
+            this.radioButton_No.CheckedChanged += new System.EventHandler(this.radioButton_No_CheckedChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(15, 461);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(319, 20);
+            this.label21.TabIndex = 39;
+            this.label21.Text = "Please select if project is requistion or not:";
             // 
             // MH_tool
             // 
@@ -1943,7 +1978,10 @@ namespace WindowsFormsApplication1
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(931, 941);
-            this.Controls.Add(this.type_SelectAll);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.radioButton_No);
+            this.Controls.Add(this.radioButton_Yes);
+            this.Controls.Add(this.checkBox_General);
             this.Controls.Add(this.checkedListBox_General);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.comboBox_CompTech);
@@ -2041,7 +2079,10 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckedListBox checkedListBox_General;
-        private System.Windows.Forms.RadioButton type_SelectAll;
+        private System.Windows.Forms.CheckBox checkBox_General;
+        private System.Windows.Forms.RadioButton radioButton_Yes;
+        private System.Windows.Forms.RadioButton radioButton_No;
+        private System.Windows.Forms.Label label21;
         //private System.Windows.Forms.Button button1;
         //private System.Windows.Forms.Button button2;
 

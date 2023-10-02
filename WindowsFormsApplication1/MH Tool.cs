@@ -40,6 +40,14 @@ namespace WindowsFormsApplication1
             checkedListBox_QC.CheckOnClick  = true;
             checkedListBox_Req.CheckOnClick = true;
             checkedListBox_General.CheckOnClick = true;
+            checkedListBox_ASC.Enabled = false; 
+            checkedListBox_QC.Enabled = false;
+            checkedListBox_General.Enabled = false;
+            checkedListBox_Req.Enabled = false;
+            typeASC.Enabled = false;
+            typeQC.Enabled = false;
+            typeRequisit.Enabled = false;
+            checkBox_General.Enabled = false;
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -451,7 +459,7 @@ namespace WindowsFormsApplication1
                     if (typeRequisit.Checked == false)
                     {
 
-                        if (type_SelectAll.Checked == true)
+                        if (checkBox_General.Checked == true)
                         {
                             this.progressBar1.Increment(10);
                             // Add component: Hardware  ------------ Every project gets Hardware 
@@ -521,10 +529,9 @@ namespace WindowsFormsApplication1
                             componentComment = "General+issues+involving+elementary+drawings";
                             getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                             token = FindToken(getToken);
-                            response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
-                        
+                            response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);                       
                         }
-                        else
+                        else if (checkBox_General.Checked == false)
                         {
                             if(checkedListBox_General.GetItemChecked(0))
                             {
@@ -539,13 +546,11 @@ namespace WindowsFormsApplication1
                                     return false;
                                 }
                                 token = FindToken(getToken);
-                                response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + AppEngineer + "%2C+" + HWengineer + "%2C+" + HW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
-                               
+                                response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + AppEngineer + "%2C+" + HWengineer + "%2C+" + HW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);                               
                             }
                             if (checkedListBox_General.GetItemChecked(1))
                             {
                                 this.progressBar1.Increment(10);
-
                                 // Add component: Crane PLC 
                                 component = "Crane+PLC";
                                 componentComment = "Crane+PLC+Software";
@@ -557,72 +562,72 @@ namespace WindowsFormsApplication1
                             if (checkedListBox_General.GetItemChecked(2))
                             {
                                 // Add component: General Software 
+                                this.progressBar1.Increment(10);
                                 component = "General+Software";
                                 componentComment = "Anything+software+related+not+dealing+with+the+PLC+or+HMI+project";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                                 token = FindToken(getToken);
                                 response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
-
                             }
                             if (checkedListBox_General.GetItemChecked(3))
                             {
                                 // Add component: Drive Hardware 
+                                this.progressBar1.Increment(10);
                                 component = "Drive+Hardware";
                                 componentComment = "Issues+related+to+Drive+Hardware";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                                 token = FindToken(getToken);
                                 response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + SW_Manager + "%2C+" + AppEngineer + "%2C+" + projectManager + "&action=new&token=" + token);
-
                             }
                             if (checkedListBox_General.GetItemChecked(4))
                             {
                                 // Add component: Drive Software 
+                                this.progressBar1.Increment(10);
                                 component = "Drive+Software";
                                 componentComment = "Issues+related+to+Drive+Software+files";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                                 token = FindToken(getToken);
                                 response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + DrvEngineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + HW_Manager + "%2C+" + SW_Manager + "%2C+" + AppEngineer + "%2C+" + projectManager + "&action=new&token=" + token);
-
                             }
                             if (checkedListBox_General.GetItemChecked(5))
                             {
                                 // Add component: LCMS HMI Project 
+                                this.progressBar1.Increment(10);
                                 component = "LCMS+HMI+Project";
                                 componentComment = "General+HMI+project+related+issues+including+points,+alarms,+events,+scripts,+devices,+ports,+users,+roles,+resources,+database+logger,+documentation,+drawings+index,+and+HMI+config+files";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                                 token = FindToken(getToken);
                                 response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
-
                             }
                             if (checkedListBox_General.GetItemChecked(6))
                             {
                                 // Add component: LCMS HMI Screens 
+                                this.progressBar1.Increment(10);
                                 component = "LCMS+HMI+Screens";
                                 componentComment = "General+HMI+screens+related+issues";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                                 token = FindToken(getToken);
                                 response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HMI_Engineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
-
                             }
                             if (checkedListBox_General.GetItemChecked(7))
                             {
                                 // Add component: LCMS Machine Configuration 
+                                this.progressBar1.Increment(10);
                                 component = "LCMS+Machine+Configuration";
                                 componentComment = "General+machine+configuration+related+issues+including+OS,+Hardware+drivers,+applications+and+software+licenses";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                                 token = FindToken(getToken);
                                 response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
-
                             }
                             if (checkedListBox_General.GetItemChecked(8))
                             {
                                 // Add component: Elementaries 
+                                 this.progressBar1.Increment(10);
                                 component = "Elementaries";
                                 componentComment = "General+issues+involving+elementary+drawings";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                                 token = FindToken(getToken);
                                 response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
-
                             }
                         }
                     }
@@ -1254,6 +1259,7 @@ namespace WindowsFormsApplication1
                     if (checkedListBox_Req.GetItemChecked(0) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
                     {
                         // Add component: Requisition Crane Director 
+                        this.progressBar1.Increment(10);
                         component = "Requisition+Crane+Director";
                         componentComment = " Use+this+prior+to+initial+Software+Release";
                         getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
@@ -1438,25 +1444,33 @@ namespace WindowsFormsApplication1
             }
             return cookies;
         }
-        private void typeSelectAll_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_General_Checked(object sender, EventArgs e)
         {
             //Toggle all items if Select All is checked
-            if ((type_SelectAll.Checked) == true && (typeRequisit.Checked == false))
+            if ((checkBox_General.Checked) == true && (typeRequisit.Checked == false))
             {
                 for (int i = 0; i < checkedListBox_General.Items.Count; i++)
                 {
                     checkedListBox_General.SetItemChecked(i, true);
-                }                
+                }          
             }
+            else if (checkBox_General.Checked == false)
+            {
+                for (int i = 0; i < checkedListBox_General.Items.Count; i++)
+                {
+                    checkedListBox_General.SetItemChecked(i, false);
+                }
+            } // if an individual item has been checked, Check = false for typeASC
+            checkedListBox_ASC.Refresh();
+            checkedListBox_QC.Refresh();        
             checkedListBox_General.Refresh();                  
-        }
+        }        
         private void typeASC_CheckedChanged(object sender, EventArgs e)
         {
             //Toggle all items if ASC is checked
             if (typeASC.Checked == true)
-            {
+            {              
                 typeQC.Checked = false;
-                typeRequisit.Checked = false;
                 for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
                 {
                     checkedListBox_ASC.SetItemChecked(i, true);                  
@@ -1464,22 +1478,18 @@ namespace WindowsFormsApplication1
                 for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
                 {
                     checkedListBox_QC.SetItemChecked(i, false);
-                }
-                for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
-                {
-                    checkedListBox_Req.SetItemChecked(i, false);
-                }                        
+                }                              
             }
             checkedListBox_ASC.Refresh();
             checkedListBox_QC.Refresh();
-            checkedListBox_Req.Refresh(); // if an individual item has been checked, Check = false for typeASC        
+            checkedListBox_Req.Refresh(); // if an individual item has been checked, Check = false for typeASC
+            checkedListBox_General.Refresh(); 
         }
         private void typeQC_CheckedChanged(object sender, EventArgs e)
         {
             if (typeQC.Checked == true)
-            {
+            {              
                 typeASC.Checked = false;
-                typeRequisit.Checked = false;
                 for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
                 {
                     checkedListBox_QC.SetItemChecked(i, true);
@@ -1487,38 +1497,21 @@ namespace WindowsFormsApplication1
                 for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
                 {
                     checkedListBox_ASC.SetItemChecked(i, false);
-                }
-                for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
-                {
-                    checkedListBox_Req.SetItemChecked(i, false);
-                }
+                }               
             }              
             checkedListBox_ASC.Refresh();
             checkedListBox_QC.Refresh();
             checkedListBox_Req.Refresh();
+            checkedListBox_General.Refresh();
         }
         private void typeRequisit_CheckedChanged(object sender, EventArgs e)
         {
             if (typeRequisit.Checked == true)
             {
-                typeASC.Checked = false;
-                typeQC.Checked = false;
                 for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
                 {
                     checkedListBox_Req.SetItemChecked(i, true);                  
-                }
-                for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
-                {
-                    checkedListBox_QC.SetItemChecked(i, false);
-                }
-                for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
-                {
-                    checkedListBox_ASC.SetItemChecked(i, false);
-                }
-                for (int i = 0; i < checkedListBox_General.Items.Count; i++)
-                {
-                    checkedListBox_General.SetItemChecked(i, false);
-                }
+                }               
             }       
             checkedListBox_ASC.Refresh();
             checkedListBox_QC.Refresh();
@@ -1536,13 +1529,12 @@ namespace WindowsFormsApplication1
                     break;
                 }               
             }
-        }//EventArgs e
+        }
         private void checkedListBox_QC_ItemClick(object sender, ItemCheckEventArgs e)
         {
             for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
             {
                 if (e.NewValue == CheckState.Unchecked)
-
                 {
                     typeQC.Checked = false;
                     typeQC.Refresh();
@@ -1559,22 +1551,80 @@ namespace WindowsFormsApplication1
                     typeRequisit.Checked = false;
                     typeRequisit.Refresh();
                     break;
-                }
+                }             
             }
         }
         private void checkedListBox_General_ItemClick(object sender, ItemCheckEventArgs e)
-        {
-            
-            ///to be edited
+        {          
             for (int i = 0; i < checkedListBox_General.Items.Count; i++)
             {
                 if (e.NewValue == CheckState.Unchecked)
                 {
-                    type_SelectAll.Checked = false;
-                    type_SelectAll.Refresh();
+                    checkBox_General.Checked = false;
+                    checkBox_General.Refresh();
                     break;
                 }
             }
+        }
+        bool check_Req_Item()
+        {
+            for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
+            {
+                if (checkedListBox_Req.GetItemChecked(i) == true)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        bool check_General_Item()
+        {
+            for (int i = 0; i < checkedListBox_General.Items.Count; i++)
+            {
+                if (checkedListBox_General.GetItemChecked(i) == true)
+                {
+                    return true;
+                }
+            }
+            return false;           
+        }
+        private void radioButton_Yes_CheckedChanged(object sender, EventArgs e)
+        {
+            checkedListBox_ASC.Enabled      = false;
+            checkedListBox_QC.Enabled       = false;
+            checkedListBox_General.Enabled  = false;
+            checkedListBox_Req.Enabled      = true;
+            typeASC.Enabled                 = false;
+            typeQC.Enabled                  = false;
+            typeRequisit.Enabled            = true;
+            checkBox_General.Enabled        = false;
+            for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
+            {
+                checkedListBox_QC.SetItemChecked(i, false);
+            }
+            for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
+            {
+                checkedListBox_ASC.SetItemChecked(i, false);
+            }
+            for (int i = 0; i < checkedListBox_General.Items.Count; i++)
+            {
+                checkedListBox_General.SetItemChecked(i, false);
+            }
+        }
+        private void radioButton_No_CheckedChanged(object sender, EventArgs e)
+        {
+            checkedListBox_ASC.Enabled = true;
+            checkedListBox_QC.Enabled = true;
+            checkedListBox_General.Enabled = true;
+            checkedListBox_Req.Enabled = false;
+            typeASC.Enabled = true;
+            typeQC.Enabled = true;
+            typeRequisit.Enabled = false;
+            checkBox_General.Enabled = true;
+            for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
+            {
+                checkedListBox_Req.SetItemChecked(i, false);
+            }          
         }
     }
 }
@@ -1693,4 +1743,61 @@ private void button2_Click(object sender, EventArgs e)
         }
     }
 }
+ //Toggle all items if Select All is checked
+            if ((checkBox_General.Checked) == true && (typeRequisit.Checked == false))
+            {
+                for (int i = 0; i < checkedListBox_General.Items.Count; i++)
+                {
+                    checkedListBox_General.SetItemChecked(i, true);
+                }
+                //checkedListBox_Req.Enabled = false;
+                //checkedListBox_QC.Enabled = true;
+                //checkedListBox_General.Enabled = true;
+                //checkedListBox_ASC.Enabled = true;
+              
+            }
+            else if ((checkBox_General.Checked) == true && (typeRequisit.Checked == true))
+            {
+                for (int i = 0; i < checkedListBox_General.Items.Count; i++)
+                {
+                    checkedListBox_General.SetItemChecked(i, true);
+                }
+                for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
+                {
+                    checkedListBox_Req.SetItemChecked(i, false);
+                }
+                //checkedListBox_Req.Enabled = false;
+                //checkedListBox_QC.Enabled = true;
+                //checkedListBox_General.Enabled = true;
+                //checkedListBox_ASC.Enabled = true;
+            }
+            ///Delete 
+            else if (checkBox_General.Checked == false)
+            {
+                for (int i = 0; i < checkedListBox_General.Items.Count; i++)
+                {
+                    checkedListBox_General.SetItemChecked(i, false);
+                }
+            }
+
+            checkedListBox_ASC.Refresh();
+            checkedListBox_QC.Refresh();
+            checkedListBox_Req.Refresh(); // if an individual item has been checked, Check = false for typeASC
+            checkedListBox_General.Refresh();
+
+
+
+
+for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
+                {
+                    checkedListBox_QC.SetItemChecked(i, false);
+                }
+                for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
+                {
+                    checkedListBox_ASC.SetItemChecked(i, false);
+                }
+                for (int i = 0; i < checkedListBox_General.Items.Count; i++)
+                {
+                    checkedListBox_General.SetItemChecked(i, false);
+                }
 */

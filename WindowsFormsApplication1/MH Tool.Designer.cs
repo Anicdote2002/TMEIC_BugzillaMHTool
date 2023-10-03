@@ -84,6 +84,7 @@ namespace WindowsFormsApplication1
             this.radioButton_Yes = new System.Windows.Forms.RadioButton();
             this.radioButton_No = new System.Windows.Forms.RadioButton();
             this.label21 = new System.Windows.Forms.Label();
+            this.get_users = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1967,9 +1968,19 @@ namespace WindowsFormsApplication1
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(15, 461);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(319, 20);
+            this.label21.Size = new System.Drawing.Size(255, 16);
             this.label21.TabIndex = 39;
             this.label21.Text = "Please select if project is requistion or not:";
+            // 
+            // get_users
+            // 
+            this.get_users.Location = new System.Drawing.Point(762, 133);
+            this.get_users.Name = "get_users";
+            this.get_users.Size = new System.Drawing.Size(145, 42);
+            this.get_users.TabIndex = 40;
+            this.get_users.Text = "Get Users";
+            this.get_users.UseVisualStyleBackColor = true;
+            this.get_users.Click += new System.EventHandler(this.button1_Click);
             // 
             // MH_tool
             // 
@@ -1978,6 +1989,7 @@ namespace WindowsFormsApplication1
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(931, 941);
+            this.Controls.Add(this.get_users);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.radioButton_No);
             this.Controls.Add(this.radioButton_Yes);
@@ -2083,6 +2095,7 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.RadioButton radioButton_Yes;
         private System.Windows.Forms.RadioButton radioButton_No;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button get_users;
         //private System.Windows.Forms.Button button1;
         //private System.Windows.Forms.Button button2;
 

@@ -27,6 +27,7 @@ using System.Web;
 using System.Xml;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Security.Policy;
 
 
 namespace WindowsFormsApplication1
@@ -61,7 +62,180 @@ namespace WindowsFormsApplication1
                 }
             }
             else this.progressBar1.Value = 0;
-        }    
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.progressBar1.Value = 0;
+            if(get_users_email())
+            {
+
+            }
+        }
+        private bool get_users_email()
+        {
+            string username = textBox1.Text;
+            string password = textBox2.Text;
+            string urlEditUsers = @"https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
+            string url = "https://tools.tmeic.com/mh/editusers.cgi";
+            string loginToken;
+            string cookies;
+            string response;
+            if (password == "")
+            {
+                MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
+                return false;
+            }
+            try
+            {
+                if (!username.Contains("@"))
+                {
+                    MessageBox.Show("Make sure that the entered usernames and those in the ProjectEmail.xml file are of the form 'first.last@tmeic.com' or are correct", "Friendly reminder!");
+                    return false;
+                }
+                // Replace @ with %40 and make sure it is lower case
+                username = username.Replace("@", "%40").ToLower();
+                this.progressBar1.Increment(10);
+                using (WebClient wb = new WebClient())
+                {
+                    string token;                         
+                    string getToken;
+
+                    try
+                    {                   
+                        wb.Headers.Add(HttpRequestHeader.Cookie, cookies);                
+                        CredentialCache credentialCache = new CredentialCache();
+                        credentialCache.Add(new System.Uri(url), "Basic", new NetworkCredential(username, password, "tools.tmeic.com"));
+                        try
+                        {
+                            wb.Credentials = credentialCache;
+                            wb.BaseAddress = url;
+                            string token_page = wb.DownloadString(url);
+                            string _buggzilla_login = "Bugzilla_login_token";
+                            int position = 0;
+                            for (int i = 0; i < token_page.Length; i++)//iterate through the string until finding the login token
+                            {
+                                bool done_flag = false; //flag to track if the vlaue is found and terminate the for loop
+                                for (int j = 0; j < _buggzilla_login.Length; j++)
+                                {//for every character, begin a substring search
+                                    if (_buggzilla_login[j] != token_page[i + j])
+                                    {//sequentially check each character against the phrase "Bugzilla_login_token", if there is a mis-match, break and start over from next character
+                                        break;
+                                    }
+                                    else if (j == _buggzilla_login.Length - 1)
+                                    {//if all cards match, position becomes i;
+                                        position = i;
+                                        done_flag = true; //set the finish flag to false
+                                        break;
+                                    }
+                                }
+                                if (done_flag) { break; }//if the token position was found, break and end the position finding loop.
+                            }
+                            //jump position to first instance of value after the token is found.
+                            string _value = "value";
+                            for (int i = position; i < token_page.Length; i++)//iterate through the string until finding the login token
+                            {
+                                bool done_flag = false; //flag to track if the value is found and terminate the for loop
+                                for (int j = 0; j < _value.Length; j++)
+                                {//for every character, begin a substring search
+                                    if (_value[j] != token_page[i + j])
+                                    {//sequentially check each character against the phrase "Bugzilla_login_token", if there is a mis-match, break and start from next character
+                                        break;
+                                    }
+                                    else if (j == _value.Length - 1)
+                                    {//if all cards match, position becomes i;
+                                        position = i + j + 3; //set the position to four characters pasts the "e" in value, the first character of the login token
+                                        done_flag = true;
+                                        break;
+                                    }
+                                }
+                                if (done_flag) { break; }//if the token position was found, break and end the position finding loop.
+                            }
+                            StringBuilder loginToken_temp = new StringBuilder();
+                            while (token_page[position] != 34)
+                            {  //the page is returned with the token ending with " (quotation marks).  34 is ASCII code.  while that character is not hit, keep appending the login token to loginToken_temp
+                                //a temp String_builder is used since strings are "immutable" in C#, that is, once set their value cannot be changed.
+                                loginToken_temp.Append(token_page[position]);
+                                position++;
+                            }
+                            loginToken = loginToken_temp.ToString(); // once the terminal character is found, set the login token to the extracted string
+                            //attempt a Login-push.  If there is a mismatch, Dialogue box will appear and indicate failure and abort project creation.
+                            //otherwise, login is successful and 
+                            response = wb.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                            if (response.Contains("<title>Add Product</title>")) { }
+                            //    MessageBox.Show("Successfully sent command. Cookies and Tokens are still valid.", "Success! ");
+                            else if (response.Contains("<title>Confirm Match</title>"))
+                            {
+                                MessageBox.Show("Failed to match entered eng" +
+                                    "ineer email. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error");
+                                return false;
+                            }
+                            else if (response.Contains("<title>Untrusted Authentication Request</title>"))
+                            {
+                                MessageBox.Show("Bugzilla returned the Untrusted Authentication Request page. The Cookies or Login Tokens are invalid", "Failed!");
+                                return false;
+                            }
+                            else if (response.Contains("<title>Invalid Username Or Password</title>"))
+                            {
+                                MessageBox.Show("Invalid Username Or Password.");
+                                return false;
+                            }
+                            else if (response.Contains("<title>Match Failed</title>"))
+                            {
+                                MessageBox.Show("Failed to match one or more of the input engineer emails. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error!");
+                                return false;
+                            }
+                            else if (response.Contains("<title>Authorization Required</title>"))
+                            {
+                                MessageBox.Show("Authorization Required. You are not an Admin!");
+                                return false;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Unexpected response. Unsure of success.  Ending Project Creation");
+                                return false;
+                            }
+
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Exception thrown. Operation failed");
+                            return false;
+
+                        }                  
+                        getToken = wb.UploadString(urlEditUsers, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        Console.WriteLine(getToken);
+                        if (getToken.Contains("<title>Invalid Username Or Password</title>"))
+                        {
+                            MessageBox.Show("Invalid Username Or Password.", "Warning!");
+                            return false;
+                        }
+                        if (getToken.Contains("<title>Authorization Required</title>"))
+                        {
+                            MessageBox.Show("This utility requires Administrative rights.", "Authorization Required");
+                            return false;
+                        }
+                        if (getToken.Contains("<title>Untrusted Authentication Request</title>"))
+                        {
+                            MessageBox.Show("Bugzilla returned the Untrusted Authentication Request page. Failed to create project.");
+                            return false;
+                        }                                          
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Exception thrown while creating project", "Error");
+                        return false;
+                    }
+                }
+                this.progressBar1.Increment(10);
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Failed to complete! Check Bugzilla to see if any part of the project was created. \r\n\r\n Exception thrown: " + e, "Error!");
+                return false;
+            }         
+        }
+
         private bool CreateProject()
         {
             string username = textBox1.Text;
@@ -93,12 +267,11 @@ namespace WindowsFormsApplication1
             string urlAddProject = @"https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
             string urlAddProduct = @"https://tools.tmeic.com/mh/editcomponents.cgi?action=add&product=";
             string urlEditGroupControl = @"https://tools.tmeic.com/mh/editproducts.cgi?action=editgroupcontrols&product=";
-
+            string urlEditUsers = @"https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
             //Local Variables added by Alexander Summerotn 11-7-11
             //Mergiing of button2_click
             string response;
             string url = "https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
-            string users_url = "https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
 
             if (password == "")
             {
@@ -271,7 +444,7 @@ namespace WindowsFormsApplication1
 
                 this.progressBar1.Increment(10);
 
-                using (WebClient wb = new WebClient())
+                using (WebClient web = new WebClient())
                 {
                     string token;
                     string component;
@@ -285,7 +458,7 @@ namespace WindowsFormsApplication1
                         // First component is General/Systems because every project type has it.
 
 
-                        wb.Headers.Add(HttpRequestHeader.Cookie, cookies);
+                        web.Headers.Add(HttpRequestHeader.Cookie, cookies);
                         /*-----------------Coded Added by Alexander Summerton
                          * adapted from  button2_click to present function
                          * This code pulls a Bugzilla login page, extracts the login token from the login page, then uses it as the login for project creation
@@ -295,11 +468,11 @@ namespace WindowsFormsApplication1
 
                         try
                         {
-                            wb.Credentials = credentialCache;
-                            wb.BaseAddress = url;
+                            web.Credentials = credentialCache;
+                            web.BaseAddress = url;
 
                             //retrieve a login webpage as a string
-                            string token_page = wb.DownloadString(url);
+                            string token_page = web.DownloadString(url);
                             // Console.WriteLine(token_page);
                             string _buggzilla_login = "Bugzilla_login_token";
                             int position = 0;
@@ -351,7 +524,7 @@ namespace WindowsFormsApplication1
                             loginToken = loginToken_temp.ToString(); // once the terminal character is found, set the login token to the extracted string
                             //attempt a Login-push.  If there is a mismatch, Dialogue box will appear and indicate failure and abort project creation.
                             //otherwise, login is successful and 
-                            response = wb.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                            response = web.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                             if (response.Contains("<title>Add Product</title>")) { }
                             //    MessageBox.Show("Successfully sent command. Cookies and Tokens are still valid.", "Success! ");
                             else if (response.Contains("<title>Confirm Match</title>"))
@@ -392,7 +565,7 @@ namespace WindowsFormsApplication1
 
                         }
                         /*----- End code added by Alexander Summerton-----*/
-                        getToken = wb.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        getToken = web.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                         Console.WriteLine(getToken);
                         if (getToken.Contains("<title>Invalid Username Or Password</title>"))
                         {
@@ -414,7 +587,7 @@ namespace WindowsFormsApplication1
                         Console.WriteLine(token);
                         component = "General%2FSystems";
                         componentComment = "Other+System+or+multicomponent+issues";
-                        response = wb.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&product=" + projectname + "&description=" + projectDescription
+                        response = web.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&product=" + projectname + "&description=" + projectDescription
                                                    + "&is_active=1&allows_unconfirmed=on&version=unspecified&createseries=1&component=" + component + "&comp_desc=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + CompTech
                                                    + "%2C+" + DrvEngineer + "%2C+" + SWengineer + "%2C+" + HWengineer + "%2C+" + projectManager + "%2C+" + AppEngineer + "%2C+" + HMI_Engineer + "%2C+" + FE_Manager + "%2C+" + HW_Manager + "%2C+"
                                                    + SW_Manager + "%2C+" + Crane_Dir_Owner + "%2C+" + Warranty_User + "%2C+" + MPR_Owner + "%2C+" + MaxviewRT_Owner + "%2C+" + SPLC_Owner + "%2C+" + Maxview_QC_Owner + "%2C+" + "&action=new&token="
@@ -446,9 +619,9 @@ namespace WindowsFormsApplication1
                         // Editing CC list for first component to remove some of the people added.  
                         component = "ASC+Drive+Software";
                         componentComment = "Drive+Configuration+Software";
-                        getToken = wb.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        getToken = web.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                         token = FindToken(getToken);
-                        response = wb.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=General%2FSystems&description=Other+System+or+multicomponent+issues&initialowner=" + DrvEngineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + CompTech + "%2C+" + HWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + SW_Manager + "%2C+" + projectManager + "%2C+" + FE_Manager + "&isactive=1&action=update&componentold=General%2FSystems&product=" + projectname + "&token=" + token);
+                        response = web.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=General%2FSystems&description=Other+System+or+multicomponent+issues&initialowner=" + DrvEngineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + CompTech + "%2C+" + HWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + SW_Manager + "%2C+" + projectManager + "%2C+" + FE_Manager + "&isactive=1&action=update&componentold=General%2FSystems&product=" + projectname + "&token=" + token);
                     }
                     catch (Exception ex)
                     {
@@ -1626,6 +1799,11 @@ namespace WindowsFormsApplication1
                 checkedListBox_Req.SetItemChecked(i, false);
             }          
         }
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }
 

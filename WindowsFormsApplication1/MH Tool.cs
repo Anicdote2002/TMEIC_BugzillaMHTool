@@ -28,6 +28,7 @@ using System.Xml;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Security.Policy;
+using HtmlAgilityPack;
 
 
 namespace WindowsFormsApplication1
@@ -49,6 +50,7 @@ namespace WindowsFormsApplication1
             typeQC.Enabled = false;
             typeRequisit.Enabled = false;
             checkBox_General.Enabled = false;
+            
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -65,51 +67,85 @@ namespace WindowsFormsApplication1
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.progressBar1.Value = 0;
+           // this.progressBar1.Value = 0;
             if(get_users_email())
             {
+                if(MessageBox.Show("Email List has been update successfully! Proceed?" , "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                {
+                    this.comboBox_CompTech.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+                    this.comboBox_CompTech.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+                    this.comboBox_CompTech.Refresh();
 
+                }
             }
         }
         private bool get_users_email()
         {
             string username = textBox1.Text;
-            string password = textBox2.Text;
-            string urlEditUsers = @"https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
-            string url = "https://tools.tmeic.com/mh/editusers.cgi";
+            string password = textBox2.Text;         
+            string url = "https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
             string loginToken;
-            string cookies;
+            string email_cookies;
             string response;
-            if (password == "")
-            {
-                MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
-                return false;
-            }
             try
-            {
+            {              
                 if (!username.Contains("@"))
                 {
                     MessageBox.Show("Make sure that the entered usernames and those in the ProjectEmail.xml file are of the form 'first.last@tmeic.com' or are correct", "Friendly reminder!");
                     return false;
-                }
-                // Replace @ with %40 and make sure it is lower case
-                username = username.Replace("@", "%40").ToLower();
-                this.progressBar1.Increment(10);
-                using (WebClient wb = new WebClient())
-                {
-                    string token;                         
-                    string getToken;
-
+                }            
+                username = username.Replace("@", "%40").ToLower();  // Replace @ with %40 and make sure it is lower case
+                if (username == "" || password == "")
+                {                   
+                    MessageBox.Show("Please fill out all the fields", "Friendly reminder!");
+                    return false;
+                }             
+                using (WebClient web = new WebClient())
+                {                   
+                    if (password == "")
+                    {
+                        MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
+                        return false;
+                    }
                     try
-                    {                   
-                        wb.Headers.Add(HttpRequestHeader.Cookie, cookies);                
+                    {
+                        try   //Load XML Document
+                        {
+                            System.Xml.XmlDocument DocTest = new System.Xml.XmlDocument();
+                            DocTest.Load(@"ProjectEmail.xml");
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Please make sure that the ProjectEmail.xml file is located in the same file as this tool when it is run.", "Error");
+                            return false;
+                        }
+                        System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
+                        Doc.Load(@"ProjectEmail.xml");
+                        XmlNode curNode = Doc.SelectSingleNode("Configuration/FieldEngineerManager");
+                        curNode = Doc.SelectSingleNode("Configuration/Cookies");
+                        if (curNode == null)
+                        {
+                            MessageBox.Show("Problem with ProjectEmail.xml/Configuration/Cookies");
+                            return false;
+                        }
+                        email_cookies = curNode.InnerText;
+                        curNode = Doc.SelectSingleNode("Configuration/LoginToken");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An exception was thrown while reading the ProjectEmail.xml. Please insure that it is in the same folder as the project creation utility. ", "Error!");
+                        return false;
+                    }
+                    try
+                    {
+                        web.Headers.Add(HttpRequestHeader.Cookie, email_cookies);                      
                         CredentialCache credentialCache = new CredentialCache();
                         credentialCache.Add(new System.Uri(url), "Basic", new NetworkCredential(username, password, "tools.tmeic.com"));
                         try
                         {
-                            wb.Credentials = credentialCache;
-                            wb.BaseAddress = url;
-                            string token_page = wb.DownloadString(url);
+                            web.Credentials = credentialCache;
+                            web.BaseAddress = url;                         
+                            string token_page = web.DownloadString(url);  //retrieve a login webpage as a string                          
                             string _buggzilla_login = "Bugzilla_login_token";
                             int position = 0;
                             for (int i = 0; i < token_page.Length; i++)//iterate through the string until finding the login token
@@ -130,8 +166,7 @@ namespace WindowsFormsApplication1
                                 }
                                 if (done_flag) { break; }//if the token position was found, break and end the position finding loop.
                             }
-                            //jump position to first instance of value after the token is found.
-                            string _value = "value";
+                            string _value = "value"; //jump position to first instance of value after the token is found.
                             for (int i = position; i < token_page.Length; i++)//iterate through the string until finding the login token
                             {
                                 bool done_flag = false; //flag to track if the value is found and terminate the for loop
@@ -152,24 +187,13 @@ namespace WindowsFormsApplication1
                             }
                             StringBuilder loginToken_temp = new StringBuilder();
                             while (token_page[position] != 34)
-                            {  //the page is returned with the token ending with " (quotation marks).  34 is ASCII code.  while that character is not hit, keep appending the login token to loginToken_temp
-                                //a temp String_builder is used since strings are "immutable" in C#, that is, once set their value cannot be changed.
+                            { 
                                 loginToken_temp.Append(token_page[position]);
                                 position++;
                             }
-                            loginToken = loginToken_temp.ToString(); // once the terminal character is found, set the login token to the extracted string
-                            //attempt a Login-push.  If there is a mismatch, Dialogue box will appear and indicate failure and abort project creation.
-                            //otherwise, login is successful and 
-                            response = wb.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
-                            if (response.Contains("<title>Add Product</title>")) { }
-                            //    MessageBox.Show("Successfully sent command. Cookies and Tokens are still valid.", "Success! ");
-                            else if (response.Contains("<title>Confirm Match</title>"))
-                            {
-                                MessageBox.Show("Failed to match entered eng" +
-                                    "ineer email. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error");
-                                return false;
-                            }
-                            else if (response.Contains("<title>Untrusted Authentication Request</title>"))
+                            loginToken = loginToken_temp.ToString();
+                            response = web.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                            if (response.Contains("<title>Untrusted Authentication Request</title>"))
                             {
                                 MessageBox.Show("Bugzilla returned the Untrusted Authentication Request page. The Cookies or Login Tokens are invalid", "Failed!");
                                 return false;
@@ -178,64 +202,84 @@ namespace WindowsFormsApplication1
                             {
                                 MessageBox.Show("Invalid Username Or Password.");
                                 return false;
-                            }
-                            else if (response.Contains("<title>Match Failed</title>"))
-                            {
-                                MessageBox.Show("Failed to match one or more of the input engineer emails. Please make sure each entry is correct. Check the ProjectEmail.xml as well.", "Error!");
-                                return false;
-                            }
+                            }                          
                             else if (response.Contains("<title>Authorization Required</title>"))
                             {
                                 MessageBox.Show("Authorization Required. You are not an Admin!");
                                 return false;
                             }
+                            else if (response.Contains("<title>Select user</title>"))
+                            {
+                                MessageBox.Show("Select User Emails");
+                               // Console.WriteLine(response);
+                                HtmlAgilityPack.HtmlDocument html_doc = new HtmlAgilityPack.HtmlDocument();
+                                html_doc.LoadHtml(response);
+                                HtmlAgilityPack.HtmlNodeCollection thNode = html_doc.DocumentNode.SelectNodes("//table[@id='admin_table']//td//a");
+                                if (thNode != null)
+                                {
+                                    // Iterate through all child nodes of the <th> element
+                                    comboBox_CompTech.BeginUpdate();
+                                    foreach (HtmlNode childNode in thNode)
+                                    {
+                                        // Extract the content of child nodes (text or HTML)
+                                        string elementContent = childNode.InnerHtml; // or .InnerText for plain text
+                                        
+                                        if (elementContent.Contains("&#64;"))
+                                        {
+                                            elementContent = elementContent.Replace("&#64;", "@");
+
+                                            Console.WriteLine(elementContent);
+                                            comboBox_ProjMan.Items.Add(elementContent);
+                                            //comboBox_ProjMan.Items.AddRange(new object[] { elementContent });                                        
+                                            comboBox_SysEng.Items.Add(elementContent);
+                                            comboBox_HrdwEng.Items.Add(elementContent);
+                                            comboBox_ControlEng.Items.Add(elementContent);
+                                            comboBox_HMIEng.Items.Add(elementContent);
+                                            comboBox_AppEng.Items.Add(elementContent);
+                                            comboBox_DriveEng.Items.Add(elementContent);
+                                            //comboBox_CompTech.Items.Add(elementContent);
+                                            comboBox_CompTech.Items.AddRange(new object[] { elementContent });
+                                        }
+                                    }
+                                    comboBox_CompTech.EndUpdate();
+                                    //comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.Suggest;
+                                    //comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.ListItems;
+                                }
+                                return true;
+                            }
                             else
                             {
-                                MessageBox.Show("Unexpected response. Unsure of success.  Ending Project Creation");
+                                MessageBox.Show("Unexpected response");                           
                                 return false;
                             }
-
                         }
                         catch
                         {
                             MessageBox.Show("Exception thrown. Operation failed");
                             return false;
-
-                        }                  
-                        getToken = wb.UploadString(urlEditUsers, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
-                        Console.WriteLine(getToken);
-                        if (getToken.Contains("<title>Invalid Username Or Password</title>"))
-                        {
-                            MessageBox.Show("Invalid Username Or Password.", "Warning!");
-                            return false;
                         }
-                        if (getToken.Contains("<title>Authorization Required</title>"))
-                        {
-                            MessageBox.Show("This utility requires Administrative rights.", "Authorization Required");
-                            return false;
-                        }
-                        if (getToken.Contains("<title>Untrusted Authentication Request</title>"))
-                        {
-                            MessageBox.Show("Bugzilla returned the Untrusted Authentication Request page. Failed to create project.");
-                            return false;
-                        }                                          
                     }
-                    catch (Exception ex)
+                    catch(Exception e)
                     {
-                        MessageBox.Show("Exception thrown while creating project", "Error");
+                        MessageBox.Show("Failed to complete!" + e, "Error");
                         return false;
-                    }
+                    }                  
                 }
-                this.progressBar1.Increment(10);
-                return true;
             }
             catch (Exception e)
             {
                 MessageBox.Show("Failed to complete! Check Bugzilla to see if any part of the project was created. \r\n\r\n Exception thrown: " + e, "Error!");
                 return false;
-            }         
+            }
         }
-
+        //private void comboBox_CompTech_Click(object sender, EventArgs e)
+        //{
+            
+        //    comboBox_CompTech.AutoCompleteMode =  AutoCompleteMode.SuggestAppend;
+        //    comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.ListItems;
+            
+        //  //  MessageBox.Show("ComboBox CompTech was clicked.");
+        //}
         private bool CreateProject()
         {
             string username = textBox1.Text;
@@ -273,6 +317,7 @@ namespace WindowsFormsApplication1
             string response;
             string url = "https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
 
+            if (checkedListBox_ASC.GetItemChecked(8) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
             if (password == "")
             {
                 MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
@@ -444,7 +489,7 @@ namespace WindowsFormsApplication1
 
                 this.progressBar1.Increment(10);
 
-                using (WebClient web = new WebClient())
+                using (WebClient wb = new WebClient())
                 {
                     string token;
                     string component;
@@ -458,7 +503,7 @@ namespace WindowsFormsApplication1
                         // First component is General/Systems because every project type has it.
 
 
-                        web.Headers.Add(HttpRequestHeader.Cookie, cookies);
+                        wb.Headers.Add(HttpRequestHeader.Cookie, cookies);
                         /*-----------------Coded Added by Alexander Summerton
                          * adapted from  button2_click to present function
                          * This code pulls a Bugzilla login page, extracts the login token from the login page, then uses it as the login for project creation
@@ -468,11 +513,11 @@ namespace WindowsFormsApplication1
 
                         try
                         {
-                            web.Credentials = credentialCache;
-                            web.BaseAddress = url;
+                            wb.Credentials = credentialCache;
+                            wb.BaseAddress = url;
 
                             //retrieve a login webpage as a string
-                            string token_page = web.DownloadString(url);
+                            string token_page = wb.DownloadString(url);
                             // Console.WriteLine(token_page);
                             string _buggzilla_login = "Bugzilla_login_token";
                             int position = 0;
@@ -524,7 +569,7 @@ namespace WindowsFormsApplication1
                             loginToken = loginToken_temp.ToString(); // once the terminal character is found, set the login token to the extracted string
                             //attempt a Login-push.  If there is a mismatch, Dialogue box will appear and indicate failure and abort project creation.
                             //otherwise, login is successful and 
-                            response = web.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                            response = wb.UploadString(url, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                             if (response.Contains("<title>Add Product</title>")) { }
                             //    MessageBox.Show("Successfully sent command. Cookies and Tokens are still valid.", "Success! ");
                             else if (response.Contains("<title>Confirm Match</title>"))
@@ -565,7 +610,7 @@ namespace WindowsFormsApplication1
 
                         }
                         /*----- End code added by Alexander Summerton-----*/
-                        getToken = web.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        getToken = wb.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                         Console.WriteLine(getToken);
                         if (getToken.Contains("<title>Invalid Username Or Password</title>"))
                         {
@@ -587,7 +632,7 @@ namespace WindowsFormsApplication1
                         Console.WriteLine(token);
                         component = "General%2FSystems";
                         componentComment = "Other+System+or+multicomponent+issues";
-                        response = web.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&product=" + projectname + "&description=" + projectDescription
+                        response = wb.UploadString(urlAddProject, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&product=" + projectname + "&description=" + projectDescription
                                                    + "&is_active=1&allows_unconfirmed=on&version=unspecified&createseries=1&component=" + component + "&comp_desc=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + CompTech
                                                    + "%2C+" + DrvEngineer + "%2C+" + SWengineer + "%2C+" + HWengineer + "%2C+" + projectManager + "%2C+" + AppEngineer + "%2C+" + HMI_Engineer + "%2C+" + FE_Manager + "%2C+" + HW_Manager + "%2C+"
                                                    + SW_Manager + "%2C+" + Crane_Dir_Owner + "%2C+" + Warranty_User + "%2C+" + MPR_Owner + "%2C+" + MaxviewRT_Owner + "%2C+" + SPLC_Owner + "%2C+" + Maxview_QC_Owner + "%2C+" + "&action=new&token="
@@ -619,9 +664,9 @@ namespace WindowsFormsApplication1
                         // Editing CC list for first component to remove some of the people added.  
                         component = "ASC+Drive+Software";
                         componentComment = "Drive+Configuration+Software";
-                        getToken = web.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                        getToken = wb.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                         token = FindToken(getToken);
-                        response = web.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=General%2FSystems&description=Other+System+or+multicomponent+issues&initialowner=" + DrvEngineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + CompTech + "%2C+" + HWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + SW_Manager + "%2C+" + projectManager + "%2C+" + FE_Manager + "&isactive=1&action=update&componentold=General%2FSystems&product=" + projectname + "&token=" + token);
+                        response = wb.UploadString("https://tools.tmeic.com/mh/editcomponents.cgi?action=edit&product=" + projectname + "&component=General%2FSystems", "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=General%2FSystems&description=Other+System+or+multicomponent+issues&initialowner=" + DrvEngineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + CompTech + "%2C+" + HWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + SW_Manager + "%2C+" + projectManager + "%2C+" + FE_Manager + "&isactive=1&action=update&componentold=General%2FSystems&product=" + projectname + "&token=" + token);
                     }
                     catch (Exception ex)
                     {
@@ -1210,8 +1255,7 @@ namespace WindowsFormsApplication1
                         token = FindToken(getToken);
                         response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
                     }
-                    if (checkedListBox_ASC.GetItemChecked(8) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
-                    {
+                     {
                         //RCMS HMI Project 8
                         // Add component: RCMS HMI Project
                         this.progressBar1.Increment(10);

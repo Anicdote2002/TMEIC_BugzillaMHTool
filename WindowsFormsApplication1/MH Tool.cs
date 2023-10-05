@@ -4,10 +4,8 @@
 //Modified:
 /*----
  * Alexander Summerton - 11/14/2022 - Added token extraction to project creation function, depreciated XML Edit and Test Cookies event functions
+ * Aniruddh Chauhan - 10/03/2023 - Enhanced Features
  */
-
-
-
 
 using System;
 using System.Windows.Forms;
@@ -29,6 +27,8 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Security.Policy;
 using HtmlAgilityPack;
+using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace WindowsFormsApplication1
@@ -38,23 +38,21 @@ namespace WindowsFormsApplication1
         public MH_tool()
         {
             InitializeComponent();
-            checkedListBox_ASC.CheckOnClick = true;
-            checkedListBox_QC.CheckOnClick  = true;
-            checkedListBox_Req.CheckOnClick = true;
+            checkedListBox_ASC.CheckOnClick =     true;
+            checkedListBox_QC.CheckOnClick  =     true;
+            checkedListBox_Req.CheckOnClick =     true;
             checkedListBox_General.CheckOnClick = true;
-            checkedListBox_ASC.Enabled = false; 
-            checkedListBox_QC.Enabled = false;
-            checkedListBox_General.Enabled = false;
-            checkedListBox_Req.Enabled = false;
-            typeASC.Enabled = false;
-            typeQC.Enabled = false;
-            typeRequisit.Enabled = false;
-            checkBox_General.Enabled = false;
-            
+            checkedListBox_ASC.Enabled =          false; 
+            checkedListBox_QC.Enabled =           false;
+            checkedListBox_General.Enabled =      false;
+            checkedListBox_Req.Enabled =          false;
+            typeASC.Enabled =                     false;
+            typeQC.Enabled =                      false;
+            typeRequisit.Enabled =                false;
+            checkBox_General.Enabled =            false;            
         }
         private void button4_Click(object sender, EventArgs e)
-        {
-            
+        {           
             this.progressBar1.Value = 0;      
             if (CreateProject())
             {
@@ -66,19 +64,51 @@ namespace WindowsFormsApplication1
             else this.progressBar1.Value = 0;
         }
         private void button1_Click(object sender, EventArgs e)
-        {
-           // this.progressBar1.Value = 0;
+        {        
             if(get_users_email())
             {
                 if(MessageBox.Show("Email List has been update successfully! Proceed?" , "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                 {
-                    this.comboBox_CompTech.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-                    this.comboBox_CompTech.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-                    this.comboBox_CompTech.Refresh();
-
+                    if (comboBox_CompTech.Items.Count > 0)
+                    {
+                        MessageBox.Show("ComboBox CompTech was updated: " + comboBox_CompTech.Items.Count);
+                        
+                    }
                 }
             }
         }
+        //private void comboBox_CompTech_TextChanged(object sender, EventArgs e)
+        //{
+        //    string userInput = comboBox_CompTech.Text;
+        //    List<string> suggestions = GetAutocompleteSuggestions(userInput); // Implement this method to retrieve suggestions.
+        //   // comboBox_CompTech.Items.Clear(); // Clear the ComboBox items.
+        //    if (!string.IsNullOrEmpty(userInput))
+        //    {
+        //        comboBox_CompTech.Items.AddRange(suggestions.ToArray()); // Add suggestions to ComboBox items.
+        //        comboBox_CompTech.DroppedDown = true; // Show the dropdown with suggestions.
+        //        comboBox_CompTech.SelectionStart = userInput.Length; // Keep the user's input selected.
+        //    }
+        //    else
+        //    {
+        //        comboBox_CompTech.DroppedDown = false; // Hide the dropdown when there's no input.
+        //    }
+        //}
+        //private List<string> GetAutocompleteSuggestions(string userInput)
+        //{
+        //    List<string> suggestions = new List<string>();
+        //    // Iterate through the existing items in the ComboBox.
+        //    foreach (string item in comboBox_CompTech.Items)
+        //    {
+        //        // Filter items that start with the user's input (case-insensitive).
+        //        if (item.StartsWith(userInput, StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            suggestions.Add(item);
+        //        }
+        //    }
+        //    return suggestions;
+        //}
+
+
         private bool get_users_email()
         {
             string username = textBox1.Text;
@@ -211,7 +241,6 @@ namespace WindowsFormsApplication1
                             else if (response.Contains("<title>Select user</title>"))
                             {
                                 MessageBox.Show("Select User Emails");
-                               // Console.WriteLine(response);
                                 HtmlAgilityPack.HtmlDocument html_doc = new HtmlAgilityPack.HtmlDocument();
                                 html_doc.LoadHtml(response);
                                 HtmlAgilityPack.HtmlNodeCollection thNode = html_doc.DocumentNode.SelectNodes("//table[@id='admin_table']//td//a");
@@ -219,31 +248,37 @@ namespace WindowsFormsApplication1
                                 {
                                     // Iterate through all child nodes of the <th> element
                                     comboBox_CompTech.BeginUpdate();
+                                    comboBox_ProjMan.BeginUpdate();  
+                                    
                                     foreach (HtmlNode childNode in thNode)
                                     {
                                         // Extract the content of child nodes (text or HTML)
-                                        string elementContent = childNode.InnerHtml; // or .InnerText for plain text
-                                        
+                                        string elementContent = childNode.InnerHtml; // or .InnerText for plain text                                       
                                         if (elementContent.Contains("&#64;"))
                                         {
                                             elementContent = elementContent.Replace("&#64;", "@");
-
+                                            string Comp = elementContent;
                                             Console.WriteLine(elementContent);
-                                            comboBox_ProjMan.Items.Add(elementContent);
-                                            //comboBox_ProjMan.Items.AddRange(new object[] { elementContent });                                        
+                                           // comboBox_ProjMan.Items.Add(elementContent);
+                                            comboBox_ProjMan.Items.AddRange(new object[] { elementContent });                                        
                                             comboBox_SysEng.Items.Add(elementContent);
                                             comboBox_HrdwEng.Items.Add(elementContent);
                                             comboBox_ControlEng.Items.Add(elementContent);
                                             comboBox_HMIEng.Items.Add(elementContent);
                                             comboBox_AppEng.Items.Add(elementContent);
                                             comboBox_DriveEng.Items.Add(elementContent);
-                                            //comboBox_CompTech.Items.Add(elementContent);
-                                            comboBox_CompTech.Items.AddRange(new object[] { elementContent });
+                                            comboBox_CompTech.Items.Add(elementContent);
                                         }
                                     }
-                                    comboBox_CompTech.EndUpdate();
-                                    //comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.Suggest;
+                                    comboBox_CompTech.Refresh();
+                                    //comboBox_ProjMan.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                                    //comboBox_ProjMan.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+                                    //comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                                     //comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+                                    comboBox_CompTech.EndUpdate();
+                                    //comboBox_ProjMan.EndUpdate();
                                 }
                                 return true;
                             }
@@ -311,23 +346,21 @@ namespace WindowsFormsApplication1
             string urlAddProject = @"https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
             string urlAddProduct = @"https://tools.tmeic.com/mh/editcomponents.cgi?action=add&product=";
             string urlEditGroupControl = @"https://tools.tmeic.com/mh/editproducts.cgi?action=editgroupcontrols&product=";
-            string urlEditUsers = @"https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
+          //  string urlEditUsers = @"https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
             //Local Variables added by Alexander Summerotn 11-7-11
             //Mergiing of button2_click
             string response;
             string url = "https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
 
-            if (checkedListBox_ASC.GetItemChecked(8) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
+          //  if (checkedListBox_ASC.GetItemChecked(8) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
             if (password == "")
             {
                 MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
                 return false;
             }
-
             try
             {
-                //Load XML Document
-                try
+                try   //Load XML Document
                 {
                     System.Xml.XmlDocument DocTest = new System.Xml.XmlDocument();
                     DocTest.Load(@"ProjectEmail.xml");

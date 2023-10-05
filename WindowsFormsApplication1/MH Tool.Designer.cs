@@ -87,12 +87,13 @@ namespace WindowsFormsApplication1
             this.radioButton_No = new System.Windows.Forms.RadioButton();
             this.label21 = new System.Windows.Forms.Label();
             this.get_users = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(145, 882);
+            this.button4.Location = new System.Drawing.Point(145, 950);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(179, 42);
@@ -325,7 +326,7 @@ namespace WindowsFormsApplication1
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(341, 892);
+            this.progressBar1.Location = new System.Drawing.Point(341, 959);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(195, 22);
@@ -516,186 +517,21 @@ namespace WindowsFormsApplication1
             this.comboBox_DriveEng.Location = new System.Drawing.Point(631, 828);
             this.comboBox_DriveEng.Name = "comboBox_DriveEng";
             this.comboBox_DriveEng.Size = new System.Drawing.Size(276, 24);
-            this.comboBox_DriveEng.TabIndex = 31; ;
+            this.comboBox_DriveEng.TabIndex = 31;
             // 
             // comboBox_CompTech
             // 
-           
+            this.comboBox_CompTech.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox_CompTech.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox_CompTech.FormattingEnabled = true;
+            this.comboBox_CompTech.Items.AddRange(new object[] {
+            "Aniruddh.chauhan@tmeic.com",
+            "Joesph.Ha@tmeic.com",
+            "Riya.Parkih@tmeic.com"});
             this.comboBox_CompTech.Location = new System.Drawing.Point(631, 798);
             this.comboBox_CompTech.Name = "comboBox_CompTech";
             this.comboBox_CompTech.Size = new System.Drawing.Size(276, 24);
             this.comboBox_CompTech.TabIndex = 32;
-            //this.comboBox_CompTech.Items.AddRange(new object[] {
-            //"Aniruddh.Chauhan@tmeic.com",
-            //"abhijeet.pisal@tmeic.in",
-            //"Abhijit.Gorhe@tmeic.com.au",
-            //"Abhishek.Kumar@tmeic.in",
-            //"Adarsh.K@tmeic.in",
-            //"ahmet.durmaz@tmeic.com",
-            //"andrew.nolan@tmeic.com",
-            //"Ansh.Kapoor@tmeic.com",
-            //"azuma.hideki@tmeic.co.jp",
-            //"baoquan.guo@tmeic.com",
-            //"Ben.Yates@tmeic.com",
-            //"benjamin.hummel@tmeic.com",
-            //"bharath.sridhar@tmeic.com",
-            //"Bhuvaneshwar.Rao@tmeic.in",
-            //"biaoxu@tmeic-cn.com",
-            //"blas.zapata@tmeic.com",
-            //"brent.walker@tmeic.com",
-            //"brian.butenschoen@tmeic.com",
-            //"ChaoChen@TMEIC-CN.Com",
-            //"Charles.Chukwu@tmeic.com",
-            //"christopher.uliana@tmeic.com",
-            //"daniel.byrnes@tmeic.com",
-            //"Darrick.McMurray@tmeic.com",
-            //"David.Baier@tmeic.com",
-            //"David.Stocker@tmeic.com",
-            //"david.turner@tmeic.com",
-            //"david.zarazua@tmeic.com",
-            //"Deepak.Poojary@tmeic.in",
-            //"DevendraPhaniKumar.Manepalli@tmeic.in",
-            //"douglas.sherk@tmeic.com",
-            //"edgar.noriega@tmeic.com",
-            //"eduardo.leong@tmeic.com",
-            //"Edward.Utterback@tmeic.com",
-            //"Edward.Zelenske@tmeic.com",
-            //"Eunsoo.Jee@tmeic.com",
-            //"faris@redteam.com.my",
-            //"felipe.garcia@amiautomation.com",
-            //"fengding@tmeic-cn.com",
-            //"fengwang@tmeic-cn.com",
-            //"fernando.lopez@amiautomation.com",
-            //"filip.przybylak@tmeic.com",
-            //"frederic.mattern@tmeic.com",
-            //"gary.gepitulan@tmeic.com",
-            //"gerardo.martinez@tmeic.com",
-            //"Gladis.Regalado@tmeic.com",
-            //"Gregory.Hedrick@tmeic.com",
-            //"gurpartap.sidhu@tmeic.com",
-            //"halim@redteam.com.my",
-            //"hany.gamal@tmeic.com",
-            //"haritha.gnanasegar@tmeic.com",
-            //"ivan.eichhardt@gmail.com",
-            //"jack.kirby@tmeic.com",
-            //"james.devera@tmeic.com",
-            //"Jian.Lu@tmeic.com",
-            //"jianfeixu@tmeic-cn.com",
-            //"jianxiongzhu@tmeic-cn.com",
-            //"Jim.Wang@tmeic.com",
-            //"Jo.Gin@tmeic.com",
-            //"joe.avery@tmeic.com",
-            //"john.curry@tmeic.com",
-            //"John.McMillen@tmeic.com",
-            //"john.newton@tmeic.com",
-            //"John.Plenge@tmeic.com",
-            //"jon.carner@tmeic.com",
-            //"jorge.llamas@amiautomation.com",
-            //"Joseph.Lee@tmeic.com",
-            //"kaevon.zanjani@tmeic.com",
-            //"kelvin.savage@tmeic.com",
-            //"ken.mcdonald@tmeic.com.au",
-            //"kenneth.tang@tmeic.com",
-            //"kevin.schwendiman@tmeic.com",
-            //"Kirubakaran.K@tmeic.in",
-            //"Kudrot.Elahi@tmeic.com.au",
-            //"Kumar.Gautam@tmeic.com",
-            //"Kursat.Konca@tmeic.com",
-            //"lawrence.good@tmeic.com",
-            //"leon.mcdonald@tmeic.com.au",
-            //"liangxiongzhang@tmeic-cn.com",
-            //"loway.numeiry@tmeic.com",
-            //"Luis.Nafate@tmeic.com",
-            //"madhukumar.sm@tmeic.in",
-            //"marcelo.landesmann@tmeic.com",
-            //"Marcelo.Lara@tmeic.com",
-            //"Margaret.Hartless@tmeic.com",
-            //"mario.rodriguez@tmeic.com",
-            //"Mark.Stiefbold@tmeic.com",
-            //"matt.hutchinson@tmeic.com",
-            //"matt.kile@tmeic.com",
-            //"matt.mandros@tmeic.com",
-            //"Matt.Norris@tmeic.com",
-            //"michael.baldwin@tmeic.com",
-            //"Michael.Bartel@tmeic.com",
-            //"Michael.Crosser@tmeic.com",
-            //"mohammad.aletawei@tmeic.com",
-            //"nagaraj.athinarayanan@tmeic.in",
-            //"nakamura.daisuke@tmeic.co.jp",
-            //"Nam.Kim@tmeic.com",
-            //"naveenkumar.vakati@tmeic.in",
-            //"neil.carpenter@tmeic.com",
-            //"neil.mclaren@tmeic.com.au",
-            //"niranjan.patil@tmeic.com",
-            //"Nitish.Yellamilli@tmeic.in",
-            //"NOGUCHI.hideo@tmeic.co.jp",
-            //"padmaraju.didde@tmeic.in",
-            //"patrick.herron@tmeic.com",
-            //"Paul.Walczak@tmeic.com",
-            //"peter.lapstich@tmeic.com",
-            //"peter.milway@tmeic.com",
-            //"Prashanth.Kakkirala@tmeic.in",
-            //"QuanbinZhou@TMEIC-CN.Com",
-            //"rachel.vitzoski@tmeic.com",
-            //"rafal.czapnik@tmeic.com",
-            //"Raul.Trevino@tmeic.com",
-            //"Ravinder.Verelly@tmeic.com",
-            //"ricardo.maldonado@tmeic.com",
-            //"Richard.Gillmore@tmeic.com",
-            //"Richard.Hurt@tmeic.com",
-            //"rick.shaw@tmeic.com",
-            //"rodney.pressley@tmeic.com",
-            //"rodolfo.sandonato@tmeic.com.au",
-            //"Roy.Wang@tmeic.com",
-            //"ryan.bruch@tmeic.com",
-            //"Sanehdeep.Sandhawalia@tmeic.com",
-            //"Santosh.Suryapeta@tmeic.com",
-            //"Sean.Connolly@tmeic.com",
-            //"shruti.pal@tmeic.com",
-            //"SONE.yuta@tmeic.co.jp",
-            //"srikanth.mutyala@tmeic.com",
-            //"Stathis.Kounousos@tmeic.com",
-            //"Stephen.Garrett@tmeic.com",
-            //"steve.andes@tmeic.com",
-            //"steven.epps@tmeic.com",
-            //"steven.kasper@tmeic.com",
-            //"Subhas.Bole@tmeic.com",
-            //"SUJIT.ROUTH@tmeic.com",
-            //"Sunanda.Rajmohan@tmeic.in",
-            //"sung.kim@tmeic.com",
-            //"surabhi.lale@tmeic.com",
-            //"tamara.mann@tmeic.com",
-            //"taosu@tmeic-cn.com",
-            //"ted.barham@tmeic.com",
-            //"thomas.gomez@amiautomation.com",
-            //"Thomson.Alexander@tmeic.com",
-            //"Tilton.Holmes@tmeic.com",
-            //"Timothy.Coogan@tmeic.com",
-            //"Tom.Steeves@tmeic.com",
-            //"tony.steele@tmeic.com.au",
-            //"Uwe.Lemm@tmeic.com",
-            //"vasanth.rajkumar@tmeic.in",
-            //"Venkataganesh.Pachari@tmeic.in",
-            //"Venkatesh.Mandaji@tmeic.in",
-            //"Vikashkumar.Varnwal@tmeic.in",
-            //"vilem.otte@post.cz",
-            //"Vinodkumar.Vegi@tmeic.in",
-            //"Vladimir.Etingen@tmeic.com",
-            //"weber.wang@tmeic.com",
-            //"weehau@leap-embedded-system.com",
-            //"wei.liu@tmeic.com",
-            //"Weiming.Luqiu@tmeic.com",
-            //"will.cook@tmeic.com",
-            //"wojciech.romanski@tmeic.com",
-            //"worasak@redteam.com.my",
-            //"xiaoxiaozhao@tmeic-cn.com",
-            //"yanzhuang@tmeic-cn.com",
-            //"yogesh.lalit@tmeic.in",
-            //"zhaoyunfu@tmeic-cn.com",
-            //"zhenyan@tmeic-cn.com",
-            //"ZhisongMei@TMEIC-CN.Com",
-            //"zhuoqiu@tmeic-cn.com"});
             // 
             // label20
             // 
@@ -781,13 +617,23 @@ namespace WindowsFormsApplication1
             // 
             // get_users
             // 
-            this.get_users.Location = new System.Drawing.Point(762, 133);
+            this.get_users.Location = new System.Drawing.Point(145, 889);
             this.get_users.Name = "get_users";
-            this.get_users.Size = new System.Drawing.Size(145, 42);
+            this.get_users.Size = new System.Drawing.Size(179, 42);
             this.get_users.TabIndex = 40;
-            this.get_users.Text = "Get Users";
+            this.get_users.Text = "Get Users Emails";
             this.get_users.UseVisualStyleBackColor = true;
             this.get_users.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(330, 902);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(520, 16);
+            this.label22.TabIndex = 41;
+            this.label22.Text = "Note: You need to enter your Credentials and Click on Get Users to retrieve user " +
+    "emails";
             // 
             // MH_tool
             // 
@@ -795,7 +641,8 @@ namespace WindowsFormsApplication1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(931, 941);
+            this.ClientSize = new System.Drawing.Size(932, 1023);
+            this.Controls.Add(this.label22);
             this.Controls.Add(this.get_users);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.radioButton_No);
@@ -903,6 +750,7 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.RadioButton radioButton_No;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button get_users;
+        private Label label22;
         //private System.Windows.Forms.Button button1;
         //private System.Windows.Forms.Button button2;
 

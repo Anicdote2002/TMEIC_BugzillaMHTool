@@ -51,6 +51,7 @@ namespace WindowsFormsApplication1
             typeRequisit.Enabled =                false;
             checkBox_General.Enabled =            false;            
         }
+        AutoCompleteStringCollection autoCompleteSource = new AutoCompleteStringCollection();
         private void button4_Click(object sender, EventArgs e)
         {           
             this.progressBar1.Value = 0;      
@@ -63,17 +64,30 @@ namespace WindowsFormsApplication1
             }
             else this.progressBar1.Value = 0;
         }
+        //private void click_box(object sender, EventArgs e)
+        //{
+        //    // Your event handling code here
+
+        //    comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.Suggest;
+        //    comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+
+        //}
         private void button1_Click(object sender, EventArgs e)
         {        
             if(get_users_email())
             {
                 if(MessageBox.Show("Email List has been update successfully! Proceed?" , "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                 {
-                    if (comboBox_CompTech.Items.Count > 0)
-                    {
-                        MessageBox.Show("ComboBox CompTech was updated: " + comboBox_CompTech.Items.Count);
+                  //  Console.WriteLine(autoCompleteSource);
+                   
+                        //MessageBox.Show("ComboBox CompTech was updated: " + comboBox_CompTech.Items.Count);
                         
-                    }
+
+                    //this.comboBox_CompTech.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+                    //this.comboBox_CompTech.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+
+
                 }
             }
         }
@@ -81,7 +95,7 @@ namespace WindowsFormsApplication1
         //{
         //    string userInput = comboBox_CompTech.Text;
         //    List<string> suggestions = GetAutocompleteSuggestions(userInput); // Implement this method to retrieve suggestions.
-        //   // comboBox_CompTech.Items.Clear(); // Clear the ComboBox items.
+        //                                                                      // comboBox_CompTech.Items.Clear(); // Clear the ComboBox items.
         //    if (!string.IsNullOrEmpty(userInput))
         //    {
         //        comboBox_CompTech.Items.AddRange(suggestions.ToArray()); // Add suggestions to ComboBox items.
@@ -247,9 +261,8 @@ namespace WindowsFormsApplication1
                                 if (thNode != null)
                                 {
                                     // Iterate through all child nodes of the <th> element
-                                    comboBox_CompTech.BeginUpdate();
-                                    comboBox_ProjMan.BeginUpdate();  
-                                    
+                                    //  comboBox_CompTech.BeginUpdate();
+                                    //     comboBox_ProjMan.BeginUpdate();  
                                     foreach (HtmlNode childNode in thNode)
                                     {
                                         // Extract the content of child nodes (text or HTML)
@@ -259,26 +272,35 @@ namespace WindowsFormsApplication1
                                             elementContent = elementContent.Replace("&#64;", "@");
                                             string Comp = elementContent;
                                             Console.WriteLine(elementContent);
-                                           // comboBox_ProjMan.Items.Add(elementContent);
-                                            comboBox_ProjMan.Items.AddRange(new object[] { elementContent });                                        
+                                            // comboBox_ProjMan.Items.Add(elementContent);
+                                            comboBox_ProjMan.Items.AddRange(new object[] { elementContent });
                                             comboBox_SysEng.Items.Add(elementContent);
                                             comboBox_HrdwEng.Items.Add(elementContent);
                                             comboBox_ControlEng.Items.Add(elementContent);
                                             comboBox_HMIEng.Items.Add(elementContent);
                                             comboBox_AppEng.Items.Add(elementContent);
                                             comboBox_DriveEng.Items.Add(elementContent);
-                                            comboBox_CompTech.Items.Add(elementContent);
+                                            // comboBox_CompTech.Items.Add(elementContent);
+                                            //autoCompleteSource.AddRange(new string[] { elementContent });
+                                            email_list.Items.Add($"{elementContent}");
+                                            autoCompleteSource.Add(elementContent);
                                         }
                                     }
-                                    comboBox_CompTech.Refresh();
+                                    comboBox_CompTech.AutoCompleteCustomSource = autoCompleteSource;
+                                    // comboBox_CompTech.AutoCompleteCustomSource = email_list.Items;
+                                                                  
+                                    //comboBox_CompTech.DisplayMember = "ToString";
+                                    //  comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.Suggest;
+                                    // comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.ListItems;
+                                    // comboBox_CompTech.Refresh();
                                     //comboBox_ProjMan.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                                     //comboBox_ProjMan.AutoCompleteSource = AutoCompleteSource.ListItems;
 
                                     //comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                                     //comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-                                    comboBox_CompTech.EndUpdate();
-                                    //comboBox_ProjMan.EndUpdate();
+                                    // comboBox_CompTech.EndUpdate();
+                                  
                                 }
                                 return true;
                             }

@@ -88,6 +88,7 @@ namespace WindowsFormsApplication1
             this.label21 = new System.Windows.Forms.Label();
             this.get_users = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
+            this.email_list = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -521,13 +522,11 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_CompTech
             // 
+            //this.comboBox_CompTech.AutoCompleteCustomSource.AddRange(new string[] {
+            //email_list.Items});
             this.comboBox_CompTech.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox_CompTech.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox_CompTech.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.comboBox_CompTech.FormattingEnabled = true;
-            this.comboBox_CompTech.Items.AddRange(new object[] {
-            "Aniruddh.chauhan@tmeic.com",
-            "Joesph.Ha@tmeic.com",
-            "Riya.Parkih@tmeic.com"});
             this.comboBox_CompTech.Location = new System.Drawing.Point(631, 798);
             this.comboBox_CompTech.Name = "comboBox_CompTech";
             this.comboBox_CompTech.Size = new System.Drawing.Size(276, 24);
@@ -635,13 +634,23 @@ namespace WindowsFormsApplication1
             this.label22.Text = "Note: You need to enter your Credentials and Click on Get Users to retrieve user " +
     "emails";
             // 
+            // email_list
+            // 
+            this.email_list.FormattingEnabled = true;
+            this.email_list.ItemHeight = 16;
+            this.email_list.Location = new System.Drawing.Point(145, 1060);
+            this.email_list.Name = "email_list";
+            this.email_list.Size = new System.Drawing.Size(330, 148);
+            this.email_list.TabIndex = 42;
+            // 
             // MH_tool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(932, 1023);
+            this.ClientSize = new System.Drawing.Size(1087, 1299);
+            this.Controls.Add(this.email_list);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.get_users);
             this.Controls.Add(this.label21);
@@ -751,6 +760,7 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button get_users;
         private Label label22;
+        private ListBox email_list;
         //private System.Windows.Forms.Button button1;
         //private System.Windows.Forms.Button button2;
 

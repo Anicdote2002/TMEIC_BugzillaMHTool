@@ -1,4 +1,4 @@
-﻿//Name: MH Tool.Designer.cs
+//Name: MH Tool.Designer.cs
 //Author:
 //Date:
 //Modified:
@@ -33,38 +33,28 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApplication1
 {
-    //public static class StringExtensions
-    //{
-    //    public static bool Contains(this string source, string toCheck, StringComparison comp)
-    //    {
-    //        if (source == null) return false;
-    //        return source.IndexOf(toCheck, comp) >= 0;
-    //    }
-    //}
     public partial class MH_tool : Form
     {
-        
-        List<object> comboBox_CompTech_ItemsCopy = new List<object>();
+        List<object> comboBox_ItemsCopy = new List<object>();
         public MH_tool()
         {
             InitializeComponent();
-            checkedListBox_ASC.CheckOnClick =     true;
-            checkedListBox_QC.CheckOnClick  =     true;
-            checkedListBox_Req.CheckOnClick =     true;
+            checkedListBox_ASC.CheckOnClick = true;
+            checkedListBox_QC.CheckOnClick = true;
+            checkedListBox_Req.CheckOnClick = true;
             checkedListBox_General.CheckOnClick = true;
-            checkedListBox_ASC.Enabled =          false; 
-            checkedListBox_QC.Enabled =           false;
-            checkedListBox_General.Enabled =      false;
-            checkedListBox_Req.Enabled =          false;
-            typeASC.Enabled =                     false;
-            typeQC.Enabled =                      false;
-            typeRequisit.Enabled =                false;
-            checkBox_General.Enabled =            false;            
+            checkedListBox_ASC.Enabled = false;
+            checkedListBox_QC.Enabled = false;
+            checkedListBox_General.Enabled = false;
+            checkedListBox_Req.Enabled = false;
+            typeASC.Enabled = false;
+            typeQC.Enabled = false;
+            typeRequisit.Enabled = false;
+            checkBox_General.Enabled = false;
         }
-        
         private void button4_Click(object sender, EventArgs e)
-        {           
-            this.progressBar1.Value = 0;      
+        {
+            this.progressBar1.Value = 0;
             if (CreateProject())
             {
                 if (MessageBox.Show("A new project has been created.\r\n\r\n Select yes to open a the new project in your browser and no to close this message", "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
@@ -74,15 +64,6 @@ namespace WindowsFormsApplication1
             }
             else this.progressBar1.Value = 0;
         }
-        //private void click_box(object sender, EventArgs e)
-        //{
-        //    // Your event handling code here
-
-        //    comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.Suggest;
-        //    comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-
-        //}
         private void button1_Click(object sender, EventArgs e)
         {
             if (get_users_email())
@@ -95,10 +76,10 @@ namespace WindowsFormsApplication1
             if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
             {// Handle printable characters (letters, numbers, symbols, punctuation).
                 List<object> autoComplete_suggestions = new List<object>();
-                foreach (object item in comboBox_CompTech_ItemsCopy)
+                foreach (object item in comboBox_ItemsCopy)
                 {// Filter items that start with the user's input (case-insensitive).
-                  //  if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
-                    if (item.ToString().Contains(comboBox_CompTech.Text))
+                 //  if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
+                    if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
                     {
                         autoComplete_suggestions.Add(item);
                     }
@@ -111,7 +92,7 @@ namespace WindowsFormsApplication1
             else if (string.IsNullOrEmpty(comboBox_CompTech.Text))
             {//Hide the dropdown when there's no input.
                 comboBox_CompTech.Items.Clear();
-                comboBox_CompTech.Items.AddRange(comboBox_CompTech_ItemsCopy.ToArray());
+                comboBox_CompTech.Items.AddRange(comboBox_ItemsCopy.ToArray());
             }
         }
 
@@ -119,26 +100,26 @@ namespace WindowsFormsApplication1
         private bool get_users_email()
         {
             string username = textBox1.Text;
-            string password = textBox2.Text;         
+            string password = textBox2.Text;
             string url = "https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
             string loginToken;
             string email_cookies;
             string response;
             try
-            {              
+            {
                 if (!username.Contains("@"))
                 {
                     MessageBox.Show("Make sure that the entered usernames and those in the ProjectEmail.xml file are of the form 'first.last@tmeic.com' or are correct", "Friendly reminder!");
                     return false;
-                }            
+                }
                 username = username.Replace("@", "%40").ToLower();  // Replace @ with %40 and make sure it is lower case
                 if (username == "" || password == "")
-                {                   
+                {
                     MessageBox.Show("Please fill out all the fields", "Friendly reminder!");
                     return false;
-                }             
+                }
                 using (WebClient web = new WebClient())
-                {                   
+                {
                     if (password == "")
                     {
                         MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
@@ -175,13 +156,13 @@ namespace WindowsFormsApplication1
                     }
                     try
                     {
-                        web.Headers.Add(HttpRequestHeader.Cookie, email_cookies);                      
+                        web.Headers.Add(HttpRequestHeader.Cookie, email_cookies);
                         CredentialCache credentialCache = new CredentialCache();
                         credentialCache.Add(new System.Uri(url), "Basic", new NetworkCredential(username, password, "tools.tmeic.com"));
                         try
                         {
                             web.Credentials = credentialCache;
-                            web.BaseAddress = url;                         
+                            web.BaseAddress = url;
                             string token_page = web.DownloadString(url);  //retrieve a login webpage as a string                          
                             string _buggzilla_login = "Bugzilla_login_token";
                             int position = 0;
@@ -224,7 +205,7 @@ namespace WindowsFormsApplication1
                             }
                             StringBuilder loginToken_temp = new StringBuilder();
                             while (token_page[position] != 34)
-                            { 
+                            {
                                 loginToken_temp.Append(token_page[position]);
                                 position++;
                             }
@@ -239,7 +220,7 @@ namespace WindowsFormsApplication1
                             {
                                 MessageBox.Show("Invalid Username Or Password.");
                                 return false;
-                            }                          
+                            }
                             else if (response.Contains("<title>Authorization Required</title>"))
                             {
                                 MessageBox.Show("Authorization Required. You are not an Admin!");
@@ -259,16 +240,7 @@ namespace WindowsFormsApplication1
                                         if (elementContent.Contains("&#64;"))
                                         {
                                             elementContent = elementContent.Replace("&#64;", "@");
-                                            string Comp = elementContent;
-                                            Console.WriteLine(elementContent);
-                                            comboBox_ProjMan.Items.AddRange(new object[] { elementContent });
-                                            comboBox_SysEng.Items.Add(elementContent);
-                                            comboBox_HrdwEng.Items.Add(elementContent);
-                                            comboBox_ControlEng.Items.Add(elementContent);
-                                            comboBox_HMIEng.Items.Add(elementContent);
-                                            comboBox_AppEng.Items.Add(elementContent);
-                                            comboBox_DriveEng.Items.Add(elementContent);
-                                            email_list.Items.Add($"{elementContent}");
+                                            comboBox_ItemsCopy.Add(elementContent);
                                         }
                                     }
                                 }
@@ -276,7 +248,7 @@ namespace WindowsFormsApplication1
                             }
                             else
                             {
-                                MessageBox.Show("Unexpected response");                           
+                                MessageBox.Show("Unexpected response");
                                 return false;
                             }
                         }
@@ -286,11 +258,11 @@ namespace WindowsFormsApplication1
                             return false;
                         }
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         MessageBox.Show("Failed to complete!" + e, "Error");
                         return false;
-                    }                  
+                    }
                 }
             }
             catch (Exception e)
@@ -299,14 +271,7 @@ namespace WindowsFormsApplication1
                 return false;
             }
         }
-        //private void comboBox_CompTech_Click(object sender, EventArgs e)
-        //{
-            
-        //    comboBox_CompTech.AutoCompleteMode =  AutoCompleteMode.SuggestAppend;
-        //    comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.ListItems;
-            
-        //  //  MessageBox.Show("ComboBox CompTech was clicked.");
-        //}
+
         private bool CreateProject()
         {
             string username = textBox1.Text;
@@ -338,13 +303,12 @@ namespace WindowsFormsApplication1
             string urlAddProject = @"https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
             string urlAddProduct = @"https://tools.tmeic.com/mh/editcomponents.cgi?action=add&product=";
             string urlEditGroupControl = @"https://tools.tmeic.com/mh/editproducts.cgi?action=editgroupcontrols&product=";
-          //  string urlEditUsers = @"https://tools.tmeic.com/mh/editusers.cgi?action=list&matchvalue=login_name&matchstr=&matchtype=substr&groupid=1&is_enabled=1";
             //Local Variables added by Alexander Summerotn 11-7-11
             //Mergiing of button2_click
             string response;
             string url = "https://tools.tmeic.com/mh/editproducts.cgi?action=add&classification=MH%20Projects";
 
-          //  if (checkedListBox_ASC.GetItemChecked(8) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
+            //  if (checkedListBox_ASC.GetItemChecked(8) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
             if (password == "")
             {
                 MessageBox.Show("You must enter your Bugzilla credentials to test the cookies.", "Error!");
@@ -362,9 +326,10 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("Please make sure that the ProjectEmail.xml file is located in the same file as this tool when it is run.", "Error");
                     return false;
                 }
+
+
                 System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
                 Doc.Load(@"ProjectEmail.xml");
-
                 XmlNode curNode = Doc.SelectSingleNode("Configuration/FieldEngineerManager");
                 if (curNode == null)
                 {
@@ -372,6 +337,8 @@ namespace WindowsFormsApplication1
                     return false;
                 }
                 FE_Manager = curNode.InnerText; // FE_Manager string now stores the Field Manager email
+
+
 
                 curNode = Doc.SelectSingleNode("Configuration/HardwareManager");
                 if (curNode == null)
@@ -381,6 +348,9 @@ namespace WindowsFormsApplication1
                 }
                 HW_Manager = curNode.InnerText;
 
+
+
+
                 curNode = Doc.SelectSingleNode("Configuration/SoftwareManager");
                 if (curNode == null)
                 {
@@ -388,6 +358,8 @@ namespace WindowsFormsApplication1
                     return false;
                 }
                 SW_Manager = curNode.InnerText;
+
+
 
                 curNode = Doc.SelectSingleNode("Configuration/CrainDirectorOwner");
                 if (curNode == null)
@@ -397,6 +369,8 @@ namespace WindowsFormsApplication1
                 }
                 Crane_Dir_Owner = curNode.InnerText;
 
+
+
                 curNode = Doc.SelectSingleNode("Configuration/WarrantyUser");
                 if (curNode == null)
                 {
@@ -404,6 +378,8 @@ namespace WindowsFormsApplication1
                     return false;
                 }
                 Warranty_User = curNode.InnerText;
+
+
 
                 curNode = Doc.SelectSingleNode("Configuration/MPROwner");
                 if (curNode == null)
@@ -413,6 +389,8 @@ namespace WindowsFormsApplication1
                 }
                 MPR_Owner = curNode.InnerText;
 
+
+
                 curNode = Doc.SelectSingleNode("Configuration/MaxViewRT");
                 if (curNode == null)
                 {
@@ -420,6 +398,8 @@ namespace WindowsFormsApplication1
                     return false;
                 }
                 MaxviewRT_Owner = curNode.InnerText;
+
+
 
                 curNode = Doc.SelectSingleNode("Configuration/VOIPOwner");
                 if (curNode == null)
@@ -429,6 +409,8 @@ namespace WindowsFormsApplication1
                 }
                 VOIP_Owner = curNode.InnerText;
 
+
+
                 curNode = Doc.SelectSingleNode("Configuration/SPLCOwner");
                 if (curNode == null)
                 {
@@ -437,6 +419,8 @@ namespace WindowsFormsApplication1
                 }
                 SPLC_Owner = curNode.InnerText;
 
+
+
                 curNode = Doc.SelectSingleNode("Configuration/MaxviewQCOwner");
                 if (curNode == null)
                 {
@@ -444,7 +428,9 @@ namespace WindowsFormsApplication1
                     return false;
                 }
                 Maxview_QC_Owner = curNode.InnerText;
-                
+
+
+
                 curNode = Doc.SelectSingleNode("Configuration/Cookies");
                 if (curNode == null)
                 {
@@ -452,9 +438,9 @@ namespace WindowsFormsApplication1
                     return false;
                 }
                 cookies = curNode.InnerText;
+
+                /*curNode = Doc.SelectSingleNode("Configuration/LoginToken");
                 
-                curNode = Doc.SelectSingleNode("Configuration/LoginToken");
-                /*
                 if (curNode == null)
                 {
                     MessageBox.Show("Problem with ProjectEmail.xml/Configuration/LoginToken");
@@ -463,7 +449,7 @@ namespace WindowsFormsApplication1
                 loginToken = curNode.InnerText;               
                 */
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("An exception was thrown while reading the ProjectEmail.xml. Please insure that it is in the same folder as the project creation utility. ", "Error!");
                 return false;
@@ -471,18 +457,18 @@ namespace WindowsFormsApplication1
 
             try
             {
-               
+
                 // Encoding Project Name and Description
                 projectname = Encoder(projectname);
                 projectDescription = Encoder(projectDescription);
-                
+
                 // Checking username formate
-                if (!username.Contains("@") || !projectManager.Contains("@") || !HWengineer.Contains("@") || !SWengineer.Contains("@") || !AppEngineer.Contains("@") || !HMI_Engineer.Contains("@") || !FE_Manager.Contains("@") || !HW_Manager.Contains("@") || !SW_Manager.Contains("@") || !Crane_Dir_Owner.Contains("@") || !Warranty_User.Contains("@") || !MPR_Owner.Contains("@")|| !MaxviewRT_Owner.Contains("@") || !VOIP_Owner.Contains("@") || !SPLC_Owner.Contains("@") || !Maxview_QC_Owner.Contains("@")
+                if (!username.Contains("@") || !projectManager.Contains("@") || !HWengineer.Contains("@") || !SWengineer.Contains("@") || !AppEngineer.Contains("@") || !HMI_Engineer.Contains("@") || !FE_Manager.Contains("@") || !HW_Manager.Contains("@") || !SW_Manager.Contains("@") || !Crane_Dir_Owner.Contains("@") || !Warranty_User.Contains("@") || !MPR_Owner.Contains("@") || !MaxviewRT_Owner.Contains("@") || !VOIP_Owner.Contains("@") || !SPLC_Owner.Contains("@") || !Maxview_QC_Owner.Contains("@")
                  )
                 {
                     MessageBox.Show("Make sure that the entered usernames and those in the ProjectEmail.xml file are of the form 'first.last@tmeic.com' or are correct", "Friendly reminder!");
-                    return false; 
-                } 
+                    return false;
+                }
                 // Replace @ with %40 and make sure it is lower case
                 username = username.Replace("@", "%40").ToLower();
                 projectManager = projectManager.Replace("@", "%40").ToLower();
@@ -510,7 +496,7 @@ namespace WindowsFormsApplication1
                     // do something
                     MessageBox.Show("Please fill out all the fields", "Friendly reminder!");
                     return false;
-                }                
+                }
 
                 this.progressBar1.Increment(10);
 
@@ -521,13 +507,10 @@ namespace WindowsFormsApplication1
                     string componentComment;
                     //string response;
                     string getToken;
-
                     try
                     {
                         // Create New project and Add first component:
                         // First component is General/Systems because every project type has it.
-
-
                         wb.Headers.Add(HttpRequestHeader.Cookie, cookies);
                         /*-----------------Coded Added by Alexander Summerton
                          * adapted from  button2_click to present function
@@ -540,7 +523,6 @@ namespace WindowsFormsApplication1
                         {
                             wb.Credentials = credentialCache;
                             wb.BaseAddress = url;
-
                             //retrieve a login webpage as a string
                             string token_page = wb.DownloadString(url);
                             // Console.WriteLine(token_page);
@@ -629,7 +611,9 @@ namespace WindowsFormsApplication1
                                 return false;
                             }
 
-                        } catch {
+                        }
+                        catch
+                        {
                             MessageBox.Show("Exception thrown. Operation failed");
                             return false;
 
@@ -772,11 +756,11 @@ namespace WindowsFormsApplication1
                             componentComment = "General+issues+involving+elementary+drawings";
                             getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                             token = FindToken(getToken);
-                            response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);                       
+                            response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + SWengineer + "%2C+" + AppEngineer + "%2C+" + HW_Manager + "%2C+" + FE_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
                         }
                         else if (checkBox_General.Checked == false)
                         {
-                            if(checkedListBox_General.GetItemChecked(0))
+                            if (checkedListBox_General.GetItemChecked(0))
                             {
                                 this.progressBar1.Increment(10);
                                 // Add component: Hardware  ------------ Every project gets Hardware 
@@ -789,7 +773,7 @@ namespace WindowsFormsApplication1
                                     return false;
                                 }
                                 token = FindToken(getToken);
-                                response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + AppEngineer + "%2C+" + HWengineer + "%2C+" + HW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);                               
+                                response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + HWengineer + "&initialcc=" + SysEngineer + "%2C+" + AppEngineer + "%2C+" + HWengineer + "%2C+" + HW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
                             }
                             if (checkedListBox_General.GetItemChecked(1))
                             {
@@ -865,7 +849,7 @@ namespace WindowsFormsApplication1
                             if (checkedListBox_General.GetItemChecked(8))
                             {
                                 // Add component: Elementaries 
-                                 this.progressBar1.Increment(10);
+                                this.progressBar1.Increment(10);
                                 component = "Elementaries";
                                 componentComment = "General+issues+involving+elementary+drawings";
                                 getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
@@ -1280,7 +1264,7 @@ namespace WindowsFormsApplication1
                         token = FindToken(getToken);
                         response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + CompTech + "&initialcc=" + SW_Manager + "%2C+" + projectManager + "&action=new&token=" + token);
                     }
-                     {
+                    {
                         //RCMS HMI Project 8
                         // Add component: RCMS HMI Project
                         this.progressBar1.Increment(10);
@@ -1507,7 +1491,7 @@ namespace WindowsFormsApplication1
                         getToken = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
                         token = FindToken(getToken);
                         response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
-                    } 
+                    }
                     if (checkedListBox_Req.GetItemChecked(1) && (typeASC.Checked == false) && (typeQC.Checked == false) && (typeRequisit.Checked == false))
                     {
                         this.progressBar1.Increment(10);
@@ -1588,26 +1572,26 @@ namespace WindowsFormsApplication1
                         token = FindToken(getToken);
                         response = wb.UploadString(urlAddProduct + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&component=" + component + "&description=" + componentComment + "&initialowner=" + SysEngineer + "&initialcc=" + SWengineer + "%2C+" + projectManager + "&action=new&token=" + token);
                     }
-                getToken = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&GoAheadAndLogIn=Log+in");
-                token = FindToken(getToken);
-                response = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token="+loginToken+ "&action=updategroupcontrols&product="+projectname+"&token="+token+"&membercontrol_21=0&othercontrol_21=0&membercontrol_17=0&othercontrol_17=0&membercontrol_15=0&othercontrol_15=0&entry_16=1&membercontrol_16=3&othercontrol_16=3&membercontrol_22=0&othercontrol_22=0&submit=submit");         
-                }     
+                    getToken = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&GoAheadAndLogIn=Log+in");
+                    token = FindToken(getToken);
+                    response = wb.UploadString(urlEditGroupControl + projectname, "POST", "Bugzilla_login=" + username + "&Bugzilla_password=" + password + "&Bugzilla_login_token=" + loginToken + "&action=updategroupcontrols&product=" + projectname + "&token=" + token + "&membercontrol_21=0&othercontrol_21=0&membercontrol_17=0&othercontrol_17=0&membercontrol_15=0&othercontrol_15=0&entry_16=1&membercontrol_16=3&othercontrol_16=3&membercontrol_22=0&othercontrol_22=0&submit=submit");
+                }
                 this.progressBar1.Increment(10);
-                return true;              
+                return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("Failed to complete! Check Bugzilla to see if any part of the project was created. \r\n\r\n Exception thrown: " + e, "Error!");
                 return false;
-            }           
+            }
         }
         private string FindToken(string PageHTML)
         {
             // This function retrieves the unique token which is created every time a page is opened so that it can be submitted with the new component.
-            int first = PageHTML.IndexOf("name=\"token\" value=\"") + "name=\"token\" value=\"".Length;            
+            int first = PageHTML.IndexOf("name=\"token\" value=\"") + "name=\"token\" value=\"".Length;
             return PageHTML.Substring(first, 10);
         }
-        private string Encoder(string projectDescription )
+        private string Encoder(string projectDescription)
         {
             // The encoding needed is not exactly ASCII encoding so this does it for us.
             // -   == -
@@ -1694,7 +1678,7 @@ namespace WindowsFormsApplication1
                 for (int i = 0; i < checkedListBox_General.Items.Count; i++)
                 {
                     checkedListBox_General.SetItemChecked(i, true);
-                }          
+                }
             }
             else if (checkBox_General.Checked == false)
             {
@@ -1704,33 +1688,33 @@ namespace WindowsFormsApplication1
                 }
             } // if an individual item has been checked, Check = false for typeASC
             checkedListBox_ASC.Refresh();
-            checkedListBox_QC.Refresh();        
-            checkedListBox_General.Refresh();                  
-        }        
+            checkedListBox_QC.Refresh();
+            checkedListBox_General.Refresh();
+        }
         private void typeASC_CheckedChanged(object sender, EventArgs e)
         {
             //Toggle all items if ASC is checked
             if (typeASC.Checked == true)
-            {              
+            {
                 typeQC.Checked = false;
                 for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
                 {
-                    checkedListBox_ASC.SetItemChecked(i, true);                  
+                    checkedListBox_ASC.SetItemChecked(i, true);
                 }
                 for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
                 {
                     checkedListBox_QC.SetItemChecked(i, false);
-                }                              
+                }
             }
             checkedListBox_ASC.Refresh();
             checkedListBox_QC.Refresh();
             checkedListBox_Req.Refresh(); // if an individual item has been checked, Check = false for typeASC
-            checkedListBox_General.Refresh(); 
+            checkedListBox_General.Refresh();
         }
         private void typeQC_CheckedChanged(object sender, EventArgs e)
         {
             if (typeQC.Checked == true)
-            {              
+            {
                 typeASC.Checked = false;
                 for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
                 {
@@ -1739,8 +1723,8 @@ namespace WindowsFormsApplication1
                 for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
                 {
                     checkedListBox_ASC.SetItemChecked(i, false);
-                }               
-            }              
+                }
+            }
             checkedListBox_ASC.Refresh();
             checkedListBox_QC.Refresh();
             checkedListBox_Req.Refresh();
@@ -1752,9 +1736,9 @@ namespace WindowsFormsApplication1
             {
                 for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
                 {
-                    checkedListBox_Req.SetItemChecked(i, true);                  
-                }               
-            }       
+                    checkedListBox_Req.SetItemChecked(i, true);
+                }
+            }
             checkedListBox_ASC.Refresh();
             checkedListBox_QC.Refresh();
             checkedListBox_Req.Refresh();
@@ -1765,11 +1749,11 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < checkedListBox_ASC.Items.Count; i++)
             {
                 if (e.NewValue == CheckState.Unchecked)
-                    {
+                {
                     typeASC.Checked = false;
                     typeASC.Refresh();
                     break;
-                }               
+                }
             }
         }
         private void checkedListBox_QC_ItemClick(object sender, ItemCheckEventArgs e)
@@ -1781,7 +1765,7 @@ namespace WindowsFormsApplication1
                     typeQC.Checked = false;
                     typeQC.Refresh();
                     break;
-                }             
+                }
             }
         }
         private void checkedListBox_Req_ItemClick(object sender, ItemCheckEventArgs e)
@@ -1793,11 +1777,11 @@ namespace WindowsFormsApplication1
                     typeRequisit.Checked = false;
                     typeRequisit.Refresh();
                     break;
-                }             
+                }
             }
         }
         private void checkedListBox_General_ItemClick(object sender, ItemCheckEventArgs e)
-        {          
+        {
             for (int i = 0; i < checkedListBox_General.Items.Count; i++)
             {
                 if (e.NewValue == CheckState.Unchecked)
@@ -1828,18 +1812,18 @@ namespace WindowsFormsApplication1
                     return true;
                 }
             }
-            return false;           
+            return false;
         }
         private void radioButton_Yes_CheckedChanged(object sender, EventArgs e)
         {
-            checkedListBox_ASC.Enabled      = false;
-            checkedListBox_QC.Enabled       = false;
-            checkedListBox_General.Enabled  = false;
-            checkedListBox_Req.Enabled      = true;
-            typeASC.Enabled                 = false;
-            typeQC.Enabled                  = false;
-            typeRequisit.Enabled            = true;
-            checkBox_General.Enabled        = false;
+            checkedListBox_ASC.Enabled = false;
+            checkedListBox_QC.Enabled = false;
+            checkedListBox_General.Enabled = false;
+            checkedListBox_Req.Enabled = true;
+            typeASC.Enabled = false;
+            typeQC.Enabled = false;
+            typeRequisit.Enabled = true;
+            checkBox_General.Enabled = false;
             for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
             {
                 checkedListBox_QC.SetItemChecked(i, false);
@@ -1866,13 +1850,19 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < checkedListBox_Req.Items.Count; i++)
             {
                 checkedListBox_Req.SetItemChecked(i, false);
-            }          
+            }
         }
 
-        //private void button1_Click(object sender, EventArgs e)
-        //{
 
-        //}
+    }
+
+    public static class StringExtensions
+    {
+        public static bool Contains(this string source, string toCheck, StringComparison comp)
+        {
+            if (source == null) return false;
+            return source.IndexOf(toCheck, comp) >= 0;
+        }
     }
 }
 

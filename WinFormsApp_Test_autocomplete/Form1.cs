@@ -26,110 +26,41 @@ namespace WinFormsApp_Test_autocomplete
 {
     public partial class Form1 : Form
     {
+        List<object> comboBox_CompTech_ItemsCopy = new List<object>();
         public Form1()
         {
             InitializeComponent();
         }
-        List<object> comboBox_CompTech_ItemsCopy = new List<object>();
         private void comboBox_CompTech_TextChanged(object sender, KeyPressEventArgs e)
         {
-            string userInput = comboBox_CompTech.Text;
-            List<object> suggestions = GetAutocompleteSuggestions(userInput); // Implement this method to retrieve suggestions.
-            if(char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
-    {
-                // Handle printable characters (letters, numbers, symbols, punctuation).
-                comboBox_CompTech.Items.Clear();
-                comboBox_CompTech.Items.AddRange(suggestions.ToArray()); // Add suggestions to ComboBox items.
-                comboBox_CompTech.SelectionStart = userInput.Length; // Keep the user's input selected.
-                comboBox_CompTech.DroppedDown = true; // Show the dropdown with suggestions.
-                comboBox_CompTech.Refresh();
-            }
-            else if (string.IsNullOrEmpty(userInput))
-            {
-                // Hide the dropdown when there's no input.
-                comboBox_CompTech.Items.Clear();
-                 comboBox_CompTech.DroppedDown = false;
-                comboBox_CompTech.Refresh();
-            }
-        }
-        private List<object> GetAutocompleteSuggestions(string userInput)
-        {
-            List<object> suggestions = new List<object>();
-            //// Iterate through the existing items in the ComboBox.
-            foreach (object item in comboBox_CompTech_ItemsCopy)
-            {
-                // string itemAsString = 
-
-                // Filter items that start with the user's input (case-insensitive).
-                if (item.ToString().Contains(userInput))
-                {
-                    suggestions.Add(item);
+           if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).
+                List<object> autoComplete_suggestions = new List<object>();
+                foreach (object item in comboBox_CompTech_ItemsCopy)
+                {// Filter items that start with the user's input (case-insensitive).
+                    if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
+                    {
+                        autoComplete_suggestions.Add(item);
+                    }
                 }
+                comboBox_CompTech.Items.Clear();
+                comboBox_CompTech.Items.AddRange(autoComplete_suggestions.ToArray());
+                comboBox_CompTech.SelectionStart = comboBox_CompTech.Text.Length; // Keep the user's input selected.
+                comboBox_CompTech.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+            }                                                    
+            else if (string.IsNullOrEmpty(comboBox_CompTech.Text))
+            {//Hide the dropdown when there's no input.
+                comboBox_CompTech.Items.Clear();
+                comboBox_CompTech.Items.AddRange(comboBox_CompTech_ItemsCopy.ToArray());
             }
-            return suggestions;
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (get_users_email())
             {
-                if (MessageBox.Show("Email List has been update successfully! Proceed?", "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
-                {
-
-                    // comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    //   comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.ListItems;
-                }
+                MessageBox.Show("Email List has been update successfully! Proceed?", "Succes!");
             }
         }
-        //private void comboBox_CompTech_TextChanged(object sender, EventArgs e)
-        //{
-        //    HandleTextChanged();
-        //    comboBox_CompTech.DataSource = comboBox_CompTech.Items;
-
-        //}
-
-        //private void HandleTextChanged()
-        //{
-        //    var txt = comboBox_CompTech.Text;
-        //    var list = from string d in comboBox_CompTech_ItemsCopy
-        //               where d.ToUpper().StartsWith(comboBox_CompTech.Text.ToUpper())
-        //               select d;
-        //    if (list.Count() > 0)
-        //    {
-        //        comboBox_CompTech.DataSource = list.ToList();
-        //        var sText = comboBox_CompTech.Items[0].ToString();
-        //        comboBox_CompTech.SelectionStart = txt.Length;
-        //        comboBox_CompTech.SelectionLength = sText.Length - txt.Length;
-        //        comboBox_CompTech.DroppedDown = true;
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        comboBox_CompTech.DroppedDown = false;
-        //        comboBox_CompTech.SelectionStart = txt.Length;
-        //    }
-        //}
-
-        //private void comboBox_CompTech_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Back)
-        //    {
-        //        int sStart = comboBox_CompTech.SelectionStart;
-        //        if (sStart > 0)
-        //        {
-        //            sStart--;
-        //            if (sStart == 0)
-        //            {
-        //                comboBox_CompTech.Text = "";
-        //            }
-        //            else
-        //            {
-        //                comboBox_CompTech.Text = comboBox_CompTech.Text.Substring(0, sStart);
-        //            }
-        //        }
-        //        e.Handled = true;
-        //    }
-        //}
         private bool get_users_email()
         {
             string username = textBox1.Text;
@@ -266,22 +197,15 @@ namespace WinFormsApp_Test_autocomplete
                                 html_doc.LoadHtml(response);
                                 HtmlAgilityPack.HtmlNodeCollection thNode = html_doc.DocumentNode.SelectNodes("//table[@id='admin_table']//td//a");
                                 if (thNode != null)
-                                {
-                                    // Iterate through all child nodes of the <th> element
-                                    //  comboBox_CompTech.BeginUpdate();
-                                    //     comboBox_ProjMan.BeginUpdate();  
-
+                                {  // Iterate through all child nodes of the <th> element
                                     foreach (HtmlNode childNode in thNode)
-                                    {
-                                        // Extract the content of child nodes (text or HTML)
+                                    { // Extract the content of child nodes (text or HTML)
                                         string elementContent = childNode.InnerHtml; // or .InnerText for plain text                                       
                                         if (elementContent.Contains("&#64;"))
                                         {
                                             elementContent = elementContent.Replace("&#64;", "@");
                                             string Comp = elementContent;
-                                            // comboBox_CompTech.Items.Add(elementContent);
                                             comboBox_CompTech_ItemsCopy.Add(elementContent);
-
                                         }
                                     }
                                 }
@@ -312,7 +236,5 @@ namespace WinFormsApp_Test_autocomplete
                 return false;
             }
         }
-
-
     }
 }

@@ -71,31 +71,114 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Email List has been update successfully! Proceed?", "Succes!");
             }
         }
-        private void comboBox_CompTech_TextChanged(object sender, KeyPressEventArgs e)
+        private void comboBox_ProjMan_TextChanged(object sender, KeyPressEventArgs e)
         {
             if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
             {// Handle printable characters (letters, numbers, symbols, punctuation).
                 List<object> autoComplete_suggestions = new List<object>();
                 foreach (object item in comboBox_ItemsCopy)
-                {// Filter items that start with the user's input (case-insensitive).
-                 //  if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
-                    if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
+                {// Filter items that start with the user's input (case-insensitive).               
+                    if (item.ToString().Contains(comboBox_ProjMan.Text, StringComparison.OrdinalIgnoreCase))
                     {
                         autoComplete_suggestions.Add(item);
                     }
                 }
-                comboBox_CompTech.Items.Clear();
-                comboBox_CompTech.Items.AddRange(autoComplete_suggestions.ToArray());
-                comboBox_CompTech.SelectionStart = comboBox_CompTech.Text.Length; // Keep the user's input selected.
-                comboBox_CompTech.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+                comboBox_ProjMan.Items.Clear();
+                comboBox_ProjMan.Items.AddRange(autoComplete_suggestions.ToArray());
+                comboBox_ProjMan.SelectionStart = comboBox_ProjMan.Text.Length; // Keep the user's input selected.
+                comboBox_ProjMan.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
             }
-            else if (string.IsNullOrEmpty(comboBox_CompTech.Text))
+            else if (string.IsNullOrEmpty(comboBox_ProjMan.Text))
             {//Hide the dropdown when there's no input.
-                comboBox_CompTech.Items.Clear();
-                comboBox_CompTech.Items.AddRange(comboBox_ItemsCopy.ToArray());
+                comboBox_ProjMan.Items.Clear();
+                comboBox_ProjMan.Items.AddRange(comboBox_ItemsCopy.ToArray());
             }
         }
 
+
+
+        private void comboBox_CompTech_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).
+                //List<object> autoComplete_suggestions = new List<object>();
+                //foreach (object item in comboBox_ItemsCopy)
+                //{// Filter items that start with the user's input (case-insensitive).               
+                //    if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
+                //    {
+                //        autoComplete_suggestions.Add(item);
+                //    }
+                //}
+                //comboBox_CompTech.Items.Clear();
+                //comboBox_CompTech.Items.AddRange(autoComplete_suggestions.ToArray());
+                //comboBox_CompTech.SelectionStart = comboBox_CompTech.Text.Length; // Keep the user's input selected.
+                //comboBox_CompTech.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+                comboBox_get_emails(comboBox_CompTech);
+            }
+            else if (string.IsNullOrEmpty(comboBox_CompTech.Text))
+            {//Hide the dropdown when there's no input.
+             //comboBox_CompTech.Items.Clear();
+             //comboBox_CompTech.Items.AddRange(comboBox_ItemsCopy.ToArray());
+                comboBox_clear_emails(comboBox_CompTech);
+            }
+        }
+
+
+        private void comboBox_get_emails(System.Windows.Forms.ComboBox combobox)
+        {
+
+            List<object> autoComplete_suggestions = new List<object>();
+            foreach (object item in comboBox_ItemsCopy)
+            {// Filter items that start with the user's input (case-insensitive).               
+                if (item.ToString().Contains(combobox.Text, StringComparison.OrdinalIgnoreCase))
+                {
+                    autoComplete_suggestions.Add(item);
+                }
+            }
+            combobox.Items.Clear();
+            combobox.Items.AddRange(autoComplete_suggestions.ToArray());
+            combobox.SelectionStart = combobox.Text.Length; // Keep the user's input selected.
+            combobox.DroppedDown = true; // Show the dropdown with autoComplete_suggestions
+
+        }
+        private void comboBox_clear_emails(System.Windows.Forms.ComboBox combobox)
+        {
+            combobox.Items.Clear();
+            combobox.Items.AddRange(comboBox_ItemsCopy.ToArray());
+
+
+        }
+
+
+
+
+
+        //private void SetupAutoComplete(System.Windows.Forms.ComboBox comboBox)
+        //{
+        //    comboBox.TextChanged += (sender, e) =>
+        //    {
+        //        if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+        //        {
+        //            List<object> autoCompleteSuggestions = new List<object>();
+        //            foreach (object item in comboBox_ItemsCopy)
+        //            {
+        //                if (item.ToString().Contains(comboBox.Text, StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    autoCompleteSuggestions.Add(item);
+        //                }
+        //            }
+        //            comboBox.Items.Clear();
+        //            comboBox.Items.AddRange(autoCompleteSuggestions.ToArray());
+        //            comboBox.SelectionStart = comboBox.Text.Length;
+        //            comboBox.DroppedDown = true;
+        //        }
+        //        else if (string.IsNullOrEmpty(comboBox.Text))
+        //        {
+        //            comboBox.Items.Clear();
+        //            comboBox.Items.AddRange(comboBox_ItemsCopy.ToArray());
+        //        }
+        //    };
+        //}
 
         private bool get_users_email()
         {
@@ -241,6 +324,7 @@ namespace WindowsFormsApplication1
                                         {
                                             elementContent = elementContent.Replace("&#64;", "@");
                                             comboBox_ItemsCopy.Add(elementContent);
+                                            comboBox_SysEng.Items.Add(elementContent);
                                         }
                                     }
                                 }
@@ -2038,3 +2122,99 @@ for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
                     checkedListBox_General.SetItemChecked(i, false);
                 }
 */
+
+
+
+//private void comboBox_SysEng_TextChanged(object sender, KeyPressEventArgs e)
+//{
+//    if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+//    {// Handle printable characters (letters, numbers, symbols, punctuation).
+//        List<object> autoComplete_suggestions = new List<object>();
+//        foreach (object item in comboBox_ItemsCopy)
+//        {// Filter items that start with the user's input (case-insensitive).               
+//            if (item.ToString().Contains(comboBox_SysEng.Text, StringComparison.OrdinalIgnoreCase))
+//            {
+//                autoComplete_suggestions.Add(item);
+//            }
+//        }
+//        comboBox_SysEng.Items.Clear();
+//        comboBox_SysEng.Items.AddRange(autoComplete_suggestions.ToArray());
+//        comboBox_SysEng.SelectionStart = comboBox_SysEng.Text.Length; // Keep the user's input selected.
+//        comboBox_SysEng.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+//    }
+//    else if (string.IsNullOrEmpty(comboBox_SysEng.Text))
+//    {//Hide the dropdown when there's no input.
+//        comboBox_SysEng.Items.Clear();
+//        comboBox_SysEng.Items.AddRange(comboBox_ItemsCopy.ToArray());
+//    }
+//}
+//private void comboBox_HrdwEng_TextChanged(object sender, KeyPressEventArgs e)
+//{
+//    if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+//    {// Handle printable characters (letters, numbers, symbols, punctuation).
+//        List<object> autoComplete_suggestions = new List<object>();
+//        foreach (object item in comboBox_ItemsCopy)
+//        {// Filter items that start with the user's input (case-insensitive).               
+//            if (item.ToString().Contains(comboBox_HrdwEng.Text, StringComparison.OrdinalIgnoreCase))
+//            {
+//                autoComplete_suggestions.Add(item);
+//            }
+//        }
+//        comboBox_HrdwEng.Items.Clear();
+//        comboBox_HrdwEng.Items.AddRange(autoComplete_suggestions.ToArray());
+//        comboBox_HrdwEng.SelectionStart = comboBox_HrdwEng.Text.Length; // Keep the user's input selected.
+//        comboBox_HrdwEng.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+//    }
+//    else if (string.IsNullOrEmpty(comboBox_HrdwEng.Text))
+//    {//Hide the dropdown when there's no input.
+//        comboBox_HrdwEng.Items.Clear();
+//        comboBox_HrdwEng.Items.AddRange(comboBox_ItemsCopy.ToArray());
+//    }
+//}
+
+//private void comboBox_ControlEng_TextChanged(object sender, KeyPressEventArgs e)
+//{
+//    if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+//    {// Handle printable characters (letters, numbers, symbols, punctuation).
+//        List<object> autoComplete_suggestions = new List<object>();
+//        foreach (object item in comboBox_ItemsCopy)
+//        {// Filter items that start with the user's input (case-insensitive).               
+//            if (item.ToString().Contains(comboBox_ControlEng.Text, StringComparison.OrdinalIgnoreCase))
+//            {
+//                autoComplete_suggestions.Add(item);
+//            }
+//        }
+//        comboBox_ControlEng.Items.Clear();
+//        comboBox_ControlEng.Items.AddRange(autoComplete_suggestions.ToArray());
+//        comboBox_ControlEng.SelectionStart = comboBox_ControlEng.Text.Length; // Keep the user's input selected.
+//        comboBox_ControlEng.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+//    }
+//    else if (string.IsNullOrEmpty(comboBox_ControlEng.Text))
+//    {//Hide the dropdown when there's no input.
+//        comboBox_ControlEng.Items.Clear();
+//        comboBox_ControlEng.Items.AddRange(comboBox_ItemsCopy.ToArray());
+//    }
+//}
+//private void comboBox_HMIEng_TextChanged(object sender, KeyPressEventArgs e)
+//{
+//    if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+//    {// Handle printable characters (letters, numbers, symbols, punctuation).
+//        List<object> autoComplete_suggestions = new List<object>();
+//        foreach (object item in comboBox_ItemsCopy)
+//        {// Filter items that start with the user's input (case-insensitive).               
+//            if (item.ToString().Contains(comboBox_HMIEng.Text, StringComparison.OrdinalIgnoreCase))
+//            {
+//                autoComplete_suggestions.Add(item);
+//            }
+//        }
+//        comboBox_HMIEng.Items.Clear();
+//        comboBox_HMIEng.Items.AddRange(autoComplete_suggestions.ToArray());
+//        comboBox_HMIEng.SelectionStart = comboBox_HMIEng.Text.Length; // Keep the user's input selected.
+//        comboBox_HMIEng.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+//    }
+//    else if (string.IsNullOrEmpty(comboBox_HMIEng.Text))
+//    {//Hide the dropdown when there's no input.
+//        comboBox_HMIEng.Items.Clear();
+//        comboBox_HMIEng.Items.AddRange(comboBox_ItemsCopy.ToArray());
+//    }
+//}

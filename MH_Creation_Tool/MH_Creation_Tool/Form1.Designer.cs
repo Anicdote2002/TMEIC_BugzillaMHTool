@@ -7,6 +7,7 @@
  */
 
 
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
@@ -17,6 +18,7 @@ namespace WindowsFormsApplication1
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+
 
         /// <summary>
         /// Clean up any resources being used.
@@ -94,10 +96,10 @@ namespace WindowsFormsApplication1
             // 
             // button4
             // 
-            button4.Location = new Point(145, 1188);
+            button4.Location = new Point(506, 1066);
             button4.Margin = new Padding(4, 5, 4, 5);
             button4.Name = "button4";
-            button4.Size = new Size(179, 52);
+            button4.Size = new Size(114, 30);
             button4.TabIndex = 12;
             button4.Text = "Create New Project";
             button4.UseVisualStyleBackColor = true;
@@ -106,7 +108,7 @@ namespace WindowsFormsApplication1
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(15, 160);
+            label1.Location = new Point(25, 170);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(103, 20);
@@ -126,7 +128,7 @@ namespace WindowsFormsApplication1
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(15, 199);
+            label2.Location = new Point(25, 209);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(127, 20);
@@ -146,7 +148,7 @@ namespace WindowsFormsApplication1
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(15, 248);
+            label3.Location = new Point(25, 258);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(632, 20);
@@ -157,7 +159,7 @@ namespace WindowsFormsApplication1
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(273, 115);
+            label4.Location = new Point(283, 125);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(471, 31);
@@ -167,7 +169,7 @@ namespace WindowsFormsApplication1
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(15, 282);
+            label5.Location = new Point(25, 292);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(69, 20);
@@ -177,7 +179,7 @@ namespace WindowsFormsApplication1
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(15, 311);
+            label6.Location = new Point(25, 321);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(123, 20);
@@ -187,7 +189,7 @@ namespace WindowsFormsApplication1
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(169, 282);
+            label7.Location = new Point(179, 292);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
             label7.Size = new Size(197, 20);
@@ -197,7 +199,7 @@ namespace WindowsFormsApplication1
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(169, 311);
+            label8.Location = new Point(179, 321);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new Size(332, 20);
@@ -207,7 +209,7 @@ namespace WindowsFormsApplication1
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(15, 359);
+            label9.Location = new Point(25, 369);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
             label9.Size = new Size(102, 20);
@@ -226,7 +228,7 @@ namespace WindowsFormsApplication1
             // typeRequisit
             // 
             typeRequisit.AutoSize = true;
-            typeRequisit.Location = new Point(652, 739);
+            typeRequisit.Location = new Point(662, 712);
             typeRequisit.Margin = new Padding(4, 5, 4, 5);
             typeRequisit.Name = "typeRequisit";
             typeRequisit.Size = new Size(138, 24);
@@ -239,7 +241,7 @@ namespace WindowsFormsApplication1
             // typeASC
             // 
             typeASC.AutoSize = true;
-            typeASC.Location = new Point(32, 739);
+            typeASC.Location = new Point(42, 712);
             typeASC.Margin = new Padding(4, 5, 4, 5);
             typeASC.Name = "typeASC";
             typeASC.Size = new Size(57, 24);
@@ -252,7 +254,7 @@ namespace WindowsFormsApplication1
             // typeQC
             // 
             typeQC.AutoSize = true;
-            typeQC.Location = new Point(341, 739);
+            typeQC.Location = new Point(351, 712);
             typeQC.Margin = new Padding(4, 5, 4, 5);
             typeQC.Name = "typeQC";
             typeQC.Size = new Size(81, 24);
@@ -265,7 +267,7 @@ namespace WindowsFormsApplication1
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(15, 714);
+            label10.Location = new Point(25, 692);
             label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
             label10.Size = new Size(93, 20);
@@ -286,7 +288,7 @@ namespace WindowsFormsApplication1
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(32, 926);
+            label11.Location = new Point(59, 860);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
             label11.Size = new Size(118, 20);
@@ -296,7 +298,7 @@ namespace WindowsFormsApplication1
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(15, 1001);
+            label12.Location = new Point(41, 932);
             label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
             label12.Size = new Size(136, 20);
@@ -306,7 +308,7 @@ namespace WindowsFormsApplication1
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(32, 1039);
+            label13.Location = new Point(57, 968);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
             label13.Size = new Size(120, 20);
@@ -326,7 +328,7 @@ namespace WindowsFormsApplication1
             // 
             // progressBar1
             // 
-            progressBar1.Location = new Point(341, 1199);
+            progressBar1.Location = new Point(506, 1106);
             progressBar1.Margin = new Padding(4, 5, 4, 5);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new Size(195, 28);
@@ -335,7 +337,7 @@ namespace WindowsFormsApplication1
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(536, 926);
+            label15.Location = new Point(556, 865);
             label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
             label15.Size = new Size(99, 20);
@@ -345,7 +347,7 @@ namespace WindowsFormsApplication1
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(493, 964);
+            label16.Location = new Point(507, 901);
             label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
             label16.Size = new Size(148, 20);
@@ -355,7 +357,7 @@ namespace WindowsFormsApplication1
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(29, 964);
+            label17.Location = new Point(59, 896);
             label17.Margin = new Padding(4, 0, 4, 0);
             label17.Name = "label17";
             label17.Size = new Size(118, 20);
@@ -365,7 +367,7 @@ namespace WindowsFormsApplication1
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(490, 1001);
+            label18.Location = new Point(507, 934);
             label18.Margin = new Padding(4, 0, 4, 0);
             label18.Name = "label18";
             label18.Size = new Size(148, 20);
@@ -375,7 +377,7 @@ namespace WindowsFormsApplication1
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(528, 1039);
+            label19.Location = new Point(549, 971);
             label19.Margin = new Padding(4, 0, 4, 0);
             label19.Name = "label19";
             label19.Size = new Size(106, 20);
@@ -386,10 +388,10 @@ namespace WindowsFormsApplication1
             // 
             checkedListBox_QC.FormattingEnabled = true;
             checkedListBox_QC.Items.AddRange(new object[] { "Safety PLC", "Op Cab/Gantry HMI Screens", "Op Cab/Gantry Machine Configuration", "Maxview Smart Landing", "Maxview Smart Move", "RCMS HMI Project", "RCMS HMI Screens", "RCMS Machine Configuration" });
-            checkedListBox_QC.Location = new Point(341, 772);
+            checkedListBox_QC.Location = new Point(338, 739);
             checkedListBox_QC.Margin = new Padding(3, 4, 3, 4);
             checkedListBox_QC.Name = "checkedListBox_QC";
-            checkedListBox_QC.Size = new Size(255, 92);
+            checkedListBox_QC.Size = new Size(255, 70);
             checkedListBox_QC.TabIndex = 33;
             checkedListBox_QC.ItemCheck += checkedListBox_QC_ItemClick;
             // 
@@ -397,10 +399,10 @@ namespace WindowsFormsApplication1
             // 
             checkedListBox_Req.FormattingEnabled = true;
             checkedListBox_Req.Items.AddRange(new object[] { "Requistion Crane Director", "Requistion Drive Software", "Requistion HMI", "Requistion Machine Configuration", "Requistion PLC Software", "Requistion General Software", "Requistion Hardware", "Requistion Maxview", "Requistion Maxview 4D" });
-            checkedListBox_Req.Location = new Point(652, 772);
+            checkedListBox_Req.Location = new Point(652, 739);
             checkedListBox_Req.Margin = new Padding(3, 4, 3, 4);
             checkedListBox_Req.Name = "checkedListBox_Req";
-            checkedListBox_Req.Size = new Size(255, 92);
+            checkedListBox_Req.Size = new Size(255, 70);
             checkedListBox_Req.TabIndex = 23;
             checkedListBox_Req.ItemCheck += checkedListBox_Req_ItemClick;
             // 
@@ -408,30 +410,27 @@ namespace WindowsFormsApplication1
             // 
             checkedListBox_ASC.FormattingEnabled = true;
             checkedListBox_ASC.Items.AddRange(new object[] { "Crane Director", "Maxview ASC", "Maxview Clear Zone", "Maxview Clear path", "Maxview Chassis Guidance", "Maxview 4D", "Maxview+Smart+Move", "Maxview Machine Configuration", "RCMS HMI Project", "RCMS HMI Screens", "RCMS Machine Configuration", "Yard HMI Project", "Yard HMI File Server Machine Configuration", "Yard PLC", "Yard IO Project", "Safety PLC", "ROS HMI Screens", "ROS Machine Configuration", "ROS IO Project", "ROS PLC" });
-            checkedListBox_ASC.Location = new Point(32, 772);
+            checkedListBox_ASC.Location = new Point(32, 739);
             checkedListBox_ASC.Margin = new Padding(3, 4, 3, 4);
             checkedListBox_ASC.Name = "checkedListBox_ASC";
-            checkedListBox_ASC.Size = new Size(255, 92);
+            checkedListBox_ASC.Size = new Size(255, 70);
             checkedListBox_ASC.TabIndex = 24;
             checkedListBox_ASC.ItemCheck += checkedListBox_ASC_ItemClick;
             // 
             // comboBox_ProjMan
             // 
-            comboBox_ProjMan.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_ProjMan.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox_ProjMan.FormattingEnabled = true;
-            comboBox_ProjMan.Location = new Point(145, 922);
+            comboBox_ProjMan.Location = new Point(174, 847);
             comboBox_ProjMan.Margin = new Padding(3, 4, 3, 4);
             comboBox_ProjMan.Name = "comboBox_ProjMan";
             comboBox_ProjMan.Size = new Size(276, 28);
             comboBox_ProjMan.TabIndex = 25;
+            comboBox_ProjMan.KeyPress += comboBox_ProjMan_TextChanged;
             // 
             // comboBox_SysEng
             // 
-            comboBox_SysEng.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_SysEng.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox_SysEng.FormattingEnabled = true;
-            comboBox_SysEng.Location = new Point(145, 960);
+            comboBox_SysEng.Location = new Point(174, 883);
             comboBox_SysEng.Margin = new Padding(3, 4, 3, 4);
             comboBox_SysEng.Name = "comboBox_SysEng";
             comboBox_SysEng.Size = new Size(276, 28);
@@ -439,10 +438,8 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_HrdwEng
             // 
-            comboBox_HrdwEng.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_HrdwEng.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox_HrdwEng.FormattingEnabled = true;
-            comboBox_HrdwEng.Location = new Point(145, 998);
+            comboBox_HrdwEng.Location = new Point(174, 919);
             comboBox_HrdwEng.Margin = new Padding(3, 4, 3, 4);
             comboBox_HrdwEng.Name = "comboBox_HrdwEng";
             comboBox_HrdwEng.Size = new Size(276, 28);
@@ -450,10 +447,8 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_ControlEng
             // 
-            comboBox_ControlEng.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_ControlEng.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox_ControlEng.FormattingEnabled = true;
-            comboBox_ControlEng.Location = new Point(145, 1035);
+            comboBox_ControlEng.Location = new Point(174, 955);
             comboBox_ControlEng.Margin = new Padding(3, 4, 3, 4);
             comboBox_ControlEng.Name = "comboBox_ControlEng";
             comboBox_ControlEng.Size = new Size(276, 28);
@@ -461,10 +456,8 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_HMIEng
             // 
-            comboBox_HMIEng.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_HMIEng.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox_HMIEng.FormattingEnabled = true;
-            comboBox_HMIEng.Location = new Point(631, 922);
+            comboBox_HMIEng.Location = new Point(652, 852);
             comboBox_HMIEng.Margin = new Padding(3, 4, 3, 4);
             comboBox_HMIEng.Name = "comboBox_HMIEng";
             comboBox_HMIEng.Size = new Size(276, 28);
@@ -472,10 +465,8 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_AppEng
             // 
-            comboBox_AppEng.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_AppEng.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox_AppEng.FormattingEnabled = true;
-            comboBox_AppEng.Location = new Point(631, 960);
+            comboBox_AppEng.Location = new Point(652, 888);
             comboBox_AppEng.Margin = new Padding(3, 4, 3, 4);
             comboBox_AppEng.Name = "comboBox_AppEng";
             comboBox_AppEng.Size = new Size(276, 28);
@@ -483,10 +474,8 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_DriveEng
             // 
-            comboBox_DriveEng.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_DriveEng.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox_DriveEng.FormattingEnabled = true;
-            comboBox_DriveEng.Location = new Point(631, 1035);
+            comboBox_DriveEng.Location = new Point(652, 958);
             comboBox_DriveEng.Margin = new Padding(3, 4, 3, 4);
             comboBox_DriveEng.Name = "comboBox_DriveEng";
             comboBox_DriveEng.Size = new Size(276, 28);
@@ -494,10 +483,8 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_CompTech
             // 
-            comboBox_CompTech.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox_CompTech.AutoCompleteSource = AutoCompleteSource.CustomSource;
             comboBox_CompTech.FormattingEnabled = true;
-            comboBox_CompTech.Location = new Point(631, 998);
+            comboBox_CompTech.Location = new Point(652, 924);
             comboBox_CompTech.Margin = new Padding(3, 4, 3, 4);
             comboBox_CompTech.Name = "comboBox_CompTech";
             comboBox_CompTech.Size = new Size(276, 28);
@@ -507,7 +494,7 @@ namespace WindowsFormsApplication1
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new Point(338, 576);
+            label20.Location = new Point(348, 586);
             label20.Name = "label20";
             label20.Size = new Size(149, 20);
             label20.TabIndex = 34;
@@ -516,7 +503,7 @@ namespace WindowsFormsApplication1
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(15, 399);
+            label14.Location = new Point(25, 409);
             label14.Margin = new Padding(4, 0, 4, 0);
             label14.Name = "label14";
             label14.Size = new Size(138, 20);
@@ -530,14 +517,14 @@ namespace WindowsFormsApplication1
             checkedListBox_General.Location = new Point(489, 576);
             checkedListBox_General.Margin = new Padding(3, 4, 3, 4);
             checkedListBox_General.Name = "checkedListBox_General";
-            checkedListBox_General.Size = new Size(255, 92);
+            checkedListBox_General.Size = new Size(255, 70);
             checkedListBox_General.TabIndex = 35;
             checkedListBox_General.ItemCheck += checkedListBox_General_ItemClick;
             // 
             // checkBox_General
             // 
             checkBox_General.AutoSize = true;
-            checkBox_General.Location = new Point(386, 600);
+            checkBox_General.Location = new Point(400, 615);
             checkBox_General.Margin = new Padding(3, 4, 3, 4);
             checkBox_General.Name = "checkBox_General";
             checkBox_General.Size = new Size(93, 24);
@@ -549,7 +536,7 @@ namespace WindowsFormsApplication1
             // radioButton_Yes
             // 
             radioButton_Yes.AutoSize = true;
-            radioButton_Yes.Location = new Point(173, 604);
+            radioButton_Yes.Location = new Point(183, 614);
             radioButton_Yes.Margin = new Padding(3, 4, 3, 4);
             radioButton_Yes.Name = "radioButton_Yes";
             radioButton_Yes.Size = new Size(51, 24);
@@ -562,7 +549,7 @@ namespace WindowsFormsApplication1
             // radioButton_No
             // 
             radioButton_No.AutoSize = true;
-            radioButton_No.Location = new Point(174, 636);
+            radioButton_No.Location = new Point(184, 646);
             radioButton_No.Margin = new Padding(3, 4, 3, 4);
             radioButton_No.Name = "radioButton_No";
             radioButton_No.Size = new Size(50, 24);
@@ -575,7 +562,7 @@ namespace WindowsFormsApplication1
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new Point(15, 576);
+            label21.Location = new Point(25, 586);
             label21.Name = "label21";
             label21.Size = new Size(288, 20);
             label21.TabIndex = 39;
@@ -583,10 +570,10 @@ namespace WindowsFormsApplication1
             // 
             // get_users
             // 
-            get_users.Location = new Point(145, 1111);
+            get_users.Location = new Point(32, 1066);
             get_users.Margin = new Padding(3, 4, 3, 4);
             get_users.Name = "get_users";
-            get_users.Size = new Size(179, 52);
+            get_users.Size = new Size(114, 30);
             get_users.TabIndex = 40;
             get_users.Text = "Get Users Emails";
             get_users.UseVisualStyleBackColor = true;
@@ -595,7 +582,7 @@ namespace WindowsFormsApplication1
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new Point(330, 1128);
+            label22.Location = new Point(25, 1036);
             label22.Name = "label22";
             label22.Size = new Size(578, 20);
             label22.TabIndex = 41;
@@ -605,19 +592,26 @@ namespace WindowsFormsApplication1
             // 
             email_list.FormattingEnabled = true;
             email_list.ItemHeight = 20;
-            email_list.Location = new Point(145, 1325);
+            email_list.Location = new Point(152, 1066);
             email_list.Margin = new Padding(3, 4, 3, 4);
             email_list.Name = "email_list";
-            email_list.Size = new Size(330, 184);
+            email_list.ScrollAlwaysVisible = true;
+            email_list.Size = new Size(230, 104);
             email_list.TabIndex = 42;
             // 
             // MH_tool
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AccessibleName = "MH Utility Tool";
+            AllowDrop = true;
+            AutoScaleMode = AutoScaleMode.None;
+            AutoScroll = true;
+            AutoScrollMargin = new Size(10, 10);
+            AutoScrollMinSize = new Size(500, 500);
             AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1087, 1542);
+            ClientSize = new Size(782, 753);
             Controls.Add(email_list);
             Controls.Add(label22);
             Controls.Add(get_users);
@@ -667,11 +661,15 @@ namespace WindowsFormsApplication1
             Controls.Add(label4);
             Controls.Add(label1);
             Controls.Add(button4);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 5, 4, 5);
-            MaximizeBox = false;
+            MaximumSize = new Size(1000, 800);
+            MinimumSize = new Size(800, 800);
             Name = "MH_tool";
+            Padding = new Padding(10);
             Text = "MH_tool";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

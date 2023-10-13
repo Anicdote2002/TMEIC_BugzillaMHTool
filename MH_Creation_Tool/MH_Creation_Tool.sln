@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MH_Creation_Tool", "MH_Creation_Tool\MH_Creation_Tool.csproj", "{D38518EF-472B-48E2-85C3-0B0368D2764F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MH_Tool_Setup", "MH_Tool_Setup\MH_Tool_Setup.vdproj", "{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D38518EF-472B-48E2-85C3-0B0368D2764F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D38518EF-472B-48E2-85C3-0B0368D2764F}.Release|x86.ActiveCfg = Release|Any CPU
 		{D38518EF-472B-48E2-85C3-0B0368D2764F}.Release|x86.Build.0 = Release|Any CPU
+		{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}.Debug|Any CPU.ActiveCfg = Debug
+		{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}.Debug|x86.ActiveCfg = Debug
+		{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}.Release|Any CPU.ActiveCfg = Release
+		{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

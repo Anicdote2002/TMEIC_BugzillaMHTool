@@ -522,8 +522,6 @@ namespace WindowsFormsApplication1
             // 
             // comboBox_CompTech
             // 
-            //this.comboBox_CompTech.AutoCompleteCustomSource.AddRange(new string[] {
-            //email_list.Items});
             this.comboBox_CompTech.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBox_CompTech.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.comboBox_CompTech.FormattingEnabled = true;

@@ -435,6 +435,7 @@ namespace WindowsFormsApplication1
             comboBox_SysEng.Name = "comboBox_SysEng";
             comboBox_SysEng.Size = new Size(276, 28);
             comboBox_SysEng.TabIndex = 26;
+            comboBox_SysEng.KeyPress += comboBox_SysEng_TextChanged;
             // 
             // comboBox_HrdwEng
             // 
@@ -444,6 +445,7 @@ namespace WindowsFormsApplication1
             comboBox_HrdwEng.Name = "comboBox_HrdwEng";
             comboBox_HrdwEng.Size = new Size(276, 28);
             comboBox_HrdwEng.TabIndex = 27;
+            comboBox_HrdwEng.KeyPress += comboBox_HrdwEng_TextChanged;
             // 
             // comboBox_ControlEng
             // 
@@ -453,6 +455,7 @@ namespace WindowsFormsApplication1
             comboBox_ControlEng.Name = "comboBox_ControlEng";
             comboBox_ControlEng.Size = new Size(276, 28);
             comboBox_ControlEng.TabIndex = 28;
+            comboBox_ControlEng.KeyPress += comboBox_ControlEng_TextChanged;
             // 
             // comboBox_HMIEng
             // 
@@ -462,6 +465,7 @@ namespace WindowsFormsApplication1
             comboBox_HMIEng.Name = "comboBox_HMIEng";
             comboBox_HMIEng.Size = new Size(276, 28);
             comboBox_HMIEng.TabIndex = 29;
+            comboBox_HMIEng.KeyPress += comboBox_HMIEng_TextChanged;
             // 
             // comboBox_AppEng
             // 
@@ -471,6 +475,7 @@ namespace WindowsFormsApplication1
             comboBox_AppEng.Name = "comboBox_AppEng";
             comboBox_AppEng.Size = new Size(276, 28);
             comboBox_AppEng.TabIndex = 30;
+            comboBox_AppEng.KeyPress += comboBox_AppEng_TextChanged;
             // 
             // comboBox_DriveEng
             // 
@@ -480,6 +485,7 @@ namespace WindowsFormsApplication1
             comboBox_DriveEng.Name = "comboBox_DriveEng";
             comboBox_DriveEng.Size = new Size(276, 28);
             comboBox_DriveEng.TabIndex = 31;
+            comboBox_DriveEng.KeyPress += comboBox_DriveEng_TextChanged;
             // 
             // comboBox_CompTech
             // 
@@ -673,6 +679,11 @@ namespace WindowsFormsApplication1
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void ComboBox_DriveEng_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

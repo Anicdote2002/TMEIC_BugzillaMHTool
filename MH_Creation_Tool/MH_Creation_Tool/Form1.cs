@@ -39,18 +39,18 @@ namespace WindowsFormsApplication1
         public MH_tool()
         {
             InitializeComponent();
-            checkedListBox_ASC.CheckOnClick = true;
-            checkedListBox_QC.CheckOnClick = true;
-            checkedListBox_Req.CheckOnClick = true;
+            checkedListBox_ASC.CheckOnClick     = true;
+            checkedListBox_QC.CheckOnClick      = true;
+            checkedListBox_Req.CheckOnClick     = true;
             checkedListBox_General.CheckOnClick = true;
-            checkedListBox_ASC.Enabled = false;
-            checkedListBox_QC.Enabled = false;
-            checkedListBox_General.Enabled = false;
-            checkedListBox_Req.Enabled = false;
-            typeASC.Enabled = false;
-            typeQC.Enabled = false;
-            typeRequisit.Enabled = false;
-            checkBox_General.Enabled = false;
+            checkedListBox_ASC.Enabled          = false;
+            checkedListBox_QC.Enabled           = false;
+            checkedListBox_General.Enabled      = false;
+            checkedListBox_Req.Enabled          = false;
+            typeASC.Enabled                     = false;
+            typeQC.Enabled                      = false;
+            typeRequisit.Enabled                = false;
+            checkBox_General.Enabled            = false;
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -73,52 +73,90 @@ namespace WindowsFormsApplication1
         }
         private void comboBox_ProjMan_TextChanged(object sender, KeyPressEventArgs e)
         {
-            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
-            {// Handle printable characters (letters, numbers, symbols, punctuation).
-                List<object> autoComplete_suggestions = new List<object>();
-                foreach (object item in comboBox_ItemsCopy)
-                {// Filter items that start with the user's input (case-insensitive).               
-                    if (item.ToString().Contains(comboBox_ProjMan.Text, StringComparison.OrdinalIgnoreCase))
-                    {
-                        autoComplete_suggestions.Add(item);
-                    }
-                }
-                comboBox_ProjMan.Items.Clear();
-                comboBox_ProjMan.Items.AddRange(autoComplete_suggestions.ToArray());
-                comboBox_ProjMan.SelectionStart = comboBox_ProjMan.Text.Length; // Keep the user's input selected.
-                comboBox_ProjMan.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+            if(char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
+                comboBox_get_emails(comboBox_ProjMan);
             }
             else if (string.IsNullOrEmpty(comboBox_ProjMan.Text))
             {//Hide the dropdown when there's no input.
-                comboBox_ProjMan.Items.Clear();
-                comboBox_ProjMan.Items.AddRange(comboBox_ItemsCopy.ToArray());
+                comboBox_clear_emails(comboBox_ProjMan);
             }
         }
-
-
+        private void comboBox_SysEng_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
+                comboBox_get_emails(comboBox_SysEng);
+            }
+            else if (string.IsNullOrEmpty(comboBox_SysEng.Text))
+            {//Hide the dropdown when there's no input.
+                comboBox_clear_emails(comboBox_SysEng);
+            }
+        }
+        private void comboBox_HrdwEng_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
+                comboBox_get_emails(comboBox_HrdwEng);
+            }
+            else if (string.IsNullOrEmpty(comboBox_HrdwEng.Text))
+            {//Hide the dropdown when there's no input.
+                comboBox_clear_emails(comboBox_HrdwEng);
+            }
+        }
+        private void comboBox_ControlEng_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
+                comboBox_get_emails(comboBox_ControlEng);
+            }
+            else if (string.IsNullOrEmpty(comboBox_ControlEng.Text))
+            {//Hide the dropdown when there's no input.
+                comboBox_clear_emails(comboBox_ControlEng);
+            }
+        }
+        private void comboBox_HMIEng_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
+                comboBox_get_emails(comboBox_HMIEng);
+            }
+            else if (string.IsNullOrEmpty(comboBox_HMIEng.Text))
+            {//Hide the dropdown when there's no input.
+                comboBox_clear_emails(comboBox_HMIEng);
+            }
+        }
+        private void comboBox_AppEng_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
+                comboBox_get_emails(comboBox_AppEng);
+            }
+            else if (string.IsNullOrEmpty(comboBox_AppEng.Text))
+            {//Hide the dropdown when there's no input.
+                comboBox_clear_emails(comboBox_AppEng);
+            }
+        }
+        private void comboBox_DriveEng_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
+                comboBox_get_emails(comboBox_DriveEng);
+            }
+            else if (string.IsNullOrEmpty(comboBox_DriveEng.Text))
+            {//Hide the dropdown when there's no input.
+                comboBox_clear_emails(comboBox_DriveEng);
+            }
+        }
 
         private void comboBox_CompTech_TextChanged(object sender, KeyPressEventArgs e)
         {
             if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
-            {// Handle printable characters (letters, numbers, symbols, punctuation).
-                //List<object> autoComplete_suggestions = new List<object>();
-                //foreach (object item in comboBox_ItemsCopy)
-                //{// Filter items that start with the user's input (case-insensitive).               
-                //    if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
-                //    {
-                //        autoComplete_suggestions.Add(item);
-                //    }
-                //}
-                //comboBox_CompTech.Items.Clear();
-                //comboBox_CompTech.Items.AddRange(autoComplete_suggestions.ToArray());
-                //comboBox_CompTech.SelectionStart = comboBox_CompTech.Text.Length; // Keep the user's input selected.
-                //comboBox_CompTech.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+            {// Handle printable characters (letters, numbers, symbols, punctuation).             
                 comboBox_get_emails(comboBox_CompTech);
             }
             else if (string.IsNullOrEmpty(comboBox_CompTech.Text))
             {//Hide the dropdown when there's no input.
-             //comboBox_CompTech.Items.Clear();
-             //comboBox_CompTech.Items.AddRange(comboBox_ItemsCopy.ToArray());
                 comboBox_clear_emails(comboBox_CompTech);
             }
         }
@@ -145,40 +183,8 @@ namespace WindowsFormsApplication1
         {
             combobox.Items.Clear();
             combobox.Items.AddRange(comboBox_ItemsCopy.ToArray());
-
-
         }
 
-
-
-
-
-        //private void SetupAutoComplete(System.Windows.Forms.ComboBox comboBox)
-        //{
-        //    comboBox.TextChanged += (sender, e) =>
-        //    {
-        //        if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
-        //        {
-        //            List<object> autoCompleteSuggestions = new List<object>();
-        //            foreach (object item in comboBox_ItemsCopy)
-        //            {
-        //                if (item.ToString().Contains(comboBox.Text, StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    autoCompleteSuggestions.Add(item);
-        //                }
-        //            }
-        //            comboBox.Items.Clear();
-        //            comboBox.Items.AddRange(autoCompleteSuggestions.ToArray());
-        //            comboBox.SelectionStart = comboBox.Text.Length;
-        //            comboBox.DroppedDown = true;
-        //        }
-        //        else if (string.IsNullOrEmpty(comboBox.Text))
-        //        {
-        //            comboBox.Items.Clear();
-        //            comboBox.Items.AddRange(comboBox_ItemsCopy.ToArray());
-        //        }
-        //    };
-        //}
 
         private bool get_users_email()
         {
@@ -323,8 +329,7 @@ namespace WindowsFormsApplication1
                                         if (elementContent.Contains("&#64;"))
                                         {
                                             elementContent = elementContent.Replace("&#64;", "@");
-                                            comboBox_ItemsCopy.Add(elementContent);
-                                            comboBox_SysEng.Items.Add(elementContent);
+                                            comboBox_ItemsCopy.Add(elementContent);                                           
                                         }
                                     }
                                 }
@@ -410,7 +415,6 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("Please make sure that the ProjectEmail.xml file is located in the same file as this tool when it is run.", "Error");
                     return false;
                 }
-
 
                 System.Xml.XmlDocument Doc = new System.Xml.XmlDocument();
                 Doc.Load(@"ProjectEmail.xml");
@@ -1936,8 +1940,6 @@ namespace WindowsFormsApplication1
                 checkedListBox_Req.SetItemChecked(i, false);
             }
         }
-
-
     }
 
     public static class StringExtensions
@@ -2216,5 +2218,30 @@ for (int i = 0; i < checkedListBox_QC.Items.Count; i++)
 //    {//Hide the dropdown when there's no input.
 //        comboBox_HMIEng.Items.Clear();
 //        comboBox_HMIEng.Items.AddRange(comboBox_ItemsCopy.ToArray());
+//    }
+//}
+//private void comboBox_CompTech_TextChanged(object sender, KeyPressEventArgs e)
+//{
+//    if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+//    {// Handle printable characters (letters, numbers, symbols, punctuation).
+//     //List<object> autoComplete_suggestions = new List<object>();
+//     //foreach (object item in comboBox_ItemsCopy)
+//     //{// Filter items that start with the user's input (case-insensitive).               
+//     //    if (item.ToString().Contains(comboBox_CompTech.Text, StringComparison.OrdinalIgnoreCase))
+//     //    {
+//     //        autoComplete_suggestions.Add(item);
+//     //    }
+//     //}
+//     //comboBox_CompTech.Items.Clear();
+//     //comboBox_CompTech.Items.AddRange(autoComplete_suggestions.ToArray());
+//     //comboBox_CompTech.SelectionStart = comboBox_CompTech.Text.Length; // Keep the user's input selected.
+//     //comboBox_CompTech.DroppedDown = true; // Show the dropdown with autoComplete_suggestions.
+//        comboBox_get_emails(comboBox_CompTech);
+//    }
+//    else if (string.IsNullOrEmpty(comboBox_CompTech.Text))
+//    {//Hide the dropdown when there's no input.
+//     //comboBox_CompTech.Items.Clear();
+//     //comboBox_CompTech.Items.AddRange(comboBox_ItemsCopy.ToArray());
+//        comboBox_clear_emails(comboBox_CompTech);
 //    }
 //}

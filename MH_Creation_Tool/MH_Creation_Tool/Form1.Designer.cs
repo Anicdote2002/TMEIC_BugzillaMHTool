@@ -504,7 +504,7 @@ namespace WindowsFormsApplication1
             label20.Name = "label20";
             label20.Size = new Size(149, 20);
             label20.TabIndex = 34;
-            label20.Text = "General Component: ";
+            label20.Text = "General Component:";
             // 
             // label14
             // 

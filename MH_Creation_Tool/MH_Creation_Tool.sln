@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MH_Creation_Tool", "MH_Crea
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MH_Tool_Setup", "MH_Tool_Setup\MH_Tool_Setup.vdproj", "{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MH_Creation_Tool_v2", "MH_Creation_Tool_v2\MH_Creation_Tool_v2.csproj", "{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MH_Tool_Setup_v2", "MH_Tool_v2\MH_Tool_v2.vdproj", "{1335088E-31A6-44DC-B839-0FE12C27C789}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,18 @@ Global
 		{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}.Debug|x86.ActiveCfg = Debug
 		{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}.Release|Any CPU.ActiveCfg = Release
 		{5B0EADB6-EC85-4F13-93C7-91FC347AB4CA}.Release|x86.ActiveCfg = Release
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Debug|x86.Build.0 = Debug|Any CPU
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Release|x86.ActiveCfg = Release|Any CPU
+		{32A799F3-C6E0-4E6B-B67C-5B5D9B31ECFB}.Release|x86.Build.0 = Release|Any CPU
+		{1335088E-31A6-44DC-B839-0FE12C27C789}.Debug|Any CPU.ActiveCfg = Debug
+		{1335088E-31A6-44DC-B839-0FE12C27C789}.Debug|x86.ActiveCfg = Debug
+		{1335088E-31A6-44DC-B839-0FE12C27C789}.Release|Any CPU.ActiveCfg = Release
+		{1335088E-31A6-44DC-B839-0FE12C27C789}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

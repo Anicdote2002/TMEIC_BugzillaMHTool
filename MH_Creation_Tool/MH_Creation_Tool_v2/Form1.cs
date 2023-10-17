@@ -1,4 +1,4 @@
-//Name: MH Tool.Designer.cs
+﻿//Name: MH Tool.Designer.cs
 //Author:
 //Date:
 //Modified:
@@ -39,18 +39,18 @@ namespace WindowsFormsApplication1
         public MH_tool()
         {
             InitializeComponent();
-            checkedListBox_ASC.CheckOnClick     = true;
-            checkedListBox_QC.CheckOnClick      = true;
-            checkedListBox_Req.CheckOnClick     = true;
+            checkedListBox_ASC.CheckOnClick = true;
+            checkedListBox_QC.CheckOnClick = true;
+            checkedListBox_Req.CheckOnClick = true;
             checkedListBox_General.CheckOnClick = true;
-            checkedListBox_ASC.Enabled          = false;
-            checkedListBox_QC.Enabled           = false;
-            checkedListBox_General.Enabled      = false;
-            checkedListBox_Req.Enabled          = false;
-            typeASC.Enabled                     = false;
-            typeQC.Enabled                      = false;
-            typeRequisit.Enabled                = false;
-            checkBox_General.Enabled            = false;
+            checkedListBox_ASC.Enabled = false;
+            checkedListBox_QC.Enabled = false;
+            checkedListBox_General.Enabled = false;
+            checkedListBox_Req.Enabled = false;
+            typeASC.Enabled = false;
+            typeQC.Enabled = false;
+            typeRequisit.Enabled = false;
+            checkBox_General.Enabled = false;
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -59,21 +59,7 @@ namespace WindowsFormsApplication1
             {
                 if (MessageBox.Show("A new project has been created.\r\n\r\n Select yes to open a the new project in your browser and no to close this message", "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                 {
-                         _ = System.Diagnostics.Process.Start(@"https://tools.tmeic.com/mh/editproducts.cgi?action=edit&product=" + Encoder(textBox3.Text));
-                    //string link = "https://tools.tmeic.com/mh/editproducts.cgi?action=edit&product=" + Uri.EscapeDataString(Encoder(textBox3.Text));
-
-                    //try
-                    //{
-                    //    System.Diagnostics.Process.Start(link);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    // Handle any exceptions, e.g., if the process can't start.
-                    //    MessageBox.Show("Error: " + ex.Message);
-                    //}
-
-
-
+                    System.Diagnostics.Process.Start(@"https://tools.tmeic.com/mh/editproducts.cgi?action=edit&product=" + Encoder(textBox3.Text));                
                 }
             }
             else this.progressBar1.Value = 0;
@@ -87,7 +73,7 @@ namespace WindowsFormsApplication1
         }
         private void comboBox_ProjMan_TextChanged(object sender, KeyPressEventArgs e)
         {
-            if(char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
+            if (char.IsLetterOrDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || char.IsPunctuation(e.KeyChar))
             {// Handle printable characters (letters, numbers, symbols, punctuation).             
                 comboBox_get_emails(comboBox_ProjMan);
             }

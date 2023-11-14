@@ -458,6 +458,7 @@ namespace WindowsFormsApplication1
             this.comboBox_ProjMan.Name = "comboBox_ProjMan";
             this.comboBox_ProjMan.Size = new System.Drawing.Size(276, 24);
             this.comboBox_ProjMan.TabIndex = 25;
+            this.comboBox_ProjMan.KeyPress += comboBox_ProjMan_TextChanged;
             // 
             // comboBox_SysEng
             // 
@@ -466,6 +467,7 @@ namespace WindowsFormsApplication1
             this.comboBox_SysEng.Name = "comboBox_SysEng";
             this.comboBox_SysEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_SysEng.TabIndex = 26;
+            this.comboBox_SysEng.KeyPress += comboBox_SysEng_TextChanged;
             // 
             // comboBox_HrdwEng
             // 
@@ -474,6 +476,7 @@ namespace WindowsFormsApplication1
             this.comboBox_HrdwEng.Name = "comboBox_HrdwEng";
             this.comboBox_HrdwEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_HrdwEng.TabIndex = 27;
+            this.comboBox_HrdwEng.KeyPress += comboBox_HrdwEng_TextChanged;
             // 
             // comboBox_ControlEng
             // 
@@ -482,6 +485,7 @@ namespace WindowsFormsApplication1
             this.comboBox_ControlEng.Name = "comboBox_ControlEng";
             this.comboBox_ControlEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_ControlEng.TabIndex = 28;
+            this.comboBox_ControlEng.KeyPress += comboBox_ControlEng_TextChanged;
             // 
             // comboBox_HMIEng
             // 
@@ -490,6 +494,7 @@ namespace WindowsFormsApplication1
             this.comboBox_HMIEng.Name = "comboBox_HMIEng";
             this.comboBox_HMIEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_HMIEng.TabIndex = 29;
+            this.comboBox_HMIEng.KeyPress += comboBox_HMIEng_TextChanged;
             // 
             // comboBox_AppEng
             // 
@@ -498,6 +503,7 @@ namespace WindowsFormsApplication1
             this.comboBox_AppEng.Name = "comboBox_AppEng";
             this.comboBox_AppEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_AppEng.TabIndex = 30;
+            this.comboBox_AppEng.KeyPress += comboBox_AppEng_TextChanged;
             // 
             // comboBox_DriveEng
             // 
@@ -506,6 +512,7 @@ namespace WindowsFormsApplication1
             this.comboBox_DriveEng.Name = "comboBox_DriveEng";
             this.comboBox_DriveEng.Size = new System.Drawing.Size(276, 24);
             this.comboBox_DriveEng.TabIndex = 31;
+            this.comboBox_DriveEng.KeyPress += comboBox_DriveEng_TextChanged;
             // 
             // comboBox_CompTech
             // 
@@ -514,6 +521,7 @@ namespace WindowsFormsApplication1
             this.comboBox_CompTech.Name = "comboBox_CompTech";
             this.comboBox_CompTech.Size = new System.Drawing.Size(276, 24);
             this.comboBox_CompTech.TabIndex = 32;
+            this.comboBox_CompTech.KeyPress += comboBox_CompTech_TextChanged;
             // 
             // label20
             // 
